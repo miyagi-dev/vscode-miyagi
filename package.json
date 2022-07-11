@@ -1,0 +1,84 @@
+{
+	"name": "miyagi",
+	"displayName": "miyagi",
+	"description": "Use miyagi features directly in VS Code.",
+	"publisher": "fynn",
+	"version": "0.1.1",
+	"preview": true,
+	"license": "MIT",
+	"categories": [
+		"Linters",
+		"Other"
+	],
+	"keywords": [
+		"miyagi"
+	],
+	"homepage": "https://github.com/mvsde/vscode-miyagi#readme",
+	"bugs": {
+		"url": "https://github.com/mvsde/vscode-miyagi/issues",
+		"email": "post@fynn.be"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mvsde/vscode-miyagi.git"
+	},
+	"icon": "images/icon.png",
+	"galleryBanner": {
+		"color": "#062b3e",
+		"theme": "dark"
+	},
+	"engines": {
+		"vscode": "^1.69.0"
+	},
+	"main": "./out/extension.js",
+	"activationEvents": [
+		"onStartupFinished",
+		"onCommand:miyagi.newComponent",
+		"onCommand:miyagi.lint"
+	],
+	"contributes": {
+		"commands": [
+			{
+				"command": "miyagi.newComponent",
+				"title": "New component",
+				"category": "miyagi",
+				"enablement": "miyagi.hasMiyagi"
+			},
+			{
+				"command": "miyagi.lint",
+				"category": "miyagi",
+				"title": "Lint component",
+				"enablement": "miyagi.hasMiyagi"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "miyagi.newComponent",
+					"group": "miyagi@1",
+					"when": "explorerResourceIsFolder && miyagi.hasMiyagi"
+				},
+				{
+					"command": "miyagi.lint",
+					"group": "miyagi@2",
+					"when": "explorerResourceIsFolder && miyagi.hasMiyagi"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"lint": "eslint src --ext ts"
+	},
+	"devDependencies": {
+		"@types/node": "^18.0.4",
+		"@types/vscode": "^1.69.0",
+		"@typescript-eslint/eslint-plugin": "^5.30.6",
+		"@typescript-eslint/parser": "^5.30.6",
+		"eslint": "^8.19.0",
+		"eslint-config-standard": "^17.0.0",
+		"typescript": "^4.7.4"
+	}
+}
