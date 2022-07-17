@@ -3,13 +3,13 @@ import { runMiyagi } from '../lib/run'
 import { storage } from '../lib/storage'
 import * as vscode from 'vscode'
 
-interface QuickPickItem extends vscode.QuickPickItem {
+interface FileOption extends vscode.QuickPickItem {
 	value: any
 }
 
 const STORAGE_KEY_ONLY_FILES = 'miyagi.new-component-only-files'
 
-const FILE_OPTIONS: QuickPickItem[] = [
+const fileOptions: FileOption[] = [
 	{
 		label: 'Template',
 		value: 'tpl',
@@ -57,12 +57,12 @@ export async function newComponent (uri?: vscode.Uri) {
 	const storedOnlyFiles: string[] | undefined = await storage.get(STORAGE_KEY_ONLY_FILES)
 
 	if (storedOnlyFiles) {
-		FILE_OPTIONS.forEach(option => {
+		fileOptions.forEach(option => {
 			option.picked = storedOnlyFiles.includes(option.value)
 		})
 	}
 
-	const selectedFiles = await vscode.window.showQuickPick(FILE_OPTIONS, {
+	const selectedFiles = await vscode.window.showQuickPick(fileOptions, {
 		title: 'miyagi: Select files to create',
 		canPickMany: true
 	})
