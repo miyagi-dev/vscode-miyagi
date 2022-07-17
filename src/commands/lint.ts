@@ -1,19 +1,18 @@
-import { getMiyagiProject } from '../lib/get-miyagi-project'
-import { getWorkspaceFolder } from '../lib/get-workspace-folder'
+import { getProject, selectProject } from '../lib/project'
 import { miyagiOutputChannel } from '../lib/output-channel'
 import { runMiyagi } from '../lib/run'
 import * as path from 'node:path'
 import * as vscode from 'vscode'
 
-async function lintComponent (uri: vscode.Uri) {
-	const miyagiProject = await getMiyagiProject()
+function lintComponent (uri: vscode.Uri) {
+	const project = getProject(uri)
 
-	if (!miyagiProject) {
+	if (!project) {
 		return
 	}
 
-	const cwd = miyagiProject.cwd
-	const componentsFolder = miyagiProject.config.components.folder
+	const cwd = project.uri.path
+	const componentsFolder = project.config.components.folder
 	const componentPath = path.relative(path.join(cwd, componentsFolder), uri.path)
 
 	return runMiyagi({
@@ -22,20 +21,14 @@ async function lintComponent (uri: vscode.Uri) {
 	})
 }
 
-async function lintWorkspace () {
-	const workspaceFolder = await getWorkspaceFolder()
+async function lintProject () {
+	const project = await selectProject()
 
-	if (!workspaceFolder) {
+	if (!project) {
 		return
 	}
 
-	const miyagiProject = await getMiyagiProject()
-
-	if (!miyagiProject) {
-		return
-	}
-
-	const cwd = miyagiProject.cwd
+	const cwd = project.uri.path
 
 	return runMiyagi({
 		args: ['lint'],
@@ -47,12 +40,16 @@ export async function lint (uri?: vscode.Uri) {
 	let result
 
 	if (uri) {
-		result = await lintComponent(uri)
+		result = lintComponent(uri)
 	} else {
-		result = await lintWorkspace()
+		result = await lintProject()
 	}
 
-	if (result?.status === 0) {
+	if (!result) {
+		return
+	}
+
+	if (result.status === 0) {
 		vscode.window.showInformationMessage('miyagi: Valid schemas and mock data')
 	} else {
 		vscode.window.showErrorMessage('miyagi: Invalid schemas or mock data')

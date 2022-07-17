@@ -1,5 +1,4 @@
-import { getMiyagiProject } from './get-miyagi-project'
-import { getWorkspaceFolder } from './get-workspace-folder'
+import { getProject, selectProject } from './project'
 import * as path from 'node:path'
 import * as vscode from 'vscode'
 
@@ -9,40 +8,39 @@ export async function getNewComponentPath (uri?: vscode.Uri) {
 	if (uri) {
 		activePath = uri
 	} else if (vscode.window.activeTextEditor) {
-		activePath = vscode.window.activeTextEditor.document.uri
+		activePath = vscode.Uri.joinPath(vscode.window.activeTextEditor.document.uri, '..')
 	} else {
-		const workspaceFolder = await getWorkspaceFolder()
-		activePath = workspaceFolder?.uri
+		activePath = (await selectProject())?.uri
 	}
 
 	if (!activePath) {
 		return
 	}
 
-	const workspaceFolder = vscode.workspace.getWorkspaceFolder(activePath)
+	const project = getProject(activePath)
 
-	if (!workspaceFolder) {
+	if (!project) {
 		return
 	}
 
-	const miyagiProject = await getMiyagiProject()
-
-	if (!miyagiProject) {
-		return
-	}
-
+	const cwd = project.uri.path
 	const parentPlaceholder = '<componentFolder>'
 	const componentPlaceholder = '<componentName>'
-	const cwd = miyagiProject.cwd
-	const componentsFolder = miyagiProject.config.components.folder
-	const parentFolder = uri
-		? path.relative(path.join(cwd, componentsFolder), uri.path)
+	const componentsFolder = project.config.components.folder
+	const activePathInComponentsFolder = activePath.path.includes(componentsFolder) &&
+		!activePath.path.endsWith(componentsFolder)
+	const parentFolder = activePathInComponentsFolder
+		? path.relative(path.join(cwd, componentsFolder), activePath.path)
 		: ''
 
 	const componentPath = await vscode.window.showInputBox({
 		title: 'miyagi: Component path and name',
-		value: uri ? path.join(parentFolder, componentPlaceholder) : undefined,
-		valueSelection: [parentFolder.length + 1, -1],
+		value: activePathInComponentsFolder
+			? path.join(parentFolder, componentPlaceholder)
+			: undefined,
+		valueSelection: activePathInComponentsFolder
+			? [parentFolder.length + 1, -1]
+			: [0, 0],
 		placeHolder: `${parentPlaceholder}/${componentPlaceholder}`
 	})
 
