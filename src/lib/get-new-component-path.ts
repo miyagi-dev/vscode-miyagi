@@ -24,24 +24,19 @@ export async function getNewComponentPath (uri?: vscode.Uri) {
 	}
 
 	const cwd = project.uri.path
-	const parentPlaceholder = '<componentFolder>'
-	const componentPlaceholder = '<componentName>'
 	const componentsFolder = project.config.components.folder
-	const activePathInComponentsFolder = activePath.path.includes(componentsFolder) &&
-		!activePath.path.endsWith(componentsFolder)
-	const parentFolder = activePathInComponentsFolder
-		? path.relative(path.join(cwd, componentsFolder), activePath.path)
-		: ''
+
+	let parentFolder
+
+	if (activePath.path.includes(componentsFolder) && !activePath.path.endsWith(componentsFolder)) {
+		parentFolder = path.relative(path.join(cwd, componentsFolder), activePath.path) + '/'
+	}
 
 	const componentPath = await vscode.window.showInputBox({
 		title: 'miyagi: Component path and name',
-		value: activePathInComponentsFolder
-			? path.join(parentFolder, componentPlaceholder)
-			: undefined,
-		valueSelection: activePathInComponentsFolder
-			? [parentFolder.length + 1, -1]
-			: [0, 0],
-		placeHolder: `${parentPlaceholder}/${componentPlaceholder}`
+		value: parentFolder,
+		valueSelection: [-1, -1],
+		placeHolder: '<componentFolder>/<componentName>'
 	})
 
 	if (!componentPath) {
