@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2022-07-18
+### Fixed
+- Remove `<componentPath>` placeholder from name input box for new-component.
+
+### Changed
+- Remove unreleased v0.1.0 from changelog.
+
 ## [0.2.0] - 2022-07-17
 ### Added
 - Handle multiple miyagi projects (Close #1).
@@ -19,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Setup.
 
-[Unreleased]: https://github.com/miyagi-dev/vscode-miyagi/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/miyagi-dev/vscode-miyagi/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/miyagi-dev/vscode-miyagi/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/miyagi-dev/vscode-miyagi/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/miyagi-dev/vscode-miyagi/releases/tag/v0.1.1
