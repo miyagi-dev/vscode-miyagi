@@ -3,7 +3,7 @@
 	"displayName": "miyagi",
 	"description": "Use miyagi features directly in VS Code.",
 	"publisher": "fynn",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"preview": true,
 	"license": "MIT",
 	"categories": [
@@ -70,7 +70,8 @@
 		"vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
-		"lint": "eslint src --ext ts"
+		"lint": "eslint src --ext ts",
+		"release": "change --bump ./release.sh"
 	},
 	"devDependencies": {
 		"@types/node": "^18.0.5",
