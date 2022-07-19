@@ -13,14 +13,14 @@
 	"keywords": [
 		"miyagi"
 	],
-	"homepage": "https://github.com/mvsde/vscode-miyagi#readme",
+	"homepage": "https://github.com/miyagi-dev/vscode-miyagi#readme",
 	"bugs": {
-		"url": "https://github.com/mvsde/vscode-miyagi/issues",
+		"url": "https://github.com/miyagi-dev/vscode-miyagi/issues",
 		"email": "post@fynn.be"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/mvsde/vscode-miyagi.git"
+		"url": "https://github.com/miyagi-dev/vscode-miyagi.git"
 	},
 	"icon": "images/icon.png",
 	"galleryBanner": {
@@ -71,13 +71,14 @@
 		"compile": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
 		"lint": "eslint src --ext ts",
-		"release": "change --bump ./release.sh"
+		"version": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file && git add CHANGELOG.md"
 	},
 	"devDependencies": {
 		"@types/node": "^18.0.6",
 		"@types/vscode": "^1.69.0",
 		"@typescript-eslint/eslint-plugin": "^5.30.6",
 		"@typescript-eslint/parser": "^5.30.6",
+		"conventional-changelog-cli": "^2.2.2",
 		"eslint": "^8.20.0",
 		"eslint-config-standard": "^17.0.0",
 		"typescript": "^4.7.4"
