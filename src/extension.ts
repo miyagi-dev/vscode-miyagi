@@ -15,7 +15,8 @@ export async function activate (context: vscode.ExtensionContext) {
 	setupStorage(context)
 
 	const commandNewComponent = vscode.commands.registerCommand('miyagi.newComponent', newComponent)
-	const commandLint = vscode.commands.registerCommand('miyagi.lint', lint)
+	const commandLintComponent = vscode.commands.registerCommand('miyagi.lintComponent', lint)
+	const commandLintAllComponents = vscode.commands.registerCommand('miyagi.lintAllComponents', lint)
 
 	const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
 	await setContext(contextHasMiyagi)
@@ -31,7 +32,8 @@ export async function activate (context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(
 		commandNewComponent,
-		commandLint,
+		commandLintComponent,
+		commandLintAllComponents,
 		eventChangeWorkspaceFolders,
 		watcherMiyagiConfig
 	)

@@ -32,35 +32,44 @@
 	},
 	"main": "./out/extension.js",
 	"activationEvents": [
-		"onStartupFinished",
-		"onCommand:miyagi.newComponent",
-		"onCommand:miyagi.lint"
+		"onStartupFinished"
 	],
 	"contributes": {
 		"commands": [
 			{
 				"command": "miyagi.newComponent",
-				"title": "New component",
+				"title": "New Component",
 				"category": "miyagi",
 				"enablement": "miyagi.hasMiyagi"
 			},
 			{
-				"command": "miyagi.lint",
+				"command": "miyagi.lintComponent",
 				"category": "miyagi",
-				"title": "Lint component",
+				"title": "Lint Component"
+			},
+			{
+				"command": "miyagi.lintAllComponents",
+				"category": "miyagi",
+				"title": "Lint All Components",
 				"enablement": "miyagi.hasMiyagi"
 			}
 		],
 		"menus": {
+			"commandPalette": [
+				{
+					"command": "miyagi.lintComponent",
+					"when": "never"
+				}
+			],
 			"explorer/context": [
 				{
 					"command": "miyagi.newComponent",
-					"group": "miyagi@1",
+					"group": "navigation@10",
 					"when": "explorerResourceIsFolder && miyagi.hasMiyagi"
 				},
 				{
-					"command": "miyagi.lint",
-					"group": "miyagi@2",
+					"command": "miyagi.lintComponent",
+					"group": "4_search@10",
 					"when": "explorerResourceIsFolder && miyagi.hasMiyagi"
 				}
 			]
