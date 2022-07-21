@@ -1,3 +1,17 @@
+# [0.3.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.2.1...v0.3.0) (2022-07-21)
+
+
+### Bug Fixes
+
+* Better command naming and context menu placement ([a17566f](https://github.com/miyagi-dev/vscode-miyagi/commit/a17566f63e0675a2d4db1833e14be6b099042c52))
+
+
+### Features
+
+* Linked $ref and $tpl in schemas/mocks (Close [#5](https://github.com/miyagi-dev/vscode-miyagi/issues/5)) ([a66daa0](https://github.com/miyagi-dev/vscode-miyagi/commit/a66daa0d5e48e8ff178dad1aab8ab55ef16f785d))
+
+
+
 ## [0.2.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.2.0...v0.2.1) (2022-07-18)
 
 
