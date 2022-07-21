@@ -8,7 +8,7 @@ interface MiyagiConfig {
 	}
 }
 
-interface Project {
+export interface Project {
   uri: vscode.Uri
   config: MiyagiConfig
 }
