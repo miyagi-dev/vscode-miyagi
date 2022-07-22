@@ -1,4 +1,4 @@
-import * as vscode from 'vscode'
+import vscode from 'vscode'
 
 type ContextValue = boolean | string | string[] | RegExp | undefined
 

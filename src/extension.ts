@@ -5,7 +5,7 @@ import { lint } from './commands/lint'
 import { MIYAGI_CONFIG_GLOB } from './constants'
 import { newComponent } from './commands/new-component'
 import { setupStorage } from './lib/storage'
-import * as vscode from 'vscode'
+import vscode from 'vscode'
 
 async function setContext (contextHasMiyagi: ContextKey) {
 	const projectList = await getProjectList({ refresh: true })

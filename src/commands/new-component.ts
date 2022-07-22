@@ -2,7 +2,7 @@ import { getNewComponentPath } from '../lib/get-new-component-path'
 import { outputChannel } from '../lib/output-channel'
 import { runMiyagi } from '../lib/run'
 import { storage } from '../lib/storage'
-import * as vscode from 'vscode'
+import vscode from 'vscode'
 
 interface FileOption extends vscode.QuickPickItem {
 	value: any

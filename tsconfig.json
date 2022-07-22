@@ -9,6 +9,7 @@
 		"outDir": "out",
 		"sourceMap": true,
 		"strict": true,
+		"esModuleInterop": true,
 		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
 		"noUnusedParameters": true,

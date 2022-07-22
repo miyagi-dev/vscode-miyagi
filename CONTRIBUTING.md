@@ -27,4 +27,10 @@ Bump the package version and generate a changelog:
 npm version …
 ```
 
+Publish the new version with [vsce](https://github.com/microsoft/vscode-vsce):
+
+```sh
+vsce publish
+```
+
 See [npm version docs](https://docs.npmjs.com/cli/v8/commands/npm-version) for all available arguments.
