@@ -1,5 +1,5 @@
 import { getProject, selectProject } from '../lib/project'
-import { miyagiOutputChannel } from '../lib/output-channel'
+import { outputChannel } from '../lib/output-channel'
 import { runMiyagi } from '../lib/run'
 import * as path from 'node:path'
 import * as vscode from 'vscode'
@@ -59,11 +59,11 @@ export async function lint (uri?: vscode.Uri) {
 	const stderr = result?.stderr.toString()
 
 	if (stdout) {
-		miyagiOutputChannel.appendLine(stdout)
+		outputChannel.appendLine(stdout)
 	}
 
 	if (stderr) {
-		miyagiOutputChannel.appendLine(stderr)
-		miyagiOutputChannel.show()
+		outputChannel.appendLine(stderr)
+		outputChannel.show()
 	}
 }

@@ -1,4 +1,5 @@
 import { getNewComponentPath } from '../lib/get-new-component-path'
+import { outputChannel } from '../lib/output-channel'
 import { runMiyagi } from '../lib/run'
 import { storage } from '../lib/storage'
 import * as vscode from 'vscode'
@@ -74,8 +75,19 @@ export async function newComponent (uri?: vscode.Uri) {
 	const onlyFiles = selectedFiles.map(file => file.value)
 	await storage.update(STORAGE_KEY_ONLY_FILES, onlyFiles)
 
-	runMiyagi({
+	const result = runMiyagi({
 		args: ['new', componentPath.path, '--only', ...onlyFiles],
 		cwd: componentPath.cwd
 	})
+
+	if (result.status !== 0) {
+		vscode.window.showErrorMessage('miyagi: Error creating component')
+	}
+
+	const stderr = result?.stderr.toString()
+
+	if (stderr) {
+		outputChannel.appendLine(stderr)
+		outputChannel.show()
+	}
 }

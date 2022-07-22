@@ -20,6 +20,7 @@ export async function getNewComponentPath (uri?: vscode.Uri) {
 	const project = getProject(activePath)
 
 	if (!project) {
+		vscode.window.showErrorMessage('miyagi: Error getting active project')
 		return
 	}
 
