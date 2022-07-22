@@ -1,7 +1,7 @@
 import { getProject, Project } from './project'
 import { includes } from '../utils/types'
-import * as path from 'node:path'
-import * as vscode from 'vscode'
+import path from 'node:path'
+import vscode from 'vscode'
 
 const VALID_TYPES = ['mocks', 'schema'] as const
 const VALID_EXTENSIONS = ['.yaml', '.json'] as const

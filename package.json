@@ -76,11 +76,16 @@
 		}
 	},
 	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
+		"watch": "esbuild $npm_package_config_esbuild --sourcemap --watch",
 		"lint": "eslint src --ext ts",
-		"version": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file && git add CHANGELOG.md"
+		"typecheck": "tsc --project ./ --noEmit",
+		"prebuild": "npm run lint && npm run typecheck",
+		"build": "esbuild $npm_package_config_esbuild --minify",
+		"version": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file && git add CHANGELOG.md",
+		"vscode:prepublish": "npm run build"
+	},
+	"config": {
+		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node"
 	},
 	"dependencies": {
 		"deepmerge": "^4.2.2"
@@ -91,6 +96,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.30.6",
 		"@typescript-eslint/parser": "^5.30.6",
 		"conventional-changelog-cli": "^2.2.2",
+		"esbuild": "^0.14.49",
 		"eslint": "^8.20.0",
 		"eslint-config-standard": "^17.0.0",
 		"typescript": "^4.7.4"

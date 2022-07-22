@@ -1,8 +1,8 @@
 import { isDefined } from '../utils/types'
 import { MIYAGI_CONFIG_GLOB } from '../constants'
 import { outputChannel } from './output-channel'
-import * as deepmerge from 'deepmerge'
-import * as vscode from 'vscode'
+import vscode from 'vscode'
+import deepmerge from 'deepmerge'
 
 interface MiyagiConfig {
 	components: {
