@@ -1,3 +1,3 @@
 import * as vscode from 'vscode'
 
-export const miyagiOutputChannel = vscode.window.createOutputChannel('miyagi')
+export const outputChannel = vscode.window.createOutputChannel('miyagi')

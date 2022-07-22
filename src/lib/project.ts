@@ -1,10 +1,18 @@
 import { isDefined } from '../utils/types'
 import { MIYAGI_CONFIG_GLOB } from '../constants'
+import { outputChannel } from './output-channel'
+import * as deepmerge from 'deepmerge'
 import * as vscode from 'vscode'
 
 interface MiyagiConfig {
 	components: {
 		folder: string
+	}
+}
+
+const DEFAULT_CONFIG: MiyagiConfig = {
+	components: {
+		folder: 'src'
 	}
 }
 
@@ -28,9 +36,16 @@ function getProjectInfo (projectURI: vscode.Uri): Project | undefined {
 		delete require.cache[projectURI.path]
 
 		const uri = vscode.Uri.joinPath(projectURI, '..')
-		const config: MiyagiConfig = require(projectURI.path)
+		const config = deepmerge(DEFAULT_CONFIG, require(projectURI.path))
+
 		return { uri, config }
-	} catch {
+	} catch (error) {
+		outputChannel.appendLine(String(error))
+
+		vscode.window
+			.showErrorMessage('miyagi: Error loading configuration', 'Show Details')
+			.then(action => action === 'Show Details' && outputChannel.show())
+
 		return undefined
 	}
 }
