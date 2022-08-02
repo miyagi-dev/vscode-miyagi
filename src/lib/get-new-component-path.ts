@@ -27,9 +27,14 @@ export async function getNewComponentPath (uri?: vscode.Uri) {
 	const cwd = project.uri.path
 	const componentsFolder = project.config.components.folder
 
-	let parentFolder
+	if (!activePath.path.includes(componentsFolder)) {
+		vscode.window.showWarningMessage(`miyagi: Select a location in "${componentsFolder}"`)
+		return
+	}
 
-	if (activePath.path.includes(componentsFolder) && !activePath.path.endsWith(componentsFolder)) {
+	let parentFolder: string | undefined
+
+	if (!activePath.path.endsWith(componentsFolder)) {
 		parentFolder = path.relative(path.join(cwd, componentsFolder), activePath.path) + '/'
 	}
 

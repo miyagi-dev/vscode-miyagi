@@ -15,6 +15,11 @@ function lintComponent (uri: vscode.Uri) {
 	const componentsFolder = project.config.components.folder
 	const componentPath = path.relative(path.join(cwd, componentsFolder), uri.path)
 
+	if (!componentPath.includes(componentsFolder)) {
+		vscode.window.showWarningMessage(`miyagi: Select a component in "${componentsFolder}"`)
+		return
+	}
+
 	return runMiyagi({
 		args: ['lint', componentPath],
 		cwd
