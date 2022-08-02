@@ -1,8 +1,9 @@
+import { clearRequireCache } from '../utils/clear-require-cache'
 import { isDefined } from '../utils/types'
 import { MIYAGI_CONFIG_GLOB } from '../constants'
 import { outputChannel } from './output-channel'
-import vscode from 'vscode'
 import deepmerge from 'deepmerge'
+import vscode from 'vscode'
 
 interface MiyagiConfig {
 	components: {
@@ -33,7 +34,7 @@ let projects: Project[]
 
 function getProjectInfo (projectURI: vscode.Uri): Project | undefined {
 	try {
-		delete require.cache[projectURI.path]
+		clearRequireCache(projectURI.path)
 
 		const uri = vscode.Uri.joinPath(projectURI, '..')
 		const config = deepmerge(DEFAULT_CONFIG, require(projectURI.path))
