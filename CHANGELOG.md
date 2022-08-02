@@ -1,3 +1,18 @@
+# [0.4.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.3.0...v0.4.0) (2022-08-02)
+
+
+### Bug Fixes
+
+* Add more verbose error logging (Close [#10](https://github.com/miyagi-dev/vscode-miyagi/issues/10)) ([3c8222e](https://github.com/miyagi-dev/vscode-miyagi/commit/3c8222e2a90b3ef975ee3c8523050ff562adfa88))
+* Cache clearing on miyagi config change ([669856e](https://github.com/miyagi-dev/vscode-miyagi/commit/669856efb8b5018c5266931410e8c0f8b079e35d))
+
+
+### Features
+
+* Add reload command ([68b4e97](https://github.com/miyagi-dev/vscode-miyagi/commit/68b4e976a4cfb7d258f99098a657d4606381c054))
+
+
+
 # [0.3.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.2.1...v0.3.0) (2022-07-21)
 
 
