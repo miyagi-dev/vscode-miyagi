@@ -35,8 +35,8 @@ export async function activate (context: vscode.ExtensionContext) {
 	const commandReload = vscode.commands.registerCommand('miyagi.reload', reload)
 
 	// Providers
-	const providerYAMLLinks = vscode.languages.registerDocumentLinkProvider({ scheme: 'file', language: 'yaml' }, documentLinks)
-	const providerJSONLinks = vscode.languages.registerDocumentLinkProvider({ scheme: 'file', language: 'json' }, documentLinks)
+	const providerYAMLLinks = vscode.languages.registerDocumentLinkProvider({ language: 'yaml' }, documentLinks)
+	const providerJSONLinks = vscode.languages.registerDocumentLinkProvider({ language: 'json' }, documentLinks)
 
 	context.subscriptions.push(
 		eventWorkspaceFolders,
