@@ -7,7 +7,7 @@ import { newComponent } from './commands/new-component'
 import { setupStorage } from './lib/storage'
 import vscode from 'vscode'
 
-async function setContext (contextHasMiyagi: ContextKey) {
+async function queryProjects (contextHasMiyagi: ContextKey) {
 	const projectList = await getProjectList({ refresh: true })
 	contextHasMiyagi.set(projectList.length > 0)
 }
@@ -16,19 +16,25 @@ export async function activate (context: vscode.ExtensionContext) {
 	setupStorage(context)
 
 	const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
-	await setContext(contextHasMiyagi)
+	const reload = () => queryProjects(contextHasMiyagi)
+	await queryProjects(contextHasMiyagi)
 
-	const eventWorkspaceFolders = vscode.workspace.onDidChangeWorkspaceFolders(() => setContext(contextHasMiyagi))
+	// Events
+	const eventWorkspaceFolders = vscode.workspace.onDidChangeWorkspaceFolders(reload)
 
+	// Watchers
 	const watcherMiyagiConfig = vscode.workspace.createFileSystemWatcher(MIYAGI_CONFIG_GLOB)
-	watcherMiyagiConfig.onDidCreate(() => setContext(contextHasMiyagi))
-	watcherMiyagiConfig.onDidChange(() => setContext(contextHasMiyagi))
-	watcherMiyagiConfig.onDidDelete(() => setContext(contextHasMiyagi))
+	watcherMiyagiConfig.onDidCreate(reload)
+	watcherMiyagiConfig.onDidChange(reload)
+	watcherMiyagiConfig.onDidDelete(reload)
 
+	// Commands
 	const commandNewComponent = vscode.commands.registerCommand('miyagi.newComponent', newComponent)
 	const commandLintComponent = vscode.commands.registerCommand('miyagi.lintComponent', lint)
 	const commandLintAllComponents = vscode.commands.registerCommand('miyagi.lintAllComponents', lint)
+	const commandReload = vscode.commands.registerCommand('miyagi.reload', reload)
 
+	// Providers
 	const providerYAMLLinks = vscode.languages.registerDocumentLinkProvider({ scheme: 'file', language: 'yaml' }, documentLinks)
 	const providerJSONLinks = vscode.languages.registerDocumentLinkProvider({ scheme: 'file', language: 'json' }, documentLinks)
 
@@ -38,6 +44,7 @@ export async function activate (context: vscode.ExtensionContext) {
 		commandNewComponent,
 		commandLintComponent,
 		commandLintAllComponents,
+		commandReload,
 		providerYAMLLinks,
 		providerJSONLinks
 	)

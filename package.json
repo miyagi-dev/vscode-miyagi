@@ -52,6 +52,11 @@
 				"category": "miyagi",
 				"title": "Lint All Components",
 				"enablement": "miyagi.hasMiyagi"
+			},
+			{
+				"command": "miyagi.reload",
+				"category": "miyagi",
+				"title": "Reload"
 			}
 		],
 		"menus": {
@@ -71,6 +76,11 @@
 					"command": "miyagi.lintComponent",
 					"group": "4_search@10",
 					"when": "explorerResourceIsFolder && miyagi.hasMiyagi"
+				},
+				{
+					"command": "miyagi.reload",
+					"group": "7_modification@20",
+					"when": "resourceFilename == .miyagi.js || resourceFilename == .miyagi.json"
 				}
 			]
 		}
