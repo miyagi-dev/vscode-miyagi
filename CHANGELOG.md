@@ -1,3 +1,13 @@
+## [0.4.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.4.0...v0.4.1) (2022-08-02)
+
+
+### Bug Fixes
+
+* Enable document links for all file schemes (Close [#15](https://github.com/miyagi-dev/vscode-miyagi/issues/15)) ([906915a](https://github.com/miyagi-dev/vscode-miyagi/commit/906915a560208327dff45d079abebaccd6ef3c6f))
+* Warn when trying to create/lint component outside of components folder (Close [#4](https://github.com/miyagi-dev/vscode-miyagi/issues/4)) ([ecf1127](https://github.com/miyagi-dev/vscode-miyagi/commit/ecf1127b3ec8b05297892fedfbdc3beeb8cf7290))
+
+
+
 # [0.4.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.3.0...v0.4.0) (2022-08-02)
 
 
