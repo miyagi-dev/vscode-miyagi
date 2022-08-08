@@ -1,3 +1,12 @@
+## [0.4.2](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.4.1...v0.4.2) (2022-08-08)
+
+
+### Bug Fixes
+
+* **lint:** Valid component path detection ([f372e52](https://github.com/miyagi-dev/vscode-miyagi/commit/f372e526e12d8f50de024f69bdfb840eda06267f))
+
+
+
 ## [0.4.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.4.0...v0.4.1) (2022-08-02)
 
 
