@@ -1,70 +1,27 @@
+import { findMetaLinks } from './find-meta-links'
+import { findTwigLinks } from './find-twig-links'
 import { getProject, Project } from './project'
-import { includes } from '../utils/types'
 import path from 'node:path'
 import vscode from 'vscode'
 
-const VALID_TYPES = ['mocks', 'schema'] as const
-const VALID_EXTENSIONS = ['.yaml', '.json'] as const
+type EXTENSIONS = 'yaml' | 'json' | 'twig'
 
-const LINK_PATTERN = {
-	// eslint-disable-next-line @typescript-eslint/naming-convention
-	'.yaml': /\$(?:ref|tpl): (?<reference>.+)/g,
-	// eslint-disable-next-line @typescript-eslint/naming-convention
-	'.json': /"\$(?:ref|tpl)": ?"(?<reference>.+)"/g
-}
-
-interface FindLinksOptions {
+export interface FindLinksOptions {
 	content: string
 	document: vscode.TextDocument
 	project: Project
-	type: (typeof VALID_TYPES)[number]
-	extension: (typeof VALID_EXTENSIONS)[number]
 	token: vscode.CancellationToken
 }
 
-function findLinks ({ content, document, project, type, extension, token }: FindLinksOptions) {
-	const matches = content.matchAll(LINK_PATTERN[extension])
-	const links: vscode.DocumentLink[] = []
-
-	for (const match of matches) {
-		if (token.isCancellationRequested) {
-			break
-		}
-
-		const reference = match.groups?.reference
-		const start = match.index
-
-		if (!reference || start === undefined) {
-			continue
-		}
-
-		const contentStart = start + match[0].indexOf(reference)
-		const contentEnd = contentStart + reference.length
-		const [filename] = reference.split('#')
-
-		const range = new vscode.Range(
-			document.positionAt(contentStart),
-			document.positionAt(contentEnd)
-		)
-
-		const target = vscode.Uri.joinPath(
-			project.uri,
-			project.config.components.folder,
-			filename,
-			type + extension
-		)
-
-		links.push({ range, target })
-	}
-
-	return links
-}
+const FIND_LINKS_MAP = {
+	yaml: findMetaLinks,
+	json: findMetaLinks,
+	twig: findTwigLinks
+} as const
 
 function provideDocumentLinks (document: vscode.TextDocument, token: vscode.CancellationToken) {
 	const project = getProject(document.uri)
 	const content = document.getText()
-	const extension = path.extname(document.uri.path)
-	const type = path.basename(document.uri.path, extension)
 
 	if (!project) {
 		return
@@ -74,15 +31,10 @@ function provideDocumentLinks (document: vscode.TextDocument, token: vscode.Canc
 		return
 	}
 
-	if (!includes(VALID_TYPES, type)) {
-		return
-	}
+	// The extensions are guaranteed by the DocumentSelector.
+	const extension = path.extname(document.uri.path).slice(1) as EXTENSIONS
 
-	if (!includes(VALID_EXTENSIONS, extension)) {
-		return
-	}
-
-	return findLinks({ content, document, project, type, extension, token })
+	return FIND_LINKS_MAP[extension]({ content, document, project, token })
 }
 
 export const documentLinks: vscode.DocumentLinkProvider = {

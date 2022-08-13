@@ -9,6 +9,14 @@ interface MiyagiConfig {
 	components: {
 		folder: string
 	}
+	engine?: {
+		name?: string
+		options?: {
+			namespaces?: {
+				[key: string]: string | undefined
+			}
+		}
+	}
 }
 
 const DEFAULT_CONFIG: MiyagiConfig = {
