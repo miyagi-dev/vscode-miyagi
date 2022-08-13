@@ -1,3 +1,13 @@
+# [0.5.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.4.3...v0.5.0) (2022-08-13)
+
+
+### Features
+
+* Extend feature documentation ([239c3ca](https://github.com/miyagi-dev/vscode-miyagi/commit/239c3ca7deee35e5e981a7d9a1f98069a54a651e))
+* Linked template files in Twig templates ([23b49e5](https://github.com/miyagi-dev/vscode-miyagi/commit/23b49e58d9f4db1c18e556b93c06aaeed4986b47))
+
+
+
 ## [0.4.3](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.4.2...v0.4.3) (2022-08-08)
 
 
