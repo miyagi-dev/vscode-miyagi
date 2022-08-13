@@ -1,7 +1,7 @@
 import { FindLinksOptions } from './document-links'
 import vscode from 'vscode'
 
-const LINK_PATTERN = /@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+\.twig)/g
+const LINK_PATTERN = /("|')@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+?)("|')/g
 
 export function findTwigLinks ({ content, document, project, token }: FindLinksOptions) {
 	if (project.config.engine?.name !== 'twig') {
@@ -34,11 +34,12 @@ export function findTwigLinks ({ content, document, project, token }: FindLinksO
 			continue
 		}
 
-		const end = start + match[0].length
+		const contentStart = start + 1
+		const contentEnd = start + match[0].length - 1
 
 		const range = new vscode.Range(
-			document.positionAt(start),
-			document.positionAt(end)
+			document.positionAt(contentStart),
+			document.positionAt(contentEnd)
 		)
 
 		const target = vscode.Uri.joinPath(
