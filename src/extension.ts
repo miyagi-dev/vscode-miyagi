@@ -35,8 +35,13 @@ export async function activate (context: vscode.ExtensionContext) {
 	const commandReload = vscode.commands.registerCommand('miyagi.reload', reload)
 
 	// Providers
-	const providerYAMLLinks = vscode.languages.registerDocumentLinkProvider({ language: 'yaml' }, documentLinks)
-	const providerJSONLinks = vscode.languages.registerDocumentLinkProvider({ language: 'json' }, documentLinks)
+	const providerDocumentLinks = vscode.languages.registerDocumentLinkProvider(
+		[
+			{ pattern: '**/{mocks,schema}.{yaml,json}' },
+			{ pattern: '**/*.twig' }
+		],
+		documentLinks
+	)
 
 	context.subscriptions.push(
 		eventWorkspaceFolders,
@@ -45,8 +50,7 @@ export async function activate (context: vscode.ExtensionContext) {
 		commandLintComponent,
 		commandLintAllComponents,
 		commandReload,
-		providerYAMLLinks,
-		providerJSONLinks
+		providerDocumentLinks
 	)
 }
 
