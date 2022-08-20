@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process'
 import path from 'node:path'
 
-interface RunMiyagiOptions {
+type RunMiyagiOptions = {
   args: string[]
   cwd: string
 }
