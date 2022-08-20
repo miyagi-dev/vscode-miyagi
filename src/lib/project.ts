@@ -19,23 +19,23 @@ interface MiyagiConfig {
 	}
 }
 
-const DEFAULT_CONFIG: MiyagiConfig = {
-	components: {
-		folder: 'src'
-	}
-}
-
 export interface Project {
   uri: vscode.Uri
   config: MiyagiConfig
 }
 
-interface GetProjectListOptions {
+interface ProjectOption extends vscode.QuickPickItem {
+	value: Project
+}
+
+type GetProjectListOptions = {
   refresh?: boolean
 }
 
-interface ProjectOption extends vscode.QuickPickItem {
-	value: Project
+const DEFAULT_CONFIG: MiyagiConfig = {
+	components: {
+		folder: 'src'
+	}
 }
 
 let projects: Project[]

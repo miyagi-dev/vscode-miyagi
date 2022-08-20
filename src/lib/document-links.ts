@@ -6,7 +6,7 @@ import vscode from 'vscode'
 
 type EXTENSIONS = 'yaml' | 'json' | 'twig'
 
-export interface FindLinksOptions {
+export type FindLinksOptions = {
 	content: string
 	document: vscode.TextDocument
 	project: Project
