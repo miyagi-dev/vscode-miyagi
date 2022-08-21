@@ -1,1 +1,5 @@
 export const MIYAGI_CONFIG_GLOB = '**/.miyagi.{js,json}'
+export const SCHEMA_GLOB = '**/schema.{json,yaml}'
+export const MOCKS_GLOB = '**/mocks.{json,yaml}'
+export const TWIG_GLOB = '**/*.twig'
+export const EXCLUDE_GLOB = '**/node_modules/**'
