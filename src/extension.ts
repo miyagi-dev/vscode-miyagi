@@ -1,5 +1,5 @@
 import { ContextKey } from './lib/context-key'
-import { documentLinks } from './lib/document-links'
+import { documentLinks, documentLinkFiles } from './lib/document-links'
 import { getProjectList } from './lib/project'
 import { lint } from './commands/lint'
 import { MIYAGI_CONFIG_GLOB } from './constants'
@@ -35,13 +35,7 @@ export async function activate (context: vscode.ExtensionContext) {
 	const commandReload = vscode.commands.registerCommand('miyagi.reload', reload)
 
 	// Providers
-	const providerDocumentLinks = vscode.languages.registerDocumentLinkProvider(
-		[
-			{ pattern: '**/{mocks,schema}.{yaml,json}' },
-			{ pattern: '**/*.twig' }
-		],
-		documentLinks
-	)
+	const providerDocumentLinks = vscode.languages.registerDocumentLinkProvider(documentLinkFiles, documentLinks)
 
 	context.subscriptions.push(
 		eventWorkspaceFolders,

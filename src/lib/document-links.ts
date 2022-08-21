@@ -19,7 +19,8 @@ const FIND_LINKS_MAP = {
 	twig: findTwigLinks
 } as const
 
-function provideDocumentLinks (document: vscode.TextDocument, token: vscode.CancellationToken) {
+type ProvideDocumentLinksType = vscode.DocumentLinkProvider['provideDocumentLinks']
+const provideDocumentLinks: ProvideDocumentLinksType = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
 
@@ -40,3 +41,8 @@ function provideDocumentLinks (document: vscode.TextDocument, token: vscode.Canc
 export const documentLinks: vscode.DocumentLinkProvider = {
 	provideDocumentLinks
 }
+
+export const documentLinkFiles: vscode.DocumentSelector = [
+	{ pattern: '**/{mocks,schema}.{yaml,json}' },
+	{ pattern: '**/*.twig' }
+]
