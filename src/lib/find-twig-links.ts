@@ -1,7 +1,7 @@
 import { FindLinksOptions } from './document-links'
 import vscode from 'vscode'
 
-const LINK_PATTERN = /("|')@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+?)("|')/g
+const LINK_PATTERN = /("|')@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+?)\1/gi
 
 export function findTwigLinks ({ content, document, project, token }: FindLinksOptions) {
 	if (project.config.engine?.name !== 'twig') {
