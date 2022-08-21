@@ -1,6 +1,6 @@
 import { clearRequireCache } from '../utils/clear-require-cache'
-import { isDefined } from '../utils/types'
-import { MIYAGI_CONFIG_GLOB } from '../constants'
+import { loadSchemas, Schema } from './load-schemas'
+import { MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB } from '../constants'
 import { outputChannel } from './output-channel'
 import deepmerge from 'deepmerge'
 import vscode from 'vscode'
@@ -8,6 +8,16 @@ import vscode from 'vscode'
 interface MiyagiConfig {
 	components: {
 		folder: string
+	}
+	files: {
+		schema: {
+			name: string
+			extension: 'json' | 'yaml'
+		}
+		mocks: {
+			name: string
+			extension: 'json' | 'yaml'
+		}
 	}
 	engine?: {
 		name?: string
@@ -22,6 +32,7 @@ interface MiyagiConfig {
 export interface Project {
   uri: vscode.Uri
   config: MiyagiConfig
+	schemas: Schema[]
 }
 
 interface ProjectOption extends vscode.QuickPickItem {
@@ -35,19 +46,30 @@ type GetProjectListOptions = {
 const DEFAULT_CONFIG: MiyagiConfig = {
 	components: {
 		folder: 'src'
+	},
+	files: {
+		schema: {
+			name: 'schema',
+			extension: 'json'
+		},
+		mocks: {
+			name: 'mocks',
+			extension: 'json'
+		}
 	}
 }
 
 let projects: Project[]
 
-function getProjectInfo (projectURI: vscode.Uri): Project | undefined {
+async function getProjectInfo (projectURI: vscode.Uri): Promise<Project | undefined> {
 	try {
 		clearRequireCache(projectURI.path)
 
 		const uri = vscode.Uri.joinPath(projectURI, '..')
 		const config = deepmerge(DEFAULT_CONFIG, require(projectURI.path))
+		const schemas = await loadSchemas(uri)
 
-		return { uri, config }
+		return { uri, config, schemas }
 	} catch (error) {
 		outputChannel.appendLine(String(error))
 
@@ -64,8 +86,16 @@ export async function getProjectList ({ refresh }: GetProjectListOptions = {}) {
 		return projects
 	}
 
-	const projectURIs = await vscode.workspace.findFiles(MIYAGI_CONFIG_GLOB)
-	projects = projectURIs.map(getProjectInfo).filter(isDefined)
+	const projectURIs = await vscode.workspace.findFiles(MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB)
+	projects = []
+
+	for (const projectURI of projectURIs) {
+		const projectInfo = await getProjectInfo(projectURI)
+
+		if (projectInfo) {
+			projects.push(projectInfo)
+		}
+	}
 
 	return projects
 }

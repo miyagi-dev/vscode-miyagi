@@ -1,8 +1,9 @@
 import { ContextKey } from './lib/context-key'
+import { createFileSystemWatcher } from './utils/create-file-system-watcher'
 import { documentLinks, documentLinkFiles } from './lib/document-links'
 import { getProjectList } from './lib/project'
 import { lint } from './commands/lint'
-import { MIYAGI_CONFIG_GLOB } from './constants'
+import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
 import { newComponent } from './commands/new-component'
 import { setupStorage } from './lib/storage'
 import vscode from 'vscode'
@@ -23,10 +24,8 @@ export async function activate (context: vscode.ExtensionContext) {
 	const eventWorkspaceFolders = vscode.workspace.onDidChangeWorkspaceFolders(reload)
 
 	// Watchers
-	const watcherMiyagiConfig = vscode.workspace.createFileSystemWatcher(MIYAGI_CONFIG_GLOB)
-	watcherMiyagiConfig.onDidCreate(reload)
-	watcherMiyagiConfig.onDidChange(reload)
-	watcherMiyagiConfig.onDidDelete(reload)
+	const watcherMiyagiConfig = createFileSystemWatcher(MIYAGI_CONFIG_GLOB, reload)
+	const watcherSchema = createFileSystemWatcher(SCHEMA_GLOB, reload)
 
 	// Commands
 	const commandNewComponent = vscode.commands.registerCommand('miyagi.newComponent', newComponent)
@@ -40,6 +39,7 @@ export async function activate (context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		eventWorkspaceFolders,
 		watcherMiyagiConfig,
+		watcherSchema,
 		commandNewComponent,
 		commandLintComponent,
 		commandLintAllComponents,

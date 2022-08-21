@@ -99,7 +99,8 @@
 		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node"
 	},
 	"dependencies": {
-		"deepmerge": "^4.2.2"
+		"deepmerge": "^4.2.2",
+		"yaml": "^2.1.1"
 	},
 	"devDependencies": {
 		"@types/node": "^18.7.8",
