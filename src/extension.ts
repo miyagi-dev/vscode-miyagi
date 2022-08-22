@@ -1,6 +1,8 @@
 import { ContextKey } from './lib/context-key'
 import { createFileSystemWatcher } from './utils/create-file-system-watcher'
-import { documentLinks, documentLinkFiles } from './lib/document-links'
+import { documentLinksMocks } from './lib/document-links-mocks'
+import { documentLinksSchema } from './lib/document-links-schema'
+import { documentLinksTemplate } from './lib/document-links-template'
 import { getProjectList } from './lib/project'
 import { lint } from './commands/lint'
 import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
@@ -34,7 +36,9 @@ export async function activate (context: vscode.ExtensionContext) {
 	const commandReload = vscode.commands.registerCommand('miyagi.reload', reload)
 
 	// Providers
-	const providerDocumentLinks = vscode.languages.registerDocumentLinkProvider(documentLinkFiles, documentLinks)
+	const providerDocumentLinksMocks = documentLinksMocks()
+	const providerDocumentLinksSchema = documentLinksSchema()
+	const providerDocumentLinksTemplate = documentLinksTemplate()
 
 	context.subscriptions.push(
 		eventWorkspaceFolders,
@@ -44,7 +48,9 @@ export async function activate (context: vscode.ExtensionContext) {
 		commandLintComponent,
 		commandLintAllComponents,
 		commandReload,
-		providerDocumentLinks
+		providerDocumentLinksMocks,
+		providerDocumentLinksSchema,
+		providerDocumentLinksTemplate
 	)
 }
 

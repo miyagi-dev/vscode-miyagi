@@ -1,4 +1,5 @@
-import { FindLinksOptions } from './document-links'
+import { getProject } from './project'
+import { MOCKS_GLOB } from '../constants'
 import vscode from 'vscode'
 
 const LINK_PATTERN = {
@@ -6,7 +7,21 @@ const LINK_PATTERN = {
 	json: /"\$(?:ref|tpl)": ?"(?<reference>.+?)"/g
 } as const
 
-export function findMocksLinks ({ content, document, project, token }: FindLinksOptions) {
+const selector: vscode.DocumentSelector = { pattern: MOCKS_GLOB }
+
+type ProvideDocumentLinksType = vscode.DocumentLinkProvider['provideDocumentLinks']
+const provideDocumentLinks: ProvideDocumentLinksType = function (document, token) {
+	const project = getProject(document.uri)
+	const content = document.getText()
+
+	if (!project) {
+		return
+	}
+
+	if (!content.trim()) {
+		return
+	}
+
 	const filename = project.config.files.mocks.name
 	const extension = project.config.files.mocks.extension
 	const matches = content.matchAll(LINK_PATTERN[extension])
@@ -44,4 +59,12 @@ export function findMocksLinks ({ content, document, project, token }: FindLinks
 	}
 
 	return links
+}
+
+const provider: vscode.DocumentLinkProvider = {
+	provideDocumentLinks
+}
+
+export function documentLinksMocks () {
+	return vscode.languages.registerDocumentLinkProvider(selector, provider)
 }
