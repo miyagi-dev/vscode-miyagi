@@ -1,6 +1,6 @@
 import { SCHEMA_GLOB, EXCLUDE_GLOB } from '../constants'
-import * as vscode from 'vscode'
 import path from 'node:path'
+import vscode from 'vscode'
 import YAML from 'yaml'
 
 interface JSONSchema {

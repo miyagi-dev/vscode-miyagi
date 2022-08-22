@@ -1,4 +1,5 @@
-import { FindLinksOptions } from './document-links'
+import { getProject } from './project'
+import { SCHEMA_GLOB } from '../constants'
 import vscode from 'vscode'
 
 const LINK_PATTERN = {
@@ -6,7 +7,21 @@ const LINK_PATTERN = {
 	json: /"\$ref": ?"(?<reference>.+?)"/g
 } as const
 
-export function findSchemaLinks ({ content, document, project, token }: FindLinksOptions) {
+const selector: vscode.DocumentSelector = { pattern: SCHEMA_GLOB }
+
+type ProvideDocumentLinksType = vscode.DocumentLinkProvider['provideDocumentLinks']
+const provideDocumentLinks: ProvideDocumentLinksType = function (document, token) {
+	const project = getProject(document.uri)
+	const content = document.getText()
+
+	if (!project) {
+		return
+	}
+
+	if (!content.trim()) {
+		return
+	}
+
 	const extension = project.config.files.schema.extension
 	const matches = content.matchAll(LINK_PATTERN[extension])
 	const links: vscode.DocumentLink[] = []
@@ -38,4 +53,12 @@ export function findSchemaLinks ({ content, document, project, token }: FindLink
 	}
 
 	return links
+}
+
+const provider: vscode.DocumentLinkProvider = {
+	provideDocumentLinks
+}
+
+export function documentLinksSchema () {
+	return vscode.languages.registerDocumentLinkProvider(selector, provider)
 }
