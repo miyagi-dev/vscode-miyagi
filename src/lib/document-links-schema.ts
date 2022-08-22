@@ -2,6 +2,11 @@ import { getProject } from './project'
 import { SCHEMA_GLOB } from '../constants'
 import vscode from 'vscode'
 
+interface DocumentLink extends vscode.DocumentLink {
+  document: vscode.TextDocument
+	id: string
+}
+
 const LINK_PATTERN = {
 	yaml: /\$ref: (?<reference>.+)/g,
 	json: /"\$ref": ?"(?<reference>.+?)"/g
@@ -9,8 +14,8 @@ const LINK_PATTERN = {
 
 const selector: vscode.DocumentSelector = { pattern: SCHEMA_GLOB }
 
-type ProvideDocumentLinksType = vscode.DocumentLinkProvider['provideDocumentLinks']
-const provideDocumentLinks: ProvideDocumentLinksType = function (document, token) {
+type ProvideDocumentLinks = vscode.DocumentLinkProvider['provideDocumentLinks']
+const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
 
@@ -24,7 +29,7 @@ const provideDocumentLinks: ProvideDocumentLinksType = function (document, token
 
 	const extension = project.config.files.schema.extension
 	const matches = content.matchAll(LINK_PATTERN[extension])
-	const links: vscode.DocumentLink[] = []
+	const links: DocumentLink[] = []
 
 	for (const match of matches) {
 		if (token.isCancellationRequested) {
@@ -47,16 +52,27 @@ const provideDocumentLinks: ProvideDocumentLinksType = function (document, token
 			document.positionAt(contentEnd)
 		)
 
-		const target = project.schemas.find(schema => schema.id === id)?.uri
-
-		links.push({ range, target })
+		links.push({ range, document, id })
 	}
 
 	return links
 }
 
+type ResolveDocumentLink = vscode.DocumentLinkProvider['resolveDocumentLink']
+const resolveDocumentLink: ResolveDocumentLink = function (link: DocumentLink) {
+	const project = getProject(link.document.uri)
+	const id = link.id
+
+	if (project) {
+		link.target = project.schemas.find(schema => schema.id === id)?.uri
+	}
+
+	return link
+}
+
 const provider: vscode.DocumentLinkProvider = {
-	provideDocumentLinks
+	provideDocumentLinks,
+	resolveDocumentLink
 }
 
 export function documentLinksSchema () {

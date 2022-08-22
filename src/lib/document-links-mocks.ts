@@ -9,8 +9,8 @@ const LINK_PATTERN = {
 
 const selector: vscode.DocumentSelector = { pattern: MOCKS_GLOB }
 
-type ProvideDocumentLinksType = vscode.DocumentLinkProvider['provideDocumentLinks']
-const provideDocumentLinks: ProvideDocumentLinksType = function (document, token) {
+type ProvideDocumentLinks = vscode.DocumentLinkProvider['provideDocumentLinks']
+const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
 
