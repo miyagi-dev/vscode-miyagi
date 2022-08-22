@@ -1,39 +1,10 @@
 import { clearRequireCache } from '../utils/clear-require-cache'
-import { loadSchemas, Schema } from './load-schemas'
-import { MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB } from '../constants'
+import { loadSchemas } from './load-schemas'
+import { MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB, DEFAULT_MIYAGI_CONFIG } from '../constants'
 import { outputChannel } from './output-channel'
+import { Project } from '../types'
 import deepmerge from 'deepmerge'
 import vscode from 'vscode'
-
-interface MiyagiConfig {
-	components: {
-		folder: string
-	}
-	files: {
-		schema: {
-			name: string
-			extension: 'json' | 'yaml'
-		}
-		mocks: {
-			name: string
-			extension: 'json' | 'yaml'
-		}
-	}
-	engine?: {
-		name?: string
-		options?: {
-			namespaces?: {
-				[key: string]: string | undefined
-			}
-		}
-	}
-}
-
-export interface Project {
-  uri: vscode.Uri
-  config: MiyagiConfig
-	schemas: Schema[]
-}
 
 interface ProjectOption extends vscode.QuickPickItem {
 	value: Project
@@ -43,30 +14,14 @@ type GetProjectListOptions = {
   refresh?: boolean
 }
 
-const DEFAULT_CONFIG: MiyagiConfig = {
-	components: {
-		folder: 'src'
-	},
-	files: {
-		schema: {
-			name: 'schema',
-			extension: 'json'
-		},
-		mocks: {
-			name: 'mocks',
-			extension: 'json'
-		}
-	}
-}
-
 let projects: Project[]
 
-async function getProjectInfo (projectURI: vscode.Uri): Promise<Project | undefined> {
+async function getProjectInfo (configURI: vscode.Uri): Promise<Project | undefined> {
 	try {
-		clearRequireCache(projectURI.path)
+		clearRequireCache(configURI.path)
 
-		const uri = vscode.Uri.joinPath(projectURI, '..')
-		const config = deepmerge(DEFAULT_CONFIG, require(projectURI.path))
+		const uri = vscode.Uri.joinPath(configURI, '..')
+		const config = deepmerge(DEFAULT_MIYAGI_CONFIG, require(configURI.path))
 		const schemas = await loadSchemas(uri)
 
 		return { uri, config, schemas }
@@ -86,11 +41,11 @@ export async function getProjectList ({ refresh }: GetProjectListOptions = {}) {
 		return projects
 	}
 
-	const projectURIs = await vscode.workspace.findFiles(MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB)
+	const configURIs = await vscode.workspace.findFiles(MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB)
 	projects = []
 
-	for (const projectURI of projectURIs) {
-		const projectInfo = await getProjectInfo(projectURI)
+	for (const configURI of configURIs) {
+		const projectInfo = await getProjectInfo(configURI)
 
 		if (projectInfo) {
 			projects.push(projectInfo)

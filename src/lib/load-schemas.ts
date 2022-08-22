@@ -1,18 +1,8 @@
 import { SCHEMA_GLOB, EXCLUDE_GLOB } from '../constants'
+import { Schema, JSONSchema } from '../types'
 import path from 'node:path'
 import vscode from 'vscode'
 import YAML from 'yaml'
-
-interface JSONSchema {
-	$schema: string
-	$id?: string
-}
-
-export interface Schema {
-	uri: vscode.Uri
-	id: string
-	content: JSONSchema
-}
 
 async function convertSchema (uri: vscode.Uri): Promise<Schema> {
 	const extension = path.extname(uri.path).slice(1)
