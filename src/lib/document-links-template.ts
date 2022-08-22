@@ -13,8 +13,8 @@ const selector: vscode.DocumentSelector = [
 	{ pattern: TWIG_GLOB }
 ]
 
-type ProvideDocumentLinksType = vscode.DocumentLinkProvider['provideDocumentLinks']
-const provideDocumentLinks: ProvideDocumentLinksType = function (document, token) {
+type ProvideDocumentLinks = vscode.DocumentLinkProvider['provideDocumentLinks']
+const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
 
