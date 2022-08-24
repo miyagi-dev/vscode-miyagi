@@ -1,3 +1,4 @@
+import { JSONSchema7 } from 'json-schema'
 import vscode from 'vscode'
 
 export interface MiyagiConfig {
@@ -24,15 +25,10 @@ export interface MiyagiConfig {
 	}
 }
 
-export interface JSONSchema {
-	$schema: string
-	$id?: string
-}
-
 export interface Schema {
 	uri: vscode.Uri
 	id: string
-	content: JSONSchema
+	content: JSONSchema7
 }
 
 export interface Project {
