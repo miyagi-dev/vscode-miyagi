@@ -1,4 +1,4 @@
-import { getProject, selectProject } from '../lib/project'
+import { getProject, selectProject } from '../lib/projects'
 import { outputChannel } from '../lib/output-channel'
 import { runMiyagi } from '../lib/run'
 import path from 'node:path'

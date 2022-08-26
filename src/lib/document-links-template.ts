@@ -1,4 +1,4 @@
-import { getProject } from './project'
+import { getProject } from './projects'
 import { TWIG_GLOB } from '../constants'
 import path from 'node:path'
 import vscode from 'vscode'

@@ -1,5 +1,4 @@
 import { clearRequireCache } from '../utils/clear-require-cache'
-import { loadSchemas } from './load-schemas'
 import { MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB, DEFAULT_MIYAGI_CONFIG } from '../constants'
 import { outputChannel } from './output-channel'
 import { Project } from '../types'
@@ -22,9 +21,8 @@ async function getProjectInfo (configURI: vscode.Uri): Promise<Project | undefin
 
 		const uri = vscode.Uri.joinPath(configURI, '..')
 		const config = deepmerge(DEFAULT_MIYAGI_CONFIG, require(configURI.path))
-		const schemas = await loadSchemas(uri)
 
-		return { uri, config, schemas }
+		return { uri, config }
 	} catch (error) {
 		outputChannel.appendLine(String(error))
 
