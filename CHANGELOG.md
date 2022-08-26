@@ -1,3 +1,19 @@
+# [0.6.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.5.1...v0.6.0) (2022-08-26)
+
+
+### Bug Fixes
+
+* **document-links:** Resolve schema links on click ([4b5fa78](https://github.com/miyagi-dev/vscode-miyagi/commit/4b5fa7854cf4fdc037b999a47a2fec519f5ef1b9))
+* Improve Twig link regex ([55a2668](https://github.com/miyagi-dev/vscode-miyagi/commit/55a2668457b91d5e95a3d56a024983e35c6ea39a))
+* Reference schemas by ID instead of filename ([af056d8](https://github.com/miyagi-dev/vscode-miyagi/commit/af056d878d15dea03c971a77726f9ac4310436c4))
+
+
+### Features
+
+* Add schema properties completion to templates ([e44ab39](https://github.com/miyagi-dev/vscode-miyagi/commit/e44ab39b218ce890c559850b452398dd3eaf5aa6))
+
+
+
 ## [0.5.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.5.0...v0.5.1) (2022-08-13)
 
 
