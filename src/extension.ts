@@ -1,3 +1,4 @@
+import { completionTemplate } from './lib/completion-template'
 import { ContextKey } from './lib/context-key'
 import { createFileSystemWatcher } from './utils/create-file-system-watcher'
 import { documentLinksMocks } from './lib/document-links-mocks'
@@ -49,6 +50,7 @@ export async function activate (context: vscode.ExtensionContext) {
 	const providerDocumentLinksMocks = documentLinksMocks()
 	const providerDocumentLinksSchema = documentLinksSchema()
 	const providerDocumentLinksTemplate = documentLinksTemplate()
+	const providerCompletionTemplate = completionTemplate()
 
 	context.subscriptions.push(
 		eventWorkspaceFolders,
@@ -60,7 +62,8 @@ export async function activate (context: vscode.ExtensionContext) {
 		commandReload,
 		providerDocumentLinksMocks,
 		providerDocumentLinksSchema,
-		providerDocumentLinksTemplate
+		providerDocumentLinksTemplate,
+		providerCompletionTemplate
 	)
 }
 
