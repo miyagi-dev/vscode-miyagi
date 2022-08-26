@@ -25,14 +25,14 @@ export interface MiyagiConfig {
 	}
 }
 
-export interface Schema {
-	uri: vscode.Uri
-	id: string
-	content: JSONSchema7
-}
-
 export interface Project {
   uri: vscode.Uri
   config: MiyagiConfig
-	schemas: Schema[]
+}
+
+export interface Schema {
+	id: string
+	uri: vscode.Uri
+	component: vscode.Uri
+	content: JSONSchema7
 }

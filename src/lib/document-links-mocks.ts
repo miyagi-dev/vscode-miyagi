@@ -1,4 +1,4 @@
-import { getProject } from './project'
+import { getProject } from './projects'
 import { MOCKS_GLOB } from '../constants'
 import vscode from 'vscode'
 

@@ -3,7 +3,8 @@ import { createFileSystemWatcher } from './utils/create-file-system-watcher'
 import { documentLinksMocks } from './lib/document-links-mocks'
 import { documentLinksSchema } from './lib/document-links-schema'
 import { documentLinksTemplate } from './lib/document-links-template'
-import { getProjectList } from './lib/project'
+import { getProjectList } from './lib/projects'
+import { getSchemaList } from './lib/schemas'
 import { lint } from './commands/lint'
 import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
 import { newComponent } from './commands/new-component'
@@ -15,19 +16,28 @@ async function queryProjects (contextHasMiyagi: ContextKey) {
 	contextHasMiyagi.set(projectList.length > 0)
 }
 
+async function querySchemas () {
+	await getSchemaList({ refresh: true })
+}
+
 export async function activate (context: vscode.ExtensionContext) {
 	setupStorage(context)
 
 	const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
-	const reload = () => queryProjects(contextHasMiyagi)
-	await queryProjects(contextHasMiyagi)
+
+	const reloadProjects = () => queryProjects(contextHasMiyagi)
+	const reloadSchemas = () => querySchemas()
+	const reload = () => Promise.all([reloadProjects(), reloadSchemas()])
+
+	// Initial loading of projects and schemas.
+	await reload()
 
 	// Events
 	const eventWorkspaceFolders = vscode.workspace.onDidChangeWorkspaceFolders(reload)
 
 	// Watchers
-	const watcherMiyagiConfig = createFileSystemWatcher(MIYAGI_CONFIG_GLOB, reload)
-	const watcherSchema = createFileSystemWatcher(SCHEMA_GLOB, reload)
+	const watcherMiyagiConfig = createFileSystemWatcher(MIYAGI_CONFIG_GLOB, reloadProjects)
+	const watcherSchema = createFileSystemWatcher(SCHEMA_GLOB, reloadSchemas)
 
 	// Commands
 	const commandNewComponent = vscode.commands.registerCommand('miyagi.newComponent', newComponent)
