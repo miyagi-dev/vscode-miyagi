@@ -1,5 +1,4 @@
 import { getProject } from './projects'
-import { getSchemaList } from './schemas'
 import { SCHEMA_GLOB } from '../constants'
 import vscode from 'vscode'
 
@@ -62,11 +61,10 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 type ResolveDocumentLink = vscode.DocumentLinkProvider['resolveDocumentLink']
 const resolveDocumentLink: ResolveDocumentLink = async function (link: DocumentLink) {
 	const project = getProject(link.document.uri)
-	const schemas = await getSchemaList()
 	const id = link.id
 
 	if (project) {
-		link.target = schemas.find(schema => schema.id === id)?.uri
+		link.target = project.schemas.find(schema => schema.id === id)?.uri
 	}
 
 	return link
