@@ -1,13 +1,10 @@
 import { clearRequireCache } from '../utils/clear-require-cache'
+import { loadSchemas } from './load-schemas'
 import { MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB, DEFAULT_MIYAGI_CONFIG } from '../constants'
 import { outputChannel } from './output-channel'
 import { Project } from '../types'
 import deepmerge from 'deepmerge'
 import vscode from 'vscode'
-
-interface ProjectOption extends vscode.QuickPickItem {
-	value: Project
-}
 
 type GetProjectListOptions = {
   refresh?: boolean
@@ -21,8 +18,9 @@ async function getProjectInfo (configURI: vscode.Uri): Promise<Project | undefin
 
 		const uri = vscode.Uri.joinPath(configURI, '..')
 		const config = deepmerge(DEFAULT_MIYAGI_CONFIG, require(configURI.path))
+		const schemas = await loadSchemas(uri)
 
-		return { uri, config }
+		return { uri, config, schemas }
 	} catch (error) {
 		outputChannel.appendLine(String(error))
 
@@ -57,25 +55,8 @@ export function getProject (uri: vscode.Uri) {
 	return projects.find(project => uri.path.startsWith(project.uri.path))
 }
 
-export async function selectProject () {
-	const projectList = await getProjectList()
-
-	if (projectList.length === 1) {
-		return projectList[0]
+export async function reloadSchemas () {
+	for (const project of projects) {
+		project.schemas = await loadSchemas(project.uri)
 	}
-
-	const projectOptions: ProjectOption[] = projectList.map(project => ({
-		label: project.uri.path,
-		value: project
-	}))
-
-	const projectOption = await vscode.window.showQuickPick(projectOptions, {
-		title: 'miyagi: Select project'
-	})
-
-	if (!projectOption) {
-		return
-	}
-
-	return projectOption.value
 }

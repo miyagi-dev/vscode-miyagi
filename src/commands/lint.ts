@@ -1,6 +1,7 @@
-import { getProject, selectProject } from '../lib/projects'
+import { getProject } from '../lib/projects'
 import { outputChannel } from '../lib/output-channel'
 import { runMiyagi } from '../lib/run'
+import { selectProject } from '../lib/select-project'
 import path from 'node:path'
 import vscode from 'vscode'
 

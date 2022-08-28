@@ -1,6 +1,7 @@
-import { getSchema } from './schemas'
+import { getProject } from './projects'
 import { JSONSchema7, JSONSchema7Definition } from 'json-schema'
 import { TWIG_GLOB } from '../constants'
+import path from 'node:path'
 import vscode from 'vscode'
 
 interface CompletionItem extends vscode.CompletionItem {
@@ -130,7 +131,9 @@ function getItemCommitCharacter (definition: JSONSchema7Definition): string[] | 
 
 type ProvideCompletionItems = vscode.CompletionItemProvider['provideCompletionItems']
 const provideCompletionItems: ProvideCompletionItems = function (document, position, token) {
-	const schema = getSchema(document.uri)
+	const componentPath = path.dirname(document.uri.path)
+	const project = getProject(document.uri)
+	const schema = project?.schemas.find(schema => schema.componentURI.path === componentPath)
 
 	if (!schema) {
 		return

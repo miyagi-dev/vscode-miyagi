@@ -1,4 +1,5 @@
-import { getProject, selectProject } from './projects'
+import { getProject } from './projects'
+import { selectProject } from './select-project'
 import path from 'node:path'
 import vscode from 'vscode'
 
