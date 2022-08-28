@@ -1,3 +1,12 @@
+## [0.6.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.6.0...v0.6.1) (2022-08-28)
+
+
+### Bug Fixes
+
+* Scope schemas to project (Close [#31](https://github.com/miyagi-dev/vscode-miyagi/issues/31)) ([5f01dbe](https://github.com/miyagi-dev/vscode-miyagi/commit/5f01dbe35b250f79bfc0e899e7b7123108d03d03))
+
+
+
 # [0.6.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.5.1...v0.6.0) (2022-08-26)
 
 
