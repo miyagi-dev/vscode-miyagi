@@ -1,10 +1,13 @@
 import { getProject } from './projects'
 import { MOCKS_GLOB } from '../constants'
+import path from 'node:path'
 import vscode from 'vscode'
 
+type TYPES = 'ref' | 'tpl'
+
 const LINK_PATTERN = {
-	yaml: /\$(?:ref|tpl): (?<reference>.+)/g,
-	json: /"\$(?:ref|tpl)": ?"(?<reference>.+?)"/g
+	yaml: /\$(?<type>ref|tpl): (?<reference>.+)/g,
+	json: /"\$(?<type>ref|tpl)": ?"(?<reference>.+?)"/g
 } as const
 
 const selector: vscode.DocumentSelector = { pattern: MOCKS_GLOB }
@@ -22,9 +25,17 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 		return
 	}
 
-	const filename = project.config.files.mocks.name
-	const extension = project.config.files.mocks.extension
-	const matches = content.matchAll(LINK_PATTERN[extension])
+	const filenames = {
+		ref: project.config.files.mocks.name,
+		tpl: project.config.files.templates.name
+	}
+
+	const extensions = {
+		ref: project.config.files.mocks.extension,
+		tpl: project.config.files.templates.extension
+	}
+
+	const matches = content.matchAll(LINK_PATTERN[project.config.files.mocks.extension])
 	const links: vscode.DocumentLink[] = []
 
 	for (const match of matches) {
@@ -33,9 +44,10 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 		}
 
 		const reference = match.groups?.reference
+		const type = match.groups?.type as TYPES | undefined
 		const start = match.index
 
-		if (!reference || start === undefined) {
+		if (!reference || !type || start === undefined) {
 			continue
 		}
 
@@ -47,6 +59,9 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 			document.positionAt(contentStart),
 			document.positionAt(contentEnd)
 		)
+
+		const filename = filenames[type].replace('<component>', path.basename(componentPath))
+		const extension = extensions[type]
 
 		const target = vscode.Uri.joinPath(
 			project.uri,
