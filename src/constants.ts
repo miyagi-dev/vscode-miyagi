@@ -18,6 +18,9 @@ export const DEFAULT_MIYAGI_CONFIG: MiyagiConfig = {
 		mocks: {
 			name: 'mocks',
 			extension: 'json'
+		},
+		templates: {
+			name: 'index'
 		}
 	}
 }

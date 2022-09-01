@@ -14,9 +14,13 @@ export interface MiyagiConfig {
 			name: string
 			extension: 'json' | 'yaml'
 		}
+		templates: {
+			name: '<component>' | string
+			extension?: 'twig'
+		}
 	}
 	engine?: {
-		name?: string
+		name?: 'twig' | string
 		options?: {
 			namespaces?: {
 				[key: string]: string | undefined
