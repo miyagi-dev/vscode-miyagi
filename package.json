@@ -104,12 +104,12 @@
 	},
 	"devDependencies": {
 		"@types/json-schema": "^7.0.11",
-		"@types/node": "^18.7.13",
+		"@types/node": "^18.7.14",
 		"@types/vscode": "^1.70.0",
-		"@typescript-eslint/eslint-plugin": "^5.35.1",
-		"@typescript-eslint/parser": "^5.35.1",
+		"@typescript-eslint/eslint-plugin": "^5.36.1",
+		"@typescript-eslint/parser": "^5.36.1",
 		"conventional-changelog-cli": "^2.2.2",
-		"esbuild": "^0.15.5",
+		"esbuild": "^0.15.6",
 		"eslint": "^8.23.0",
 		"eslint-config-standard": "^17.0.0",
 		"typescript": "^4.8.2"
