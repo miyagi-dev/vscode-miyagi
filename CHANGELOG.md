@@ -1,3 +1,12 @@
+## [0.6.2](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.6.1...v0.6.2) (2022-09-01)
+
+
+### Bug Fixes
+
+* **document-links:** Link `$tpl` in mocks to template file ([#34](https://github.com/miyagi-dev/vscode-miyagi/issues/34)) ([58d4ed2](https://github.com/miyagi-dev/vscode-miyagi/commit/58d4ed2e5db87d1096ec60f1e2bcbe4186ee0dbe))
+
+
+
 ## [0.6.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.6.0...v0.6.1) (2022-08-28)
 
 
