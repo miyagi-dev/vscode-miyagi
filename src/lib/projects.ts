@@ -1,10 +1,11 @@
-import { clearRequireCache } from '../utils/clear-require-cache'
-import { loadSchemas } from './load-schemas'
-import { MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB, DEFAULT_MIYAGI_CONFIG } from '../constants'
-import { outputChannel } from './output-channel'
-import { Project } from '../types'
 import deepmerge from 'deepmerge'
 import vscode from 'vscode'
+
+import { DEFAULT_MIYAGI_CONFIG, EXCLUDE_GLOB, MIYAGI_CONFIG_GLOB } from '../constants'
+import { Project } from '../types'
+import { clearRequireCache } from '../utils/clear-require-cache'
+import { loadSchemas } from './load-schemas'
+import { outputChannel } from './output-channel'
 
 type GetProjectListOptions = {
   refresh?: boolean

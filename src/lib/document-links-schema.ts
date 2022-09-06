@@ -1,6 +1,7 @@
-import { getProject } from './projects'
-import { SCHEMA_GLOB } from '../constants'
 import vscode from 'vscode'
+
+import { SCHEMA_GLOB } from '../constants'
+import { getProject } from './projects'
 
 interface DocumentLink extends vscode.DocumentLink {
   document: vscode.TextDocument

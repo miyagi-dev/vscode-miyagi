@@ -1,7 +1,9 @@
-import { getProject } from './projects'
-import { MOCKS_GLOB } from '../constants'
 import path from 'node:path'
+
 import vscode from 'vscode'
+
+import { MOCKS_GLOB } from '../constants'
+import { getProject } from './projects'
 
 type TYPES = 'ref' | 'tpl'
 
