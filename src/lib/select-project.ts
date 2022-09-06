@@ -1,6 +1,7 @@
-import { getProjectList } from './projects'
-import { Project } from '../types'
 import vscode from 'vscode'
+
+import { Project } from '../types'
+import { getProjectList } from './projects'
 
 interface ProjectOption extends vscode.QuickPickItem {
 	value: Project

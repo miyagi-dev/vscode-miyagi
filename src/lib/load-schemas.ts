@@ -1,9 +1,11 @@
-import { JSONSchema7 } from 'json-schema'
-import { Schema } from '../types'
-import { SCHEMA_GLOB, EXCLUDE_GLOB } from '../constants'
 import path from 'node:path'
+
+import { JSONSchema7 } from 'json-schema'
 import vscode from 'vscode'
 import YAML from 'yaml'
+
+import { EXCLUDE_GLOB, SCHEMA_GLOB } from '../constants'
+import { Schema } from '../types'
 
 async function convertSchema (uri: vscode.Uri): Promise<Schema> {
 	const extension = path.extname(uri.path).slice(1)

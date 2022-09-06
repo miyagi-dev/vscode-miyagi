@@ -1,15 +1,16 @@
+import vscode from 'vscode'
+
+import { lint } from './commands/lint'
+import { newComponent } from './commands/new-component'
+import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
 import { completionTemplate } from './lib/completion-template'
 import { ContextKey } from './lib/context-key'
-import { createFileSystemWatcher } from './utils/create-file-system-watcher'
 import { documentLinksMocks } from './lib/document-links-mocks'
 import { documentLinksSchema } from './lib/document-links-schema'
 import { documentLinksTemplate } from './lib/document-links-template'
 import { getProjectList, reloadSchemas } from './lib/projects'
-import { lint } from './commands/lint'
-import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
-import { newComponent } from './commands/new-component'
 import { setupStorage } from './lib/storage'
-import vscode from 'vscode'
+import { createFileSystemWatcher } from './utils/create-file-system-watcher'
 
 async function queryProjects (contextHasMiyagi: ContextKey) {
 	const projectList = await getProjectList({ refresh: true })

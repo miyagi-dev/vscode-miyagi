@@ -1,7 +1,9 @@
+import path from 'node:path'
+
+import vscode from 'vscode'
+
 import { getProject } from './projects'
 import { selectProject } from './select-project'
-import path from 'node:path'
-import vscode from 'vscode'
 
 export async function getNewComponentPath (uri?: vscode.Uri) {
 	let activePath: vscode.Uri | undefined

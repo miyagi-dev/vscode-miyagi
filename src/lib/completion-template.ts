@@ -1,8 +1,10 @@
-import { getProject } from './projects'
-import { JSONSchema7, JSONSchema7Definition } from 'json-schema'
-import { TWIG_GLOB } from '../constants'
 import path from 'node:path'
+
+import { JSONSchema7, JSONSchema7Definition } from 'json-schema'
 import vscode from 'vscode'
+
+import { TWIG_GLOB } from '../constants'
+import { getProject } from './projects'
 
 interface CompletionItem extends vscode.CompletionItem {
   definition?: JSONSchema7Definition

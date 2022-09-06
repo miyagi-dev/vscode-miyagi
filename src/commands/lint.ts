@@ -1,9 +1,11 @@
-import { getProject } from '../lib/projects'
+import path from 'node:path'
+
+import vscode from 'vscode'
+
 import { outputChannel } from '../lib/output-channel'
+import { getProject } from '../lib/projects'
 import { runMiyagi } from '../lib/run'
 import { selectProject } from '../lib/select-project'
-import path from 'node:path'
-import vscode from 'vscode'
 
 function lintComponent (uri: vscode.Uri) {
 	const project = getProject(uri)

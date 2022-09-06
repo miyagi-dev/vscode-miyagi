@@ -5,11 +5,14 @@
 		"standard"
 	],
 	"plugins": [
-		"@typescript-eslint"
+		"@typescript-eslint",
+		"simple-import-sort"
 	],
 	"rules": {
 		"@typescript-eslint/naming-convention": "error",
 		"@typescript-eslint/semi": ["error", "never"],
+		"simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
 		"indent": ["error", "tab"],
 		"no-tabs": "off",
 		"semi": "off"
