@@ -1,46 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   viewBox="0 0 199.99999 200"
-   version="1.1"
-   id="svg4"
-   sodipodi:docname="favicon.svg"
-   width="200"
-   height="200"
-   inkscape:version="1.2 (dc2aedaf03, 2022-05-15)"
-   inkscape:export-filename="favicon.png"
-   inkscape:export-xdpi="240"
-   inkscape:export-ydpi="240"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs8" />
-  <sodipodi:namedview
-     id="namedview6"
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1.0"
-     inkscape:showpageshadow="2"
-     inkscape:pageopacity="0.0"
-     inkscape:pagecheckerboard="true"
-     inkscape:deskcolor="#d1d1d1"
-     showgrid="false"
-     inkscape:zoom="1.5261252"
-     inkscape:cx="85.183051"
-     inkscape:cy="77.32"
-     inkscape:current-layer="svg4" />
-  <rect
-     style="fill:#062b3e;fill-opacity:1;stroke:none;stroke-width:0;stroke-miterlimit:10"
-     id="rect2555"
-     width="200"
-     height="200"
-     x="0"
-     y="0"
-     inkscape:label="background" />
-  <path
-     d="M 167.55,22.68 99.95,105.75 32.35,22.68 H 14.5 v 154.64 h 171 V 22.68 Z m -1.77,135.64 H 34.12 V 54.05 l 65.83,80.64 65.83,-80.64 z"
-     id="path2"
-     style="stroke:none;fill:#ffffff;fill-opacity:1"
-     inkscape:label="logo" />
+<svg viewBox="0 0 200 200" width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+	<path fill="#062b3e" d="M0 0h200v200H0z"/>
+	<path d="m167.55 22.68-67.6 83.07-67.6-83.07H14.5v154.64h171V22.68Zm-1.77 135.64H34.12V54.05l65.83 80.64 65.83-80.64z" fill="#fff"/>
 </svg>

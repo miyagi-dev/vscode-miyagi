@@ -4,7 +4,7 @@ import { SCHEMA_GLOB } from '../constants'
 import { getProject } from './projects'
 
 interface DocumentLink extends vscode.DocumentLink {
-  document: vscode.TextDocument
+	document: vscode.TextDocument
 	id: string
 }
 

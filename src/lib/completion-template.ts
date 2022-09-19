@@ -7,7 +7,7 @@ import { TWIG_GLOB } from '../constants'
 import { getProject } from './projects'
 
 interface CompletionItem extends vscode.CompletionItem {
-  definition?: JSONSchema7Definition
+	definition?: JSONSchema7Definition
 }
 
 const OBJECT_PATH_PATTERN = /[\w.]+$/

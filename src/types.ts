@@ -37,7 +37,7 @@ export interface Schema {
 }
 
 export interface Project {
-  uri: vscode.Uri
-  config: MiyagiConfig
+	uri: vscode.Uri
+	config: MiyagiConfig
 	schemas: Schema[]
 }
