@@ -8,7 +8,7 @@ import { loadSchemas } from './load-schemas'
 import { outputChannel } from './output-channel'
 
 type GetProjectListOptions = {
-  refresh?: boolean
+	refresh?: boolean
 }
 
 let projects: Project[]

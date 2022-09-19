@@ -2,8 +2,8 @@ import { spawnSync } from 'node:child_process'
 import path from 'node:path'
 
 type RunMiyagiOptions = {
-  args: string[]
-  cwd: string
+	args: string[]
+	cwd: string
 }
 
 const MIYAGI_BIN = 'node_modules/.bin/miyagi'
