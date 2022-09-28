@@ -1,3 +1,12 @@
+# [0.7.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.6.2...v0.7.0) (2022-09-28)
+
+
+### Features
+
+* Check miyagi compatibility ([#44](https://github.com/miyagi-dev/vscode-miyagi/issues/44), close [#42](https://github.com/miyagi-dev/vscode-miyagi/issues/42)) ([3a115d5](https://github.com/miyagi-dev/vscode-miyagi/commit/3a115d59100580b410643743c6718de7143f5782))
+
+
+
 ## [0.6.2](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.6.1...v0.6.2) (2022-09-01)
 
 
