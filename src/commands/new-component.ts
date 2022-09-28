@@ -92,3 +92,5 @@ export async function newComponent (uri?: vscode.Uri) {
 		outputChannel.show()
 	}
 }
+
+export const newComponentCompatibility = '3.3.2'

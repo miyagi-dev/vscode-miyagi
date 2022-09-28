@@ -18,4 +18,8 @@ export class ContextKey {
 		this.#lastValue = value
 		vscode.commands.executeCommand('setContext', this.#name, value)
 	}
+
+	get () {
+		return this.#lastValue
+	}
 }

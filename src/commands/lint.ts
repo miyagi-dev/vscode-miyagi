@@ -75,3 +75,5 @@ export async function lint (uri?: vscode.Uri) {
 		outputChannel.show()
 	}
 }
+
+export const lintCompatibility = '3.3.2'

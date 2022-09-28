@@ -1,7 +1,7 @@
 import vscode from 'vscode'
 
-import { lint } from './commands/lint'
-import { newComponent } from './commands/new-component'
+import { lint, lintCompatibility } from './commands/lint'
+import { newComponent, newComponentCompatibility } from './commands/new-component'
 import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
 import { completionTemplate } from './lib/completion-template'
 import { ContextKey } from './lib/context-key'
@@ -11,19 +11,26 @@ import { documentLinksTemplate } from './lib/document-links-template'
 import { getProjectList, reloadSchemas } from './lib/projects'
 import { setupStorage } from './lib/storage'
 import { createFileSystemWatcher } from './utils/create-file-system-watcher'
+import { SemVer } from './utils/semver'
 
-async function queryProjects (contextHasMiyagi: ContextKey) {
+const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
+const contextCanLint = new ContextKey('miyagi.canLint')
+const contextCanNewComponent = new ContextKey('miyagi.canNewComponent')
+
+async function reload () {
 	const projectList = await getProjectList({ refresh: true })
 	contextHasMiyagi.set(projectList.length > 0)
+
+	const canLint = projectList.every(project => new SemVer(project.version).gte(lintCompatibility))
+	contextCanLint.set(canLint)
+
+	const canNewComponent = projectList.every(project => new SemVer(project.version).gte(newComponentCompatibility))
+	contextCanNewComponent.set(canNewComponent)
 }
 
 export async function activate (context: vscode.ExtensionContext) {
+	// Initialization
 	setupStorage(context)
-
-	const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
-	const reload = () => queryProjects(contextHasMiyagi)
-
-	// Initial project loading.
 	await reload()
 
 	// Events
