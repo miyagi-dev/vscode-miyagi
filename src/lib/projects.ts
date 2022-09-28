@@ -4,6 +4,7 @@ import vscode from 'vscode'
 import { DEFAULT_MIYAGI_CONFIG, EXCLUDE_GLOB, MIYAGI_CONFIG_GLOB } from '../constants'
 import { Project } from '../types'
 import { clearRequireCache } from '../utils/clear-require-cache'
+import { getMiyagiVersion } from './get-miyagi-version'
 import { loadSchemas } from './load-schemas'
 import { outputChannel } from './output-channel'
 
@@ -18,10 +19,11 @@ async function getProjectInfo (configURI: vscode.Uri): Promise<Project | undefin
 		clearRequireCache(configURI.path)
 
 		const uri = vscode.Uri.joinPath(configURI, '..')
+		const version = getMiyagiVersion(uri)
 		const config = deepmerge(DEFAULT_MIYAGI_CONFIG, require(configURI.path))
 		const schemas = await loadSchemas(uri)
 
-		return { uri, config, schemas }
+		return { uri, version, config, schemas }
 	} catch (error) {
 		outputChannel.appendLine(String(error))
 
@@ -44,9 +46,11 @@ export async function getProjectList ({ refresh }: GetProjectListOptions = {}) {
 	for (const configURI of configURIs) {
 		const projectInfo = await getProjectInfo(configURI)
 
-		if (projectInfo) {
-			projects.push(projectInfo)
+		if (!projectInfo) {
+			continue
 		}
+
+		projects.push(projectInfo)
 	}
 
 	return projects

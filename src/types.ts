@@ -38,6 +38,13 @@ export interface Schema {
 
 export interface Project {
 	uri: vscode.Uri
+	version?: string
 	config: MiyagiConfig
 	schemas: Schema[]
+}
+
+export interface SemanticVersion {
+	major: number
+	minor: number
+	patch: number
 }
