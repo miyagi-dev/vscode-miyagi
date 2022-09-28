@@ -41,7 +41,7 @@
 				"command": "miyagi.newComponent",
 				"title": "New Component",
 				"category": "miyagi",
-				"enablement": "miyagi.hasMiyagi"
+				"enablement": "miyagi.canNewComponent"
 			},
 			{
 				"command": "miyagi.lintComponent",
@@ -52,7 +52,7 @@
 				"command": "miyagi.lintAllComponents",
 				"category": "miyagi",
 				"title": "Lint All Components",
-				"enablement": "miyagi.hasMiyagi"
+				"enablement": "miyagi.canLint"
 			},
 			{
 				"command": "miyagi.reload",
@@ -71,12 +71,12 @@
 				{
 					"command": "miyagi.newComponent",
 					"group": "navigation@10",
-					"when": "explorerResourceIsFolder && miyagi.hasMiyagi"
+					"when": "explorerResourceIsFolder && miyagi.canNewComponent"
 				},
 				{
 					"command": "miyagi.lintComponent",
 					"group": "4_search@10",
-					"when": "explorerResourceIsFolder && miyagi.hasMiyagi"
+					"when": "explorerResourceIsFolder && miyagi.canLint"
 				},
 				{
 					"command": "miyagi.reload",

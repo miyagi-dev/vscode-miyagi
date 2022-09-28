@@ -1,10 +1,9 @@
 import deepmerge from 'deepmerge'
 import vscode from 'vscode'
 
-import { DEFAULT_MIYAGI_CONFIG, EXCLUDE_GLOB, MIYAGI_COMPATIBILITY, MIYAGI_CONFIG_GLOB } from '../constants'
+import { DEFAULT_MIYAGI_CONFIG, EXCLUDE_GLOB, MIYAGI_CONFIG_GLOB } from '../constants'
 import { Project } from '../types'
 import { clearRequireCache } from '../utils/clear-require-cache'
-import { compareSemanticVersion } from '../utils/semantic-versioning'
 import { getMiyagiVersion } from './get-miyagi-version'
 import { loadSchemas } from './load-schemas'
 import { outputChannel } from './output-channel'
@@ -48,12 +47,6 @@ export async function getProjectList ({ refresh }: GetProjectListOptions = {}) {
 		const projectInfo = await getProjectInfo(configURI)
 
 		if (!projectInfo) {
-			continue
-		}
-
-		const isCompatible = compareSemanticVersion(projectInfo.version, '>=', MIYAGI_COMPATIBILITY)
-
-		if (!isCompatible) {
 			continue
 		}
 

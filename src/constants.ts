@@ -1,7 +1,5 @@
 import { MiyagiConfig } from './types'
 
-export const MIYAGI_COMPATIBILITY = '3.3.2'
-
 export const MIYAGI_CONFIG_GLOB = '**/.miyagi.{js,json}'
 export const SCHEMA_GLOB = '**/schema.{json,yaml}'
 export const MOCKS_GLOB = '**/mocks.{json,yaml}'
