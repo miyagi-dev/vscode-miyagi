@@ -1,6 +1,18 @@
 import { JSONSchema7 } from 'json-schema'
 import vscode from 'vscode'
 
+// General-purpose types
+
+export type SemanticVersionString = `${number}.${number}.${number}`
+
+export interface SemanticVersionObject {
+	major: number
+	minor: number
+	patch: number
+}
+
+// miyagi-specific types
+
 export interface MiyagiConfig {
 	components: {
 		folder: string
@@ -38,13 +50,7 @@ export interface Schema {
 
 export interface Project {
 	uri: vscode.Uri
-	version?: string
+	version?: SemanticVersionString
 	config: MiyagiConfig
 	schemas: Schema[]
-}
-
-export interface SemanticVersion {
-	major: number
-	minor: number
-	patch: number
 }

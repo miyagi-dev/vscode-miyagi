@@ -1,9 +1,9 @@
-import { SemanticVersion } from '../types'
+import { SemanticVersionObject, SemanticVersionString } from '../types'
 
 const FALLBACK = '0.0.0'
 const PATTERN = /(?<major>\d+)\.(?<minor>\d+)\.(?<patch>\d+)/
 
-function parse (version: string): SemanticVersion {
+function parse (version: string): SemanticVersionObject {
 	const match = version.match(PATTERN)
 
 	const major = match?.groups?.major ?? '0'
@@ -20,13 +20,13 @@ function parse (version: string): SemanticVersion {
 }
 
 export class SemVer {
-	version: SemanticVersion
+	version: SemanticVersionObject
 
-	constructor (version: string = FALLBACK) {
+	constructor (version: SemanticVersionString = FALLBACK) {
 		this.version = parse(version)
 	}
 
-	gte (version: string = FALLBACK) {
+	gte (version: SemanticVersionString = FALLBACK) {
 		const a = this.version
 		const b = parse(version)
 
