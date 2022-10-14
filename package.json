@@ -69,22 +69,34 @@
 			],
 			"explorer/context": [
 				{
+					"submenu": "miyagi/explorer",
+					"group": "1_modification"
+				}
+			],
+			"miyagi/explorer": [
+				{
 					"command": "miyagi.newComponent",
-					"group": "navigation@10",
+					"group": "component@1",
 					"when": "explorerResourceIsFolder && miyagi.canNewComponent"
 				},
 				{
 					"command": "miyagi.lintComponent",
-					"group": "4_search@10",
+					"group": "component@2",
 					"when": "explorerResourceIsFolder && miyagi.canLint"
 				},
 				{
 					"command": "miyagi.reload",
-					"group": "7_modification@20",
+					"group": "control@1",
 					"when": "resourceFilename == .miyagi.js || resourceFilename == .miyagi.json"
 				}
 			]
-		}
+		},
+		"submenus": [
+			{
+				"id": "miyagi/explorer",
+				"label": "miyagi"
+			}
+		]
 	},
 	"scripts": {
 		"watch": "esbuild $npm_package_config_esbuild --sourcemap --watch",
