@@ -6,6 +6,7 @@ Please refer to the [miyagi docs](https://www.miyagi.dev/) for setting up and co
 
 * [Create components](#create-components)
 * [Lint components](#lint-components)
+* [Generate mock](#generate-mock)
 * [File links](#file-links)
   * [Schema and mock links](#schema-and-mock-links)
   * [Template links](#template-links)
@@ -15,15 +16,21 @@ Please refer to the [miyagi docs](https://www.miyagi.dev/) for setting up and co
 
 ## Create components
 
-Create new components by right-clicking on any folder inside your components folder and selecting “New Component”.
+Create new components by right-clicking on any folder inside your components folder and selecting “miyagi ➝ New Component”.
 
-<img src="images/command-new-component.webp" alt="VS Code explorer context menu with the “New Component” entry highlighted." width="400">
+<img src="images/command-new-component.webp" alt="VS Code explorer context menu with the “New Component” entry highlighted." width="540">
 
 ## Lint components
 
-Lint components by right-clicking any component and selecting “Lint Component”.
+Lint components by right-clicking any component folder and selecting “miyagi ➝ Lint Component”.
 
-<img src="images/command-lint-component.webp" alt="VS Code explorer context menu with the “Lint Component” entry highlighted." width="400">
+<img src="images/command-lint-component.webp" alt="VS Code explorer context menu with the “Lint Component” entry highlighted." width="540">
+
+## Generate mock
+
+Create automatic dummy mock data by right-clicking any component folder and selecting “miyagi ➝ Generate Mock”.
+
+<img src="images/command-generate-mock.webp" alt="VS Code explorer context menu with the Generate Mock” entry highlighted." width="540">
 
 ## File links
 
@@ -31,7 +38,7 @@ Lint components by right-clicking any component and selecting “Lint Component�
 
 Linked [`$ref`](https://docs.miyagi.dev/how-to/writing-mock-data/#referencing-other-mock-files) and [`$tpl`](https://docs.miyagi.dev/how-to/writing-mock-data/#referencing-template-files) file references in mocks and schemas.
 
-<img src="images/document-links-schema.webp" alt="JSON schema file opened in VS Code with a $ref link underlined and with instructions on how to follow the link." width="384">
+<img src="images/document-links-schema.webp" alt="JSON schema file opened in VS Code with a $ref link underlined and with instructions on how to follow the link." width="385">
 
 ### Template links
 
@@ -39,7 +46,7 @@ Linked [`$ref`](https://docs.miyagi.dev/how-to/writing-mock-data/#referencing-ot
 
 Linked template file references in [Twig templates](https://twig.symfony.com/).
 
-<img src="images/document-links-twig.webp" alt="Twig template file opened in VS Code with an include whose path is underlined and with instructions on how to follow the link." width="502">
+<img src="images/document-links-twig.webp" alt="Twig template file opened in VS Code with an include whose path is underlined and with instructions on how to follow the link." width="500">
 
 ## Code completion
 
@@ -65,7 +72,7 @@ These global commands are accessible in the command palette:
 
 **Note:** The extension automatically reloads when the miyagi config changes. Only use the “Reload” command if the extension stops working.
 
-<img src="images/command-palette.webp" alt="VS Code window with an open command palette filtered to all available miyagi commands." width="946">
+<img src="images/command-palette.webp" alt="VS Code window with an open command palette filtered to all available miyagi commands." width="666">
 
 ## Sponsors
 
