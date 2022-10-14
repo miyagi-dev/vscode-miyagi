@@ -1,5 +1,6 @@
 import vscode from 'vscode'
 
+import { generateMock, generateMockCompatibility } from './commands/generate-mock'
 import { lint, lintCompatibility } from './commands/lint'
 import { newComponent, newComponentCompatibility } from './commands/new-component'
 import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
@@ -16,6 +17,7 @@ import { SemVer } from './utils/semver'
 const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
 const contextCanLint = new ContextKey('miyagi.canLint')
 const contextCanNewComponent = new ContextKey('miyagi.canNewComponent')
+const contextCanGenerateMock = new ContextKey('miyagi.canGenerateMock')
 
 async function reload () {
 	const projectList = await getProjectList({ refresh: true })
@@ -26,6 +28,9 @@ async function reload () {
 
 	const canNewComponent = projectList.every(project => new SemVer(project.version).gte(newComponentCompatibility))
 	contextCanNewComponent.set(canNewComponent)
+
+	const canGenerateMock = projectList.every(project => new SemVer(project.version).gte(generateMockCompatibility))
+	contextCanGenerateMock.set(canGenerateMock)
 }
 
 export async function activate (context: vscode.ExtensionContext) {
@@ -44,6 +49,7 @@ export async function activate (context: vscode.ExtensionContext) {
 	const commandNewComponent = vscode.commands.registerCommand('miyagi.newComponent', newComponent)
 	const commandLintComponent = vscode.commands.registerCommand('miyagi.lintComponent', lint)
 	const commandLintAllComponents = vscode.commands.registerCommand('miyagi.lintAllComponents', lint)
+	const commandGenerateMock = vscode.commands.registerCommand('miyagi.generateMock', generateMock)
 	const commandReload = vscode.commands.registerCommand('miyagi.reload', reload)
 
 	// Providers
@@ -59,6 +65,7 @@ export async function activate (context: vscode.ExtensionContext) {
 		commandNewComponent,
 		commandLintComponent,
 		commandLintAllComponents,
+		commandGenerateMock,
 		commandReload,
 		providerDocumentLinksMocks,
 		providerDocumentLinksSchema,
