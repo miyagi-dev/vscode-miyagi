@@ -1,3 +1,13 @@
+# [0.8.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.7.0...v0.8.0) (2022-10-14)
+
+
+### Features
+
+* Add mock generator to component context menu (Close [#2](https://github.com/miyagi-dev/vscode-miyagi/issues/2)) ([0ddda37](https://github.com/miyagi-dev/vscode-miyagi/commit/0ddda374f2489641f82eeb155760c2e078f7fb2c))
+* Group context menu commands in submenu ([54b72ad](https://github.com/miyagi-dev/vscode-miyagi/commit/54b72adecfbe3fc50ae58649bd48db6ed42d13a4))
+
+
+
 # [0.7.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.6.2...v0.7.0) (2022-09-28)
 
 
