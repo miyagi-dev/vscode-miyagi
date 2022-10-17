@@ -55,10 +55,10 @@
 				"enablement": "miyagi.canLint"
 			},
 			{
-				"command": "miyagi.generateMock",
+				"command": "miyagi.generateMocks",
 				"category": "miyagi",
-				"title": "Generate Mock",
-				"enablement": "miyagi.canGenerateMock"
+				"title": "Generate Mocks",
+				"enablement": "miyagi.canGenerateMocks"
 			},
 			{
 				"command": "miyagi.reload",
@@ -73,7 +73,7 @@
 					"when": "never"
 				},
 				{
-					"command": "miyagi.generateMock",
+					"command": "miyagi.generateMocks",
 					"when": "never"
 				}
 			],
@@ -95,9 +95,9 @@
 					"when": "explorerResourceIsFolder && miyagi.canLint"
 				},
 				{
-					"command": "miyagi.generateMock",
+					"command": "miyagi.generateMocks",
 					"group": "component@3",
-					"when": "explorerResourceIsFolder && miyagi.canGenerateMock"
+					"when": "explorerResourceIsFolder && miyagi.canGenerateMocks"
 				},
 				{
 					"command": "miyagi.reload",

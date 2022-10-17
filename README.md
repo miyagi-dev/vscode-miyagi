@@ -6,7 +6,7 @@ Please refer to the [miyagi docs](https://www.miyagi.dev/) for setting up and co
 
 * [Create components](#create-components)
 * [Lint components](#lint-components)
-* [Generate mock](#generate-mock)
+* [Generate mocks](#generate-mocks)
 * [File links](#file-links)
   * [Schema and mock links](#schema-and-mock-links)
   * [Template links](#template-links)
@@ -26,11 +26,11 @@ Lint components by right-clicking any component folder and selecting “miyagi �
 
 <img src="images/command-lint-component.webp" alt="VS Code explorer context menu with the “Lint Component” entry highlighted." width="540">
 
-## Generate mock
+## Generate mocks
 
-Create automatic dummy mock data by right-clicking any component folder and selecting “miyagi ➝ Generate Mock”.
+Create automatic dummy mock data by right-clicking any component folder and selecting “miyagi ➝ Generate Mocks”.
 
-<img src="images/command-generate-mock.webp" alt="VS Code explorer context menu with the Generate Mock” entry highlighted." width="540">
+<img src="images/command-generate-mocks.webp" alt="VS Code explorer context menu with the Generate Mocks” entry highlighted." width="540">
 
 ## File links
 
