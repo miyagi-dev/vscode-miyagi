@@ -18,19 +18,19 @@ Please refer to the [miyagi docs](https://www.miyagi.dev/) for setting up and co
 
 Create new components by right-clicking on any folder inside your components folder and selecting “miyagi ➝ New Component”.
 
-<img src="images/command-new-component.webp" alt="VS Code explorer context menu with the “New Component” entry highlighted." width="540">
+<img src="images/command-new-component.webp" alt="VS Code explorer context menu with the “New Component” entry highlighted." width="650">
 
 ## Lint components
 
 Lint components by right-clicking any component folder and selecting “miyagi ➝ Lint Component”.
 
-<img src="images/command-lint-component.webp" alt="VS Code explorer context menu with the “Lint Component” entry highlighted." width="540">
+<img src="images/command-lint-component.webp" alt="VS Code explorer context menu with the “Lint Component” entry highlighted." width="650">
 
 ## Generate mocks
 
 Create automatic dummy mock data by right-clicking any component folder and selecting “miyagi ➝ Generate Mocks”.
 
-<img src="images/command-generate-mocks.webp" alt="VS Code explorer context menu with the Generate Mocks” entry highlighted." width="540">
+<img src="images/command-generate-mocks.webp" alt="VS Code explorer context menu with the Generate Mocks” entry highlighted." width="650">
 
 ## File links
 
