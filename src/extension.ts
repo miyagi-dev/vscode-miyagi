@@ -1,6 +1,6 @@
 import vscode from 'vscode'
 
-import { generateMock, generateMockCompatibility } from './commands/generate-mock'
+import { generateMocks, generateMocksCompatibility } from './commands/generate-mocks'
 import { lint, lintCompatibility } from './commands/lint'
 import { newComponent, newComponentCompatibility } from './commands/new-component'
 import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
@@ -17,7 +17,7 @@ import { SemVer } from './utils/semver'
 const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
 const contextCanLint = new ContextKey('miyagi.canLint')
 const contextCanNewComponent = new ContextKey('miyagi.canNewComponent')
-const contextCanGenerateMock = new ContextKey('miyagi.canGenerateMock')
+const contextCanGenerateMocks = new ContextKey('miyagi.canGenerateMocks')
 
 async function reload () {
 	const projectList = await getProjectList({ refresh: true })
@@ -29,8 +29,8 @@ async function reload () {
 	const canNewComponent = projectList.every(project => new SemVer(project.version).gte(newComponentCompatibility))
 	contextCanNewComponent.set(canNewComponent)
 
-	const canGenerateMock = projectList.every(project => new SemVer(project.version).gte(generateMockCompatibility))
-	contextCanGenerateMock.set(canGenerateMock)
+	const canGenerateMocks = projectList.every(project => new SemVer(project.version).gte(generateMocksCompatibility))
+	contextCanGenerateMocks.set(canGenerateMocks)
 }
 
 export async function activate (context: vscode.ExtensionContext) {
@@ -49,7 +49,7 @@ export async function activate (context: vscode.ExtensionContext) {
 	const commandNewComponent = vscode.commands.registerCommand('miyagi.newComponent', newComponent)
 	const commandLintComponent = vscode.commands.registerCommand('miyagi.lintComponent', lint)
 	const commandLintAllComponents = vscode.commands.registerCommand('miyagi.lintAllComponents', lint)
-	const commandGenerateMock = vscode.commands.registerCommand('miyagi.generateMock', generateMock)
+	const commandGenerateMocks = vscode.commands.registerCommand('miyagi.generateMocks', generateMocks)
 	const commandReload = vscode.commands.registerCommand('miyagi.reload', reload)
 
 	// Providers
@@ -65,7 +65,7 @@ export async function activate (context: vscode.ExtensionContext) {
 		commandNewComponent,
 		commandLintComponent,
 		commandLintAllComponents,
-		commandGenerateMock,
+		commandGenerateMocks,
 		commandReload,
 		providerDocumentLinksMocks,
 		providerDocumentLinksSchema,

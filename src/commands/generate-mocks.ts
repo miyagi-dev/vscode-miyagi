@@ -6,7 +6,7 @@ import { outputChannel } from '../lib/output-channel'
 import { getProject } from '../lib/projects'
 import { runMiyagi } from '../lib/run'
 
-export function generateMock (uri?: vscode.Uri) {
+export function generateMocks (uri?: vscode.Uri) {
 	if (!uri) {
 		return
 	}
@@ -43,4 +43,4 @@ export function generateMock (uri?: vscode.Uri) {
 	}
 }
 
-export const generateMockCompatibility = '3.3.2'
+export const generateMocksCompatibility = '3.3.2'
