@@ -4,6 +4,7 @@ import vscode from 'vscode'
 import { DEFAULT_MIYAGI_CONFIG, EXCLUDE_GLOB, MIYAGI_CONFIG_GLOB } from '../constants'
 import { Project } from '../types'
 import { clearRequireCache } from '../utils/clear-require-cache'
+import { isPathIgnored } from '../utils/is-path-ignored'
 import { getMiyagiVersion } from './get-miyagi-version'
 import { loadSchemas } from './load-schemas'
 import { outputChannel } from './output-channel'
@@ -44,6 +45,12 @@ export async function getProjectList ({ refresh }: GetProjectListOptions = {}) {
 	projects = []
 
 	for (const configURI of configURIs) {
+		const isIgnored = isPathIgnored(configURI)
+
+		if (isIgnored) {
+			continue
+		}
+
 		const projectInfo = await getProjectInfo(configURI)
 
 		if (!projectInfo) {
