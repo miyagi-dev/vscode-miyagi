@@ -131,10 +131,10 @@
 	},
 	"devDependencies": {
 		"@types/json-schema": "^7.0.11",
-		"@types/node": "^18.11.4",
+		"@types/node": "^18.11.5",
 		"@types/vscode": "^1.72.0",
-		"@typescript-eslint/eslint-plugin": "^5.40.1",
-		"@typescript-eslint/parser": "^5.40.1",
+		"@typescript-eslint/eslint-plugin": "^5.41.0",
+		"@typescript-eslint/parser": "^5.41.0",
 		"conventional-changelog-cli": "^2.2.2",
 		"esbuild": "^0.15.12",
 		"eslint": "^8.26.0",
