@@ -1,3 +1,13 @@
+## [0.8.2](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.8.1...v0.8.2) (2022-10-25)
+
+
+### Bug Fixes
+
+* Ignore miyagi projects in Git-ignored folders (Close [#38](https://github.com/miyagi-dev/vscode-miyagi/issues/38)) ([a69d9cc](https://github.com/miyagi-dev/vscode-miyagi/commit/a69d9cc5123e6ca642e6d693539eef8864fc9255))
+* Only show explorer context menu for miyagi projects ([6790f24](https://github.com/miyagi-dev/vscode-miyagi/commit/6790f24c3b628b5f68ba5e1ba0ba4b56dfba21ee))
+
+
+
 ## [0.8.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.8.0...v0.8.1) (2022-10-17)
 
 
