@@ -41,24 +41,25 @@
 				"command": "miyagi.newComponent",
 				"title": "New Component",
 				"category": "miyagi",
-				"enablement": "miyagi.canNewComponent"
+				"enablement": "miyagi.hasMiyagi && miyagi.canNewComponent"
 			},
 			{
 				"command": "miyagi.lintComponent",
 				"category": "miyagi",
-				"title": "Lint Component"
+				"title": "Lint Component",
+				"enablement": "miyagi.hasMiyagi && miyagi.canLint"
 			},
 			{
 				"command": "miyagi.lintAllComponents",
 				"category": "miyagi",
 				"title": "Lint All Components",
-				"enablement": "miyagi.canLint"
+				"enablement": "miyagi.hasMiyagi && miyagi.canLint"
 			},
 			{
 				"command": "miyagi.generateMocks",
 				"category": "miyagi",
 				"title": "Generate Mocks",
-				"enablement": "miyagi.canGenerateMocks"
+				"enablement": "miyagi.hasMiyagi && miyagi.canGenerateMocks"
 			},
 			{
 				"command": "miyagi.reload",
@@ -80,29 +81,30 @@
 			"explorer/context": [
 				{
 					"submenu": "miyagi/explorer",
-					"group": "1_modification"
+					"group": "1_modification",
+					"when": "miyagi.hasMiyagi"
 				}
 			],
 			"miyagi/explorer": [
 				{
 					"command": "miyagi.newComponent",
 					"group": "component@1",
-					"when": "explorerResourceIsFolder && miyagi.canNewComponent"
+					"when": "explorerResourceIsFolder"
 				},
 				{
 					"command": "miyagi.lintComponent",
 					"group": "component@2",
-					"when": "explorerResourceIsFolder && miyagi.canLint"
+					"when": "explorerResourceIsFolder"
 				},
 				{
 					"command": "miyagi.generateMocks",
 					"group": "component@3",
-					"when": "explorerResourceIsFolder && miyagi.canGenerateMocks"
+					"when": "explorerResourceIsFolder"
 				},
 				{
 					"command": "miyagi.reload",
 					"group": "control@1",
-					"when": "resourceFilename == .miyagi.js || resourceFilename == .miyagi.json"
+					"when": "resourceFilename =~ /\\.miyagi\\.js(on)?/"
 				}
 			]
 		},
