@@ -29,7 +29,7 @@
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.72.0"
+		"vscode": "^1.74.0"
 	},
 	"main": "./out/extension.js",
 	"activationEvents": [
@@ -134,7 +134,7 @@
 	"devDependencies": {
 		"@types/json-schema": "^7.0.11",
 		"@types/node": "^18.11.13",
-		"@types/vscode": "^1.73.1",
+		"@types/vscode": "^1.74.0",
 		"@typescript-eslint/eslint-plugin": "^5.46.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"conventional-changelog-cli": "^2.2.2",
