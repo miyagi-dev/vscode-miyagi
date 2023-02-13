@@ -8,7 +8,7 @@ import { getProject } from './projects'
 type TYPES = 'ref' | 'tpl'
 
 const LINK_PATTERN = {
-	yaml: /\$(?<type>ref|tpl): (?<reference>.+)/g,
+	yaml: /\$(?<type>ref|tpl): ("|')?(?<reference>.+)\2/g,
 	json: /"\$(?<type>ref|tpl)": ?"(?<reference>.+?)"/g
 } as const
 

@@ -9,7 +9,7 @@ interface DocumentLink extends vscode.DocumentLink {
 }
 
 const LINK_PATTERN = {
-	yaml: /\$ref: (?<reference>.+)/g,
+	yaml: /\$ref: ("|')?(?<reference>.+)\1/g,
 	json: /"\$ref": ?"(?<reference>.+?)"/g
 } as const
 
