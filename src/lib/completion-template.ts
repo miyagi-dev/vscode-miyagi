@@ -13,7 +13,7 @@ interface CompletionItem extends vscode.CompletionItem {
 const OBJECT_PATH_PATTERN = /[\w.]+$/
 
 const selector: vscode.DocumentSelector = [
-	{ pattern: TWIG_GLOB }
+	{ pattern: TWIG_GLOB },
 ] as const
 
 type TraverseSchemaOptions = {
@@ -189,7 +189,7 @@ const resolveCompletionItem: ResolveCompletionItem = function (item: CompletionI
 
 const provider: vscode.CompletionItemProvider = {
 	provideCompletionItems,
-	resolveCompletionItem
+	resolveCompletionItem,
 }
 
 export function completionTemplate () {

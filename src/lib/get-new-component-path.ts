@@ -45,7 +45,7 @@ export async function getNewComponentPath (uri?: vscode.Uri) {
 		title: 'miyagi: Component path and name',
 		value: parentFolder,
 		valueSelection: [-1, -1],
-		placeHolder: '<componentFolder>/<componentName>'
+		placeHolder: '<componentFolder>/<componentName>',
 	})
 
 	if (!componentPath) {
@@ -54,6 +54,6 @@ export async function getNewComponentPath (uri?: vscode.Uri) {
 
 	return {
 		cwd,
-		path: path.join(componentsFolder, componentPath)
+		path: path.join(componentsFolder, componentPath),
 	}
 }

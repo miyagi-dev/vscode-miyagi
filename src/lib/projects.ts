@@ -21,6 +21,7 @@ async function getProjectInfo (configURI: vscode.Uri): Promise<Project | undefin
 
 		const uri = vscode.Uri.joinPath(configURI, '..')
 		const version = getMiyagiVersion(uri)
+		// eslint-disable-next-line @typescript-eslint/no-var-requires
 		const config = deepmerge(DEFAULT_MIYAGI_CONFIG, require(configURI.path))
 		const schemas = await loadSchemas(uri)
 

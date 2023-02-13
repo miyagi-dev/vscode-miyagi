@@ -132,6 +132,7 @@
 		"yaml": "^2.2.1"
 	},
 	"devDependencies": {
+		"@pangolinjs/eslint-config": "^7.0.1",
 		"@types/json-schema": "^7.0.11",
 		"@types/node": "^18.13.0",
 		"@types/vscode": "^1.75.0",
@@ -140,8 +141,6 @@
 		"conventional-changelog-cli": "^2.2.2",
 		"esbuild": "^0.17.8",
 		"eslint": "^8.34.0",
-		"eslint-config-standard": "^17.0.0",
-		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"typescript": "^4.9.5"
 	}
 }

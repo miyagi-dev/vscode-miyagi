@@ -16,11 +16,11 @@ export async function selectProject () {
 
 	const projectOptions: ProjectOption[] = projectList.map(project => ({
 		label: project.uri.path,
-		value: project
+		value: project,
 	}))
 
 	const projectOption = await vscode.window.showQuickPick(projectOptions, {
-		title: 'miyagi: Select project'
+		title: 'miyagi: Select project',
 	})
 
 	if (!projectOption) {

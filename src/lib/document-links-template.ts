@@ -8,11 +8,11 @@ import { getProject } from './projects'
 type EXTENSIONS = 'twig'
 
 const LINK_PATTERN = {
-	twig: /("|')@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+?)\1/gi
+	twig: /("|')@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+?)\1/gi,
 } as const
 
 const selector: vscode.DocumentSelector = [
-	{ pattern: TWIG_GLOB }
+	{ pattern: TWIG_GLOB },
 ]
 
 type ProvideDocumentLinks = vscode.DocumentLinkProvider['provideDocumentLinks']
@@ -64,13 +64,13 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 
 		const range = new vscode.Range(
 			document.positionAt(contentStart),
-			document.positionAt(contentEnd)
+			document.positionAt(contentEnd),
 		)
 
 		const target = vscode.Uri.joinPath(
 			project.uri,
 			namespacePath,
-			filename
+			filename,
 		)
 
 		links.push({ range, target })
@@ -80,7 +80,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 }
 
 const provider: vscode.DocumentLinkProvider = {
-	provideDocumentLinks
+	provideDocumentLinks,
 }
 
 export function documentLinksTemplate () {
