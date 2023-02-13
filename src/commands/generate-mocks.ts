@@ -28,7 +28,7 @@ export function generateMocks (uri?: vscode.Uri) {
 
 	const result = runMiyagi({
 		args: ['mocks', componentPath],
-		cwd
+		cwd,
 	})
 
 	if (result.status !== 0) {

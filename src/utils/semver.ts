@@ -13,7 +13,7 @@ function parse (version: string): SemanticVersionObject {
 	const result = {
 		major: parseInt(major),
 		minor: parseInt(minor),
-		patch: parseInt(patch)
+		patch: parseInt(patch),
 	}
 
 	return result

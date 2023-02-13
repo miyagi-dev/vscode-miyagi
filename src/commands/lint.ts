@@ -25,7 +25,7 @@ function lintComponent (uri: vscode.Uri) {
 
 	return runMiyagi({
 		args: ['lint', componentPath],
-		cwd
+		cwd,
 	})
 }
 
@@ -40,7 +40,7 @@ async function lintProject () {
 
 	return runMiyagi({
 		args: ['lint'],
-		cwd
+		cwd,
 	})
 }
 

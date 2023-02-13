@@ -10,7 +10,7 @@ type TYPES = 'ref' | 'tpl'
 
 const LINK_PATTERN = {
 	yaml: /\$(?<type>ref|tpl): ("|')?(?<reference>.+)\2/g,
-	json: /"\$(?<type>ref|tpl)": ?"(?<reference>.+?)"/g
+	json: /"\$(?<type>ref|tpl)": ?"(?<reference>.+?)"/g,
 } as const
 
 const selector: vscode.DocumentSelector = { pattern: MOCKS_GLOB }
@@ -30,12 +30,12 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 
 	const filenames = {
 		ref: project.config.files.mocks.name,
-		tpl: project.config.files.templates.name
+		tpl: project.config.files.templates.name,
 	}
 
 	const extensions = {
 		ref: project.config.files.mocks.extension,
-		tpl: project.config.files.templates.extension
+		tpl: project.config.files.templates.extension,
 	}
 
 	const matches = content.matchAll(LINK_PATTERN[project.config.files.mocks.extension])
@@ -62,7 +62,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 
 		const range = new vscode.Range(
 			document.positionAt(contentStart),
-			document.positionAt(contentEnd)
+			document.positionAt(contentEnd),
 		)
 
 		const filename = filenames[type].replace('<component>', path.basename(id))
@@ -72,7 +72,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 			project.uri,
 			project.config.components.folder,
 			id,
-			`${filename}.${extension}`
+			`${filename}.${extension}`,
 		)
 
 		links.push({ range, target })
@@ -82,7 +82,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 }
 
 const provider: vscode.DocumentLinkProvider = {
-	provideDocumentLinks
+	provideDocumentLinks,
 }
 
 export function documentLinksMocks () {

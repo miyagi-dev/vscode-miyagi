@@ -8,19 +8,19 @@ export const EXCLUDE_GLOB = '**/node_modules/**'
 
 export const DEFAULT_MIYAGI_CONFIG: MiyagiConfig = {
 	components: {
-		folder: 'src'
+		folder: 'src',
 	},
 	files: {
 		schema: {
 			name: 'schema',
-			extension: 'json'
+			extension: 'json',
 		},
 		mocks: {
 			name: 'mocks',
-			extension: 'json'
+			extension: 'json',
 		},
 		templates: {
-			name: 'index'
-		}
-	}
+			name: 'index',
+		},
+	},
 }

@@ -11,7 +11,7 @@ interface DocumentLink extends vscode.DocumentLink {
 
 const LINK_PATTERN = {
 	yaml: /\$ref: ("|')?(?<reference>.+)\1/g,
-	json: /"\$ref": ?"(?<reference>.+?)"/g
+	json: /"\$ref": ?"(?<reference>.+?)"/g,
 } as const
 
 const selector: vscode.DocumentSelector = { pattern: SCHEMA_GLOB }
@@ -53,7 +53,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 
 		const range = new vscode.Range(
 			document.positionAt(contentStart),
-			document.positionAt(contentEnd)
+			document.positionAt(contentEnd),
 		)
 
 		links.push({ range, document, id })
@@ -76,7 +76,7 @@ const resolveDocumentLink: ResolveDocumentLink = async function (link: DocumentL
 
 const provider: vscode.DocumentLinkProvider = {
 	provideDocumentLinks,
-	resolveDocumentLink
+	resolveDocumentLink,
 }
 
 export function documentLinksSchema () {

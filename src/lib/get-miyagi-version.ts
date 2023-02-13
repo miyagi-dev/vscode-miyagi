@@ -6,7 +6,7 @@ import { runMiyagi } from './run'
 export function getMiyagiVersion (projectURI: vscode.Uri): SemanticVersionString | undefined {
 	const result = runMiyagi({
 		args: ['--version'],
-		cwd: projectURI.path
+		cwd: projectURI.path,
 	})
 
 	if (result.status !== 0) {

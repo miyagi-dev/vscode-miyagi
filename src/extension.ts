@@ -70,8 +70,6 @@ export async function activate (context: vscode.ExtensionContext) {
 		providerDocumentLinksMocks,
 		providerDocumentLinksSchema,
 		providerDocumentLinksTemplate,
-		providerCompletionTemplate
+		providerCompletionTemplate,
 	)
 }
-
-export function deactivate () {}
