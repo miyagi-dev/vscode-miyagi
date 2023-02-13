@@ -29,7 +29,7 @@
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.74.0"
+		"vscode": "^1.75.0"
 	},
 	"main": "./out/extension.js",
 	"activationEvents": [
@@ -133,13 +133,13 @@
 	},
 	"devDependencies": {
 		"@types/json-schema": "^7.0.11",
-		"@types/node": "^18.11.19",
-		"@types/vscode": "^1.74.0",
-		"@typescript-eslint/eslint-plugin": "^5.50.0",
+		"@types/node": "^18.13.0",
+		"@types/vscode": "^1.75.0",
+		"@typescript-eslint/eslint-plugin": "^5.51.0",
 		"@typescript-eslint/parser": "^5.51.0",
 		"conventional-changelog-cli": "^2.2.2",
-		"esbuild": "^0.17.5",
-		"eslint": "^8.33.0",
+		"esbuild": "^0.17.8",
+		"eslint": "^8.34.0",
 		"eslint-config-standard": "^17.0.0",
 		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"typescript": "^4.9.5"
