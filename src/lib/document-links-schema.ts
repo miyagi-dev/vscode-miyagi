@@ -1,6 +1,7 @@
 import vscode from 'vscode'
 
 import { SCHEMA_GLOB } from '../constants'
+import { resolveNamespace } from '../utils/resolve-namespace'
 import { getProject } from './projects'
 
 interface DocumentLink extends vscode.DocumentLink {
@@ -46,7 +47,9 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 
 		const contentStart = start + match[0].indexOf(reference)
 		const contentEnd = contentStart + reference.length
-		const [id] = reference.split('#')
+
+		let [id] = reference.split('#')
+		id = resolveNamespace({ project, id })
 
 		const range = new vscode.Range(
 			document.positionAt(contentStart),

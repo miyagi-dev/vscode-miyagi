@@ -3,6 +3,7 @@ import path from 'node:path'
 import vscode from 'vscode'
 
 import { MOCKS_GLOB } from '../constants'
+import { resolveNamespace } from '../utils/resolve-namespace'
 import { getProject } from './projects'
 
 type TYPES = 'ref' | 'tpl'
@@ -55,20 +56,22 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 
 		const contentStart = start + match[0].indexOf(reference)
 		const contentEnd = contentStart + reference.length
-		const [componentPath] = reference.split('#')
+
+		let [id] = reference.split('#')
+		id = resolveNamespace({ project, id })
 
 		const range = new vscode.Range(
 			document.positionAt(contentStart),
 			document.positionAt(contentEnd)
 		)
 
-		const filename = filenames[type].replace('<component>', path.basename(componentPath))
+		const filename = filenames[type].replace('<component>', path.basename(id))
 		const extension = extensions[type]
 
 		const target = vscode.Uri.joinPath(
 			project.uri,
 			project.config.components.folder,
-			componentPath,
+			id,
 			`${filename}.${extension}`
 		)
 
