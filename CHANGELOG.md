@@ -1,3 +1,17 @@
+# [0.9.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.8.2...v0.9.0) (2023-02-13)
+
+
+### Bug Fixes
+
+* **document-links:** Allow quotes in YAML values ([7a60b67](https://github.com/miyagi-dev/vscode-miyagi/commit/7a60b670c5e7b2a07763039c03fadc4520a6a791))
+
+
+### Features
+
+* **document-links:** Namespaces in schema and mock references (Fix [#115](https://github.com/miyagi-dev/vscode-miyagi/issues/115)) ([1e325b8](https://github.com/miyagi-dev/vscode-miyagi/commit/1e325b89220fd573331d4fb43229a3233ef0b5aa))
+
+
+
 ## [0.8.2](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.8.1...v0.8.2) (2022-10-25)
 
 
