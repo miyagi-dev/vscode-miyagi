@@ -29,7 +29,7 @@
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.75.0"
+		"vscode": "^1.76.0"
 	},
 	"main": "./out/extension.js",
 	"activationEvents": [
@@ -128,19 +128,19 @@
 		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node"
 	},
 	"dependencies": {
-		"deepmerge": "^4.3.0",
+		"deepmerge": "^4.3.1",
 		"yaml": "^2.2.1"
 	},
 	"devDependencies": {
 		"@pangolinjs/eslint-config": "^7.0.1",
 		"@types/json-schema": "^7.0.11",
 		"@types/node": "^18.15.3",
-		"@types/vscode": "^1.75.1",
+		"@types/vscode": "^1.76.0",
 		"@typescript-eslint/eslint-plugin": "^5.55.0",
 		"@typescript-eslint/parser": "^5.55.0",
 		"conventional-changelog-cli": "^2.2.2",
-		"esbuild": "^0.17.11",
+		"esbuild": "^0.17.12",
 		"eslint": "^8.36.0",
-		"typescript": "^4.9.5"
+		"typescript": "^5.0.2"
 	}
 }
