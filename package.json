@@ -134,7 +134,7 @@
 	"devDependencies": {
 		"@pangolinjs/eslint-config": "^7.0.1",
 		"@types/json-schema": "^7.0.11",
-		"@types/node": "^18.15.10",
+		"@types/node": "^18.15.11",
 		"@types/vscode": "^1.76.0",
 		"@typescript-eslint/eslint-plugin": "^5.56.0",
 		"@typescript-eslint/parser": "^5.56.0",
