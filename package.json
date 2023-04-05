@@ -29,7 +29,7 @@
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.76.0"
+		"vscode": "^1.77.0"
 	},
 	"main": "./out/extension.js",
 	"activationEvents": [
@@ -116,7 +116,7 @@
 		]
 	},
 	"scripts": {
-		"watch": "esbuild $npm_package_config_esbuild --sourcemap --watch",
+		"watch": "esbuild $npm_package_config_esbuild --watch",
 		"lint": "eslint src --ext ts",
 		"typecheck": "tsc --project ./ --noEmit",
 		"prebuild": "npm run lint && npm run typecheck",
@@ -125,7 +125,7 @@
 		"vscode:prepublish": "npm run build"
 	},
 	"config": {
-		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node"
+		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node16.14 --sourcemap"
 	},
 	"dependencies": {
 		"deepmerge": "^4.3.1",
@@ -135,11 +135,11 @@
 		"@pangolinjs/eslint-config": "^7.0.1",
 		"@types/json-schema": "^7.0.11",
 		"@types/node": "^18.15.11",
-		"@types/vscode": "^1.76.0",
-		"@typescript-eslint/eslint-plugin": "^5.56.0",
-		"@typescript-eslint/parser": "^5.57.0",
+		"@types/vscode": "^1.77.0",
+		"@typescript-eslint/eslint-plugin": "^5.57.1",
+		"@typescript-eslint/parser": "^5.57.1",
 		"conventional-changelog-cli": "^2.2.2",
-		"esbuild": "^0.17.14",
+		"esbuild": "^0.17.15",
 		"eslint": "^8.37.0",
 		"typescript": "^5.0.3"
 	}
