@@ -1,3 +1,5 @@
 import vscode from 'vscode'
 
-export const outputChannel = vscode.window.createOutputChannel('miyagi')
+export const outputChannel = vscode.window.createOutputChannel('miyagi', {
+	log: true,
+})
