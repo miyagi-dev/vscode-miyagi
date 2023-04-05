@@ -1,17 +1,24 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"target": "ES2022",
-		"lib": [
-			"ES2022"
-		],
+		// Input
 		"rootDir": "src",
+		"esModuleInterop": true,
+
+		// Output
+		"module": "commonjs",
+		"target": "ESNext",
+		"lib": [
+			"ESNext",
+		],
 		"outDir": "out",
 		"sourceMap": true,
+
+		// Type Checking
 		"strict": true,
-		"esModuleInterop": true,
-		"noImplicitReturns": true,
 		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 	}
 }
