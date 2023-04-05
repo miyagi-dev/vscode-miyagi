@@ -1,3 +1,12 @@
+# [0.10.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.9.0...v0.10.0) (2023-04-05)
+
+
+### Features
+
+* Use log output channel (Close [#78](https://github.com/miyagi-dev/vscode-miyagi/issues/78)) ([b0d4805](https://github.com/miyagi-dev/vscode-miyagi/commit/b0d4805856e8d50a2a63f9e73ab4bda6edb4ee05))
+
+
+
 # [0.9.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.8.2...v0.9.0) (2023-02-13)
 
 
