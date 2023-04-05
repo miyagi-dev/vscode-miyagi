@@ -1,3 +1,4 @@
+import semver from 'semver'
 import vscode from 'vscode'
 
 import { generateMocks, generateMocksCompatibility } from './commands/generate-mocks'
@@ -12,7 +13,6 @@ import { documentLinksTemplate } from './lib/document-links-template'
 import { getProjectList, reloadSchemas } from './lib/projects'
 import { setupStorage } from './lib/storage'
 import { createFileSystemWatcher } from './utils/create-file-system-watcher'
-import { SemVer } from './utils/semver'
 
 const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
 const contextCanLint = new ContextKey('miyagi.canLint')
@@ -23,13 +23,13 @@ async function reload () {
 	const projectList = await getProjectList({ refresh: true })
 	contextHasMiyagi.set(projectList.length > 0)
 
-	const canLint = projectList.every(project => new SemVer(project.version).gte(lintCompatibility))
+	const canLint = projectList.every(project => semver.gte(project.version, lintCompatibility))
 	contextCanLint.set(canLint)
 
-	const canNewComponent = projectList.every(project => new SemVer(project.version).gte(newComponentCompatibility))
+	const canNewComponent = projectList.every(project => semver.gte(project.version, newComponentCompatibility))
 	contextCanNewComponent.set(canNewComponent)
 
-	const canGenerateMocks = projectList.every(project => new SemVer(project.version).gte(generateMocksCompatibility))
+	const canGenerateMocks = projectList.every(project => semver.gte(project.version, generateMocksCompatibility))
 	contextCanGenerateMocks.set(canGenerateMocks)
 }
 

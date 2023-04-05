@@ -3,8 +3,6 @@ import vscode from 'vscode'
 
 // General-purpose types
 
-export type SemanticVersionString = `${number}.${number}.${number}`
-
 export interface SemanticVersionObject {
 	major: number
 	minor: number
@@ -50,7 +48,7 @@ export interface Schema {
 
 export interface Project {
 	uri: vscode.Uri
-	version?: SemanticVersionString
+	version: string
 	config: MiyagiConfig
 	schemas: Schema[]
 }
