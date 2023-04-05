@@ -30,7 +30,7 @@ npm version …
 Publish the new version with [vsce](https://github.com/microsoft/vscode-vsce):
 
 ```sh
-vsce publish
+npx @vscode/vsce@latest publish
 ```
 
 See [npm version docs](https://docs.npmjs.com/cli/v8/commands/npm-version) for all available arguments.
