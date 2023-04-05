@@ -129,6 +129,7 @@
 	},
 	"dependencies": {
 		"deepmerge": "^4.3.1",
+		"semver": "^7.3.8",
 		"yaml": "^2.2.1"
 	},
 	"devDependencies": {

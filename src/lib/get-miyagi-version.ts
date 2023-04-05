@@ -1,9 +1,8 @@
 import vscode from 'vscode'
 
-import { SemanticVersionString } from '../types'
 import { runMiyagi } from './run'
 
-export function getMiyagiVersion (projectURI: vscode.Uri): SemanticVersionString | undefined {
+export function getMiyagiVersion (projectURI: vscode.Uri): string | undefined {
 	const result = runMiyagi({
 		args: ['--version'],
 		cwd: projectURI.path,
@@ -13,5 +12,5 @@ export function getMiyagiVersion (projectURI: vscode.Uri): SemanticVersionString
 		return undefined
 	}
 
-	return result.stdout.toString() as SemanticVersionString | undefined
+	return result.stdout.toString() as string | undefined
 }
