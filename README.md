@@ -4,15 +4,15 @@ Please refer to the [miyagi docs](https://www.miyagi.dev/) for setting up and co
 
 ## Features
 
-* [Create components](#create-components)
-* [Lint components](#lint-components)
-* [Generate mocks](#generate-mocks)
-* [File links](#file-links)
-  * [Schema and mock links](#schema-and-mock-links)
-  * [Template links](#template-links)
-* [Code completion](#code-completion)
-  * [Template completion](#template-completion)
-* [Command palette](#command-palette)
+- [Create components](#create-components)
+- [Lint components](#lint-components)
+- [Generate mocks](#generate-mocks)
+- [File links](#file-links)
+  - [Schema and mock links](#schema-and-mock-links)
+  - [Template links](#template-links)
+- [Code completion](#code-completion)
+  - [Template completion](#template-completion)
+- [Command palette](#command-palette)
 
 ## Create components
 
@@ -65,7 +65,7 @@ The trigger characters `|` (all types) and `.` (only object and array types) can
 These global commands are accessible in the command palette:
 
 | Command             | Description                                         |
-|---------------------|-----------------------------------------------------|
+| ------------------- | --------------------------------------------------- |
 | New Component       | Create a new component by manually entering a path. |
 | Lint All Components | Lint the entire miyagi project.                     |
 | Reload              | Manually trigger a miyagi config reload.            |

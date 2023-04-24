@@ -29,6 +29,7 @@ async function getProjectInfo (configURI: vscode.Uri): Promise<Project | undefin
 	} catch (error) {
 		outputChannel.appendLine(String(error))
 
+		// eslint-disable-next-line promise/catch-or-return
 		vscode.window
 			.showErrorMessage('miyagi: Error loading configuration', 'Show Details')
 			.then(action => action === 'Show Details' && outputChannel.show())
