@@ -130,7 +130,7 @@
 	"dependencies": {
 		"deepmerge": "^4.3.1",
 		"semver": "^7.5.0",
-		"yaml": "^2.2.1"
+		"yaml": "^2.2.2"
 	},
 	"devDependencies": {
 		"@pangolinjs/eslint-config": "^7.0.1",
