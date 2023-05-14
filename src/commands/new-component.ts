@@ -49,7 +49,7 @@ const fileOptions: FileOption[] = [
 	},
 ]
 
-export async function newComponent (uri?: vscode.Uri) {
+export async function newComponent(uri?: vscode.Uri) {
 	const componentPath = await getNewComponentPath(uri)
 
 	if (!componentPath) {
@@ -59,7 +59,7 @@ export async function newComponent (uri?: vscode.Uri) {
 	const storedOnlyFiles: string[] | undefined = await storage.get(STORAGE_KEY_ONLY_FILES)
 
 	if (storedOnlyFiles) {
-		fileOptions.forEach(option => {
+		fileOptions.forEach((option) => {
 			option.picked = storedOnlyFiles.includes(option.value)
 		})
 	}
@@ -73,7 +73,7 @@ export async function newComponent (uri?: vscode.Uri) {
 		return
 	}
 
-	const onlyFiles = selectedFiles.map(file => file.value)
+	const onlyFiles = selectedFiles.map((file) => file.value)
 	await storage.update(STORAGE_KEY_ONLY_FILES, onlyFiles)
 
 	const result = runMiyagi({
@@ -92,5 +92,3 @@ export async function newComponent (uri?: vscode.Uri) {
 		outputChannel.show()
 	}
 }
-
-export const newComponentCompatibility = '3.3.2'

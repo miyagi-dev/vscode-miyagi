@@ -85,6 +85,6 @@ const provider: vscode.DocumentLinkProvider = {
 	provideDocumentLinks,
 }
 
-export function documentLinksMocks () {
+export function documentLinksMocks() {
 	return vscode.languages.registerDocumentLinkProvider(selector, provider)
 }

@@ -11,9 +11,7 @@ const LINK_PATTERN = {
 	twig: /("|')@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+?)\1/gi,
 } as const
 
-const selector: vscode.DocumentSelector = [
-	{ pattern: TWIG_GLOB },
-]
+const selector: vscode.DocumentSelector = [{ pattern: TWIG_GLOB }]
 
 type ProvideDocumentLinks = vscode.DocumentLinkProvider['provideDocumentLinks']
 const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
@@ -67,11 +65,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 			document.positionAt(contentEnd),
 		)
 
-		const target = vscode.Uri.joinPath(
-			project.uri,
-			namespacePath,
-			filename,
-		)
+		const target = vscode.Uri.joinPath(project.uri, namespacePath, filename)
 
 		links.push({ range, target })
 	}
@@ -83,6 +77,6 @@ const provider: vscode.DocumentLinkProvider = {
 	provideDocumentLinks,
 }
 
-export function documentLinksTemplate () {
+export function documentLinksTemplate() {
 	return vscode.languages.registerDocumentLinkProvider(selector, provider)
 }

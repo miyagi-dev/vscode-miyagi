@@ -68,7 +68,7 @@ const resolveDocumentLink: ResolveDocumentLink = async function (link: DocumentL
 	const id = link.id
 
 	if (project) {
-		link.target = project.schemas.find(schema => schema.id === id)?.uri
+		link.target = project.schemas.find((schema) => schema.id === id)?.uri
 	}
 
 	return link
@@ -79,6 +79,6 @@ const provider: vscode.DocumentLinkProvider = {
 	resolveDocumentLink,
 }
 
-export function documentLinksSchema () {
+export function documentLinksSchema() {
 	return vscode.languages.registerDocumentLinkProvider(selector, provider)
 }

@@ -5,7 +5,7 @@ import vscode from 'vscode'
 import { getProject } from './projects'
 import { selectProject } from './select-project'
 
-export async function getNewComponentPath (uri?: vscode.Uri) {
+export async function getNewComponentPath(uri?: vscode.Uri) {
 	let activePath: vscode.Uri | undefined
 
 	if (uri) {
