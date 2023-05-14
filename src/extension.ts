@@ -1,9 +1,9 @@
 import semver from 'semver'
-import vscode from 'vscode'
+import { commands, ExtensionContext, workspace } from 'vscode'
 
-import { generateMocks, generateMocksCompatibility } from './commands/generate-mocks'
-import { lint, lintCompatibility } from './commands/lint'
-import { newComponent, newComponentCompatibility } from './commands/new-component'
+import { generateMocks } from './commands/generate-mocks'
+import { lint } from './commands/lint'
+import { newComponent } from './commands/new-component'
 import { MIYAGI_CONFIG_GLOB, SCHEMA_GLOB } from './constants'
 import { completionTemplate } from './lib/completion-template'
 import { ContextKey } from './lib/context-key'
@@ -19,38 +19,38 @@ const contextCanLint = new ContextKey('miyagi.canLint')
 const contextCanNewComponent = new ContextKey('miyagi.canNewComponent')
 const contextCanGenerateMocks = new ContextKey('miyagi.canGenerateMocks')
 
-async function reload () {
+async function reload() {
 	const projectList = await getProjectList({ refresh: true })
 	contextHasMiyagi.set(projectList.length > 0)
 
-	const canLint = projectList.every(project => semver.gte(project.version, lintCompatibility))
+	const canLint = projectList.every((project) => semver.gte(project.version, '3.3.2'))
 	contextCanLint.set(canLint)
 
-	const canNewComponent = projectList.every(project => semver.gte(project.version, newComponentCompatibility))
+	const canNewComponent = projectList.every((project) => semver.gte(project.version, '3.3.2'))
 	contextCanNewComponent.set(canNewComponent)
 
-	const canGenerateMocks = projectList.every(project => semver.gte(project.version, generateMocksCompatibility))
+	const canGenerateMocks = projectList.every((project) => semver.gte(project.version, '3.3.2'))
 	contextCanGenerateMocks.set(canGenerateMocks)
 }
 
-export async function activate (context: vscode.ExtensionContext) {
+export async function activate(context: ExtensionContext) {
 	// Initialization
 	setupStorage(context)
 	await reload()
 
 	// Events
-	const eventWorkspaceFolders = vscode.workspace.onDidChangeWorkspaceFolders(reload)
+	const eventWorkspaceFolders = workspace.onDidChangeWorkspaceFolders(reload)
 
 	// Watchers
 	const watcherMiyagiConfig = createFileSystemWatcher(MIYAGI_CONFIG_GLOB, reload)
 	const watcherSchema = createFileSystemWatcher(SCHEMA_GLOB, reloadSchemas)
 
 	// Commands
-	const commandNewComponent = vscode.commands.registerCommand('miyagi.newComponent', newComponent)
-	const commandLintComponent = vscode.commands.registerCommand('miyagi.lintComponent', lint)
-	const commandLintAllComponents = vscode.commands.registerCommand('miyagi.lintAllComponents', lint)
-	const commandGenerateMocks = vscode.commands.registerCommand('miyagi.generateMocks', generateMocks)
-	const commandReload = vscode.commands.registerCommand('miyagi.reload', reload)
+	const commandNewComponent = commands.registerCommand('miyagi.newComponent', newComponent)
+	const commandLintComponent = commands.registerCommand('miyagi.lintComponent', lint)
+	const commandLintAllComponents = commands.registerCommand('miyagi.lintAllComponents', lint)
+	const commandGenerateMocks = commands.registerCommand('miyagi.generateMocks', generateMocks)
+	const commandReload = commands.registerCommand('miyagi.reload', reload)
 
 	// Providers
 	const providerDocumentLinksMocks = documentLinksMocks()

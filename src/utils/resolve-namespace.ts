@@ -5,7 +5,7 @@ type ResolveNamespaceOptions = {
 	id: string
 }
 
-export function resolveNamespace ({ project, id }: ResolveNamespaceOptions): string {
+export function resolveNamespace({ project, id }: ResolveNamespaceOptions): string {
 	const namespaces = project.config.engine?.options?.namespaces
 
 	if (!namespaces) {

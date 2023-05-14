@@ -12,9 +12,7 @@ interface CompletionItem extends vscode.CompletionItem {
 
 const OBJECT_PATH_PATTERN = /[\w.]+$/
 
-const selector: vscode.DocumentSelector = [
-	{ pattern: TWIG_GLOB },
-] as const
+const selector: vscode.DocumentSelector = [{ pattern: TWIG_GLOB }] as const
 
 type TraverseSchemaOptions = {
 	properties: JSONSchema7['properties']
@@ -22,7 +20,11 @@ type TraverseSchemaOptions = {
 	token: vscode.CancellationToken
 }
 
-function traverseSchema ({ properties, path, token }: TraverseSchemaOptions): JSONSchema7['properties'] {
+function traverseSchema({
+	properties,
+	path,
+	token,
+}: TraverseSchemaOptions): JSONSchema7['properties'] {
 	if (!properties) {
 		return
 	}
@@ -59,10 +61,10 @@ function traverseSchema ({ properties, path, token }: TraverseSchemaOptions): JS
 		return
 	}
 
-	return traverseSchema({ properties: childProperties, path: childPath, token	})
+	return traverseSchema({ properties: childProperties, path: childPath, token })
 }
 
-function getItemType (definition: JSONSchema7Definition): string | undefined {
+function getItemType(definition: JSONSchema7Definition): string | undefined {
 	if (typeof definition === 'boolean') {
 		return
 	}
@@ -84,7 +86,7 @@ function getItemType (definition: JSONSchema7Definition): string | undefined {
 	return `(property) ${type}`
 }
 
-function getItemDescription (definition: JSONSchema7Definition): vscode.MarkdownString | undefined {
+function getItemDescription(definition: JSONSchema7Definition): vscode.MarkdownString | undefined {
 	if (typeof definition === 'boolean') {
 		return
 	}
@@ -104,7 +106,7 @@ function getItemDescription (definition: JSONSchema7Definition): vscode.Markdown
 	}
 
 	if (definition.enum) {
-		description.push(`Enum: ${definition.enum.map(item => `\`${item}\``).join(', ')}`)
+		description.push(`Enum: ${definition.enum.map((item) => `\`${item}\``).join(', ')}`)
 	}
 
 	if (!description.length) {
@@ -114,7 +116,7 @@ function getItemDescription (definition: JSONSchema7Definition): vscode.Markdown
 	return new vscode.MarkdownString(description.join('\n\n'))
 }
 
-function getItemCommitCharacter (definition: JSONSchema7Definition): string[] | undefined {
+function getItemCommitCharacter(definition: JSONSchema7Definition): string[] | undefined {
 	const commitCharacters: string[] = ['|']
 
 	if (typeof definition === 'boolean') {
@@ -123,7 +125,8 @@ function getItemCommitCharacter (definition: JSONSchema7Definition): string[] | 
 
 	if (
 		(typeof definition.type === 'string' && ['object', 'array'].includes(definition.type)) ||
-		(Array.isArray(definition.type) && (definition.type.includes('object') || definition.type.includes('array')))
+		(Array.isArray(definition.type) &&
+			(definition.type.includes('object') || definition.type.includes('array')))
 	) {
 		commitCharacters.push('.')
 	}
@@ -135,7 +138,7 @@ type ProvideCompletionItems = vscode.CompletionItemProvider['provideCompletionIt
 const provideCompletionItems: ProvideCompletionItems = function (document, position, token) {
 	const componentPath = path.dirname(document.uri.path)
 	const project = getProject(document.uri)
-	const schema = project?.schemas.find(schema => schema.componentURI.path === componentPath)
+	const schema = project?.schemas.find((schema) => schema.componentURI.path === componentPath)
 
 	if (!schema) {
 		return
@@ -192,6 +195,6 @@ const provider: vscode.CompletionItemProvider = {
 	resolveCompletionItem,
 }
 
-export function completionTemplate () {
+export function completionTemplate() {
 	return vscode.languages.registerCompletionItemProvider(selector, provider, '.')
 }

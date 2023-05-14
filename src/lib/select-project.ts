@@ -7,14 +7,14 @@ interface ProjectOption extends vscode.QuickPickItem {
 	value: Project
 }
 
-export async function selectProject () {
+export async function selectProject() {
 	const projectList = await getProjectList()
 
 	if (projectList.length === 1) {
 		return projectList[0]
 	}
 
-	const projectOptions: ProjectOption[] = projectList.map(project => ({
+	const projectOptions: ProjectOption[] = projectList.map((project) => ({
 		label: project.uri.path,
 		value: project,
 	}))

@@ -6,11 +6,11 @@ export class ContextKey {
 	#name: string
 	#lastValue: ContextValue | undefined
 
-	constructor (name: string) {
+	constructor(name: string) {
 		this.#name = name
 	}
 
-	set (value: ContextValue) {
+	set(value: ContextValue) {
 		if (value === this.#lastValue) {
 			return
 		}
@@ -19,7 +19,7 @@ export class ContextKey {
 		vscode.commands.executeCommand('setContext', this.#name, value)
 	}
 
-	get () {
+	get() {
 		return this.#lastValue
 	}
 }

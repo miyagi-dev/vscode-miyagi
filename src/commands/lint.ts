@@ -7,7 +7,7 @@ import { getProject } from '../lib/projects'
 import { runMiyagi } from '../lib/run'
 import { selectProject } from '../lib/select-project'
 
-function lintComponent (uri: vscode.Uri) {
+function lintComponent(uri: vscode.Uri) {
 	const project = getProject(uri)
 
 	if (!project) {
@@ -29,7 +29,7 @@ function lintComponent (uri: vscode.Uri) {
 	})
 }
 
-async function lintProject () {
+async function lintProject() {
 	const project = await selectProject()
 
 	if (!project) {
@@ -44,7 +44,7 @@ async function lintProject () {
 	})
 }
 
-export async function lint (uri?: vscode.Uri) {
+export async function lint(uri?: vscode.Uri) {
 	let result
 
 	if (uri) {
@@ -75,5 +75,3 @@ export async function lint (uri?: vscode.Uri) {
 		outputChannel.show()
 	}
 }
-
-export const lintCompatibility = '3.3.2'

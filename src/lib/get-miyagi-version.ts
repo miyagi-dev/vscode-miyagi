@@ -2,7 +2,7 @@ import vscode from 'vscode'
 
 import { runMiyagi } from './run'
 
-export function getMiyagiVersion (projectURI: vscode.Uri): string | undefined {
+export function getMiyagiVersion(projectURI: vscode.Uri): string | undefined {
 	const result = runMiyagi({
 		args: ['--version'],
 		cwd: projectURI.path,
