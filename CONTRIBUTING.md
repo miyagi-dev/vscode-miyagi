@@ -6,18 +6,18 @@
 npm install
 ```
 
-* Inside VS Code press `F5` to open a new window with the extension loaded.
-* Set breakpoints in your code to debug the extension.
-* Find output from the extension in the debug console.
+- Inside VS Code press `F5` to open a new window with the extension loaded.
+- Set breakpoints in your code to debug the extension.
+- Find output from the extension in the debug console.
 
 ## Make changes
 
-* You can relaunch the extension from the debug toolbar after changing code.
-* You can also reload (`Ctrl+R` or `Cmd+R` on Mac) the VS Code window with the extension to load your changes.
+- You can relaunch the extension from the debug toolbar after changing code.
+- You can also reload (`Ctrl+R` or `Cmd+R` on Mac) the VS Code window with the extension to load your changes.
 
 ## Explore the VS Code API
 
-* You can open the full set of our API when you open the file `node_modules/@types/vscode/index.d.ts`.
+- You can open the full set of our API when you open the file `node_modules/@types/vscode/index.d.ts`.
 
 ## Create a release
 
