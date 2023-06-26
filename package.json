@@ -29,7 +29,7 @@
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.78.0",
+		"vscode": "^1.79.0",
 		"node": ">=16.0.0"
 	},
 	"main": "./out/extension.js",
@@ -130,22 +130,22 @@
 	},
 	"dependencies": {
 		"deepmerge": "^4.3.1",
-		"semver": "^7.5.2",
+		"semver": "^7.5.3",
 		"yaml": "^2.3.1"
 	},
 	"devDependencies": {
 		"@types/json-schema": "^7.0.12",
 		"@types/node": "^20.3.1",
-		"@types/vscode": "^1.78.1",
-		"@typescript-eslint/eslint-plugin": "^5.59.11",
-		"@typescript-eslint/parser": "^5.59.11",
+		"@types/vscode": "^1.79.1",
+		"@typescript-eslint/eslint-plugin": "^5.60.0",
+		"@typescript-eslint/parser": "^5.60.0",
 		"conventional-changelog-cli": "^3.0.0",
-		"esbuild": "^0.18.4",
+		"esbuild": "^0.18.9",
 		"eslint": "^8.43.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-import-resolver-typescript": "^3.5.5",
 		"eslint-plugin-import": "^2.27.5",
-		"eslint-plugin-n": "^16.0.0",
+		"eslint-plugin-n": "^16.0.1",
 		"eslint-plugin-promise": "^6.1.1",
 		"eslint-plugin-simple-import-sort": "^10.0.0",
 		"typescript": "^5.1.3"
