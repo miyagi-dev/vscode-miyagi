@@ -139,7 +139,7 @@
 		"@types/vscode": "^1.81.0",
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@typescript-eslint/parser": "^6.4.0",
-		"conventional-changelog-cli": "^3.0.0",
+		"conventional-changelog-cli": "^4.0.0",
 		"esbuild": "^0.19.2",
 		"eslint": "^8.48.0",
 		"eslint-config-prettier": "^9.0.0",
