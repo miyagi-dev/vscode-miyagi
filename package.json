@@ -29,8 +29,8 @@
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.81.0",
-		"node": ">=16.0.0"
+		"vscode": "^1.82.0",
+		"node": ">=18.0.0"
 	},
 	"main": "./out/extension.js",
 	"activationEvents": [
@@ -136,12 +136,12 @@
 	"devDependencies": {
 		"@types/json-schema": "^7.0.13",
 		"@types/node": "^20.8.0",
-		"@types/vscode": "^1.81.0",
+		"@types/vscode": "^1.82.0",
 		"@typescript-eslint/eslint-plugin": "^6.7.3",
 		"@typescript-eslint/parser": "^6.7.3",
 		"conventional-changelog-cli": "^4.1.0",
 		"esbuild": "^0.19.4",
-		"eslint": "^8.49.0",
+		"eslint": "^8.50.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-import-resolver-typescript": "^3.6.1",
 		"eslint-plugin-import": "^2.28.1",
