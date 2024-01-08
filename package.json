@@ -136,7 +136,7 @@
 	"devDependencies": {
 		"@types/json-schema": "^7.0.15",
 		"@types/node": "^20.10.6",
-		"@types/vscode": "^1.83.1",
+		"@types/vscode": "^1.85.0",
 		"@typescript-eslint/eslint-plugin": "^6.18.0",
 		"@typescript-eslint/parser": "^6.18.0",
 		"conventional-changelog-cli": "^4.1.0",
