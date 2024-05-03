@@ -1,3 +1,12 @@
+# [0.11.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.10.2...v0.11.0) (2024-05-03)
+
+
+### Features
+
+* Activate extension only if miyagi configuration file found in workspace ([96a0f45](https://github.com/miyagi-dev/vscode-miyagi/commit/96a0f455fdde973ec3d1f2d8bef916b1ef63cc73))
+
+
+
 ## [0.10.2](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.10.1...v0.10.2) (2023-10-02)
 
 
