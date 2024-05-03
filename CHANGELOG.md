@@ -3,7 +3,7 @@
 
 ### Features
 
-* Activate extension only if miyagi configuration file found in workspace ([96a0f45](https://github.com/miyagi-dev/vscode-miyagi/commit/96a0f455fdde973ec3d1f2d8bef916b1ef63cc73))
+* Activate extension only if miyagi configuration file found in workspace ([657f153](https://github.com/miyagi-dev/vscode-miyagi/commit/657f1532c39ab6e4fd1fa9d617581d02c765adf6))
 
 
 
@@ -20,7 +20,7 @@
 
 ### Features
 
-* Use log output channel (Close [#78](https://github.com/miyagi-dev/vscode-miyagi/issues/78)) ([b0d4805](https://github.com/miyagi-dev/vscode-miyagi/commit/b0d4805856e8d50a2a63f9e73ab4bda6edb4ee05))
+* Use log output channel (Close [#78](https://github.com/miyagi-dev/vscode-miyagi/issues/78)) ([2cdebd3](https://github.com/miyagi-dev/vscode-miyagi/commit/2cdebd3a9942588459305a3c63f266c296260fef))
 
 
 
@@ -29,12 +29,12 @@
 
 ### Bug Fixes
 
-* **document-links:** Allow quotes in YAML values ([7a60b67](https://github.com/miyagi-dev/vscode-miyagi/commit/7a60b670c5e7b2a07763039c03fadc4520a6a791))
+* **document-links:** Allow quotes in YAML values ([1564a8e](https://github.com/miyagi-dev/vscode-miyagi/commit/1564a8e58409054e147198b55cbc9fa6047c5a2f))
 
 
 ### Features
 
-* **document-links:** Namespaces in schema and mock references (Fix [#115](https://github.com/miyagi-dev/vscode-miyagi/issues/115)) ([1e325b8](https://github.com/miyagi-dev/vscode-miyagi/commit/1e325b89220fd573331d4fb43229a3233ef0b5aa))
+* **document-links:** Namespaces in schema and mock references (Fix [#115](https://github.com/miyagi-dev/vscode-miyagi/issues/115)) ([07d0c0b](https://github.com/miyagi-dev/vscode-miyagi/commit/07d0c0b2f6f788782cc01422be80aa6d7071863c))
 
 
 
@@ -43,8 +43,8 @@
 
 ### Bug Fixes
 
-* Ignore miyagi projects in Git-ignored folders (Close [#38](https://github.com/miyagi-dev/vscode-miyagi/issues/38)) ([a69d9cc](https://github.com/miyagi-dev/vscode-miyagi/commit/a69d9cc5123e6ca642e6d693539eef8864fc9255))
-* Only show explorer context menu for miyagi projects ([6790f24](https://github.com/miyagi-dev/vscode-miyagi/commit/6790f24c3b628b5f68ba5e1ba0ba4b56dfba21ee))
+* Ignore miyagi projects in Git-ignored folders (Close [#38](https://github.com/miyagi-dev/vscode-miyagi/issues/38)) ([52ce4c1](https://github.com/miyagi-dev/vscode-miyagi/commit/52ce4c15c0649dac8c8b2e4d2ad6262e9be7c002))
+* Only show explorer context menu for miyagi projects ([bf28af6](https://github.com/miyagi-dev/vscode-miyagi/commit/bf28af60dd3c7a522a1f8e776f27b9a8202b6b7d))
 
 
 
@@ -53,7 +53,7 @@
 
 ### Bug Fixes
 
-* Rename "Generate Mock" to "Generate Mocks" ([fcf8fb2](https://github.com/miyagi-dev/vscode-miyagi/commit/fcf8fb23f3ae3f734dd178d93aa48c52a91aa4aa))
+* Rename "Generate Mock" to "Generate Mocks" ([31e25fd](https://github.com/miyagi-dev/vscode-miyagi/commit/31e25fd6a4693548a90c395255ebf37c71da4ccc))
 
 
 
@@ -62,8 +62,8 @@
 
 ### Features
 
-* Add mock generator to component context menu (Close [#2](https://github.com/miyagi-dev/vscode-miyagi/issues/2)) ([0ddda37](https://github.com/miyagi-dev/vscode-miyagi/commit/0ddda374f2489641f82eeb155760c2e078f7fb2c))
-* Group context menu commands in submenu ([54b72ad](https://github.com/miyagi-dev/vscode-miyagi/commit/54b72adecfbe3fc50ae58649bd48db6ed42d13a4))
+* Add mock generator to component context menu (Close [#2](https://github.com/miyagi-dev/vscode-miyagi/issues/2)) ([e88f030](https://github.com/miyagi-dev/vscode-miyagi/commit/e88f030d60075c451ab28fe688cc54ed507f23bd))
+* Group context menu commands in submenu ([2e59127](https://github.com/miyagi-dev/vscode-miyagi/commit/2e591274f1be7686dd5f2d2cf11b27b65648ed52))
 
 
 
@@ -72,7 +72,7 @@
 
 ### Features
 
-* Check miyagi compatibility ([#44](https://github.com/miyagi-dev/vscode-miyagi/issues/44), close [#42](https://github.com/miyagi-dev/vscode-miyagi/issues/42)) ([3a115d5](https://github.com/miyagi-dev/vscode-miyagi/commit/3a115d59100580b410643743c6718de7143f5782))
+* Check miyagi compatibility ([#44](https://github.com/miyagi-dev/vscode-miyagi/issues/44), close [#42](https://github.com/miyagi-dev/vscode-miyagi/issues/42)) ([17374f1](https://github.com/miyagi-dev/vscode-miyagi/commit/17374f1348275daf0704e39acb5aab9448e194d4))
 
 
 
@@ -81,7 +81,7 @@
 
 ### Bug Fixes
 
-* **document-links:** Link `$tpl` in mocks to template file ([#34](https://github.com/miyagi-dev/vscode-miyagi/issues/34)) ([58d4ed2](https://github.com/miyagi-dev/vscode-miyagi/commit/58d4ed2e5db87d1096ec60f1e2bcbe4186ee0dbe))
+* **document-links:** Link `$tpl` in mocks to template file ([#34](https://github.com/miyagi-dev/vscode-miyagi/issues/34)) ([85c0960](https://github.com/miyagi-dev/vscode-miyagi/commit/85c0960d867744820fcadc5eaee21df179f4a131))
 
 
 
@@ -90,7 +90,7 @@
 
 ### Bug Fixes
 
-* Scope schemas to project (Close [#31](https://github.com/miyagi-dev/vscode-miyagi/issues/31)) ([5f01dbe](https://github.com/miyagi-dev/vscode-miyagi/commit/5f01dbe35b250f79bfc0e899e7b7123108d03d03))
+* Scope schemas to project (Close [#31](https://github.com/miyagi-dev/vscode-miyagi/issues/31)) ([a9dccb4](https://github.com/miyagi-dev/vscode-miyagi/commit/a9dccb4a6cb4cbb935249a9558a062537a943749))
 
 
 
@@ -99,14 +99,14 @@
 
 ### Bug Fixes
 
-* **document-links:** Resolve schema links on click ([4b5fa78](https://github.com/miyagi-dev/vscode-miyagi/commit/4b5fa7854cf4fdc037b999a47a2fec519f5ef1b9))
-* Improve Twig link regex ([55a2668](https://github.com/miyagi-dev/vscode-miyagi/commit/55a2668457b91d5e95a3d56a024983e35c6ea39a))
-* Reference schemas by ID instead of filename ([af056d8](https://github.com/miyagi-dev/vscode-miyagi/commit/af056d878d15dea03c971a77726f9ac4310436c4))
+* **document-links:** Resolve schema links on click ([5cccd58](https://github.com/miyagi-dev/vscode-miyagi/commit/5cccd58842def7232dbdd06fcd26ab27a5e34347))
+* Improve Twig link regex ([96d44d1](https://github.com/miyagi-dev/vscode-miyagi/commit/96d44d111115796607daf451c926afcc3cde3329))
+* Reference schemas by ID instead of filename ([f0b9b83](https://github.com/miyagi-dev/vscode-miyagi/commit/f0b9b83f4691d08d32c179d7cfd2beca6985e88d))
 
 
 ### Features
 
-* Add schema properties completion to templates ([e44ab39](https://github.com/miyagi-dev/vscode-miyagi/commit/e44ab39b218ce890c559850b452398dd3eaf5aa6))
+* Add schema properties completion to templates ([dd91a91](https://github.com/miyagi-dev/vscode-miyagi/commit/dd91a91fb6ab2596bbf916f274a43aca33aa635c))
 
 
 
@@ -115,7 +115,7 @@
 
 ### Bug Fixes
 
-* Don't restrict Twig links to `.twig` files ([217943f](https://github.com/miyagi-dev/vscode-miyagi/commit/217943f4296e82c8a94f166b9d3b0779e2bfea5a))
+* Don't restrict Twig links to `.twig` files ([6e99750](https://github.com/miyagi-dev/vscode-miyagi/commit/6e997500aadf9c38afbf9079990d95d18b65bfd0))
 
 
 
@@ -124,8 +124,8 @@
 
 ### Features
 
-* Extend feature documentation ([239c3ca](https://github.com/miyagi-dev/vscode-miyagi/commit/239c3ca7deee35e5e981a7d9a1f98069a54a651e))
-* Linked template files in Twig templates ([23b49e5](https://github.com/miyagi-dev/vscode-miyagi/commit/23b49e58d9f4db1c18e556b93c06aaeed4986b47))
+* Extend feature documentation ([0405a75](https://github.com/miyagi-dev/vscode-miyagi/commit/0405a75333b5e08cb419e8fbced242e68f574d35))
+* Linked template files in Twig templates ([7528bbb](https://github.com/miyagi-dev/vscode-miyagi/commit/7528bbb79686a9025de9e852d61fa1689503f80b))
 
 
 
@@ -138,7 +138,7 @@
 
 ### Bug Fixes
 
-* **lint:** Valid component path detection ([f372e52](https://github.com/miyagi-dev/vscode-miyagi/commit/f372e526e12d8f50de024f69bdfb840eda06267f))
+* **lint:** Valid component path detection ([d721af6](https://github.com/miyagi-dev/vscode-miyagi/commit/d721af64d396ba10b033e86f22563a67b7df3557))
 
 
 
@@ -147,8 +147,8 @@
 
 ### Bug Fixes
 
-* Enable document links for all file schemes (Close [#15](https://github.com/miyagi-dev/vscode-miyagi/issues/15)) ([906915a](https://github.com/miyagi-dev/vscode-miyagi/commit/906915a560208327dff45d079abebaccd6ef3c6f))
-* Warn when trying to create/lint component outside of components folder (Close [#4](https://github.com/miyagi-dev/vscode-miyagi/issues/4)) ([ecf1127](https://github.com/miyagi-dev/vscode-miyagi/commit/ecf1127b3ec8b05297892fedfbdc3beeb8cf7290))
+* Enable document links for all file schemes (Close [#15](https://github.com/miyagi-dev/vscode-miyagi/issues/15)) ([baf0867](https://github.com/miyagi-dev/vscode-miyagi/commit/baf08676c3ebdc4890fd34926388cab4b6d6aa73))
+* Warn when trying to create/lint component outside of components folder (Close [#4](https://github.com/miyagi-dev/vscode-miyagi/issues/4)) ([97bc1b4](https://github.com/miyagi-dev/vscode-miyagi/commit/97bc1b483888ba96aceb484258b418c4f6b93ddf))
 
 
 
@@ -157,13 +157,13 @@
 
 ### Bug Fixes
 
-* Add more verbose error logging (Close [#10](https://github.com/miyagi-dev/vscode-miyagi/issues/10)) ([3c8222e](https://github.com/miyagi-dev/vscode-miyagi/commit/3c8222e2a90b3ef975ee3c8523050ff562adfa88))
-* Cache clearing on miyagi config change ([669856e](https://github.com/miyagi-dev/vscode-miyagi/commit/669856efb8b5018c5266931410e8c0f8b079e35d))
+* Add more verbose error logging (Close [#10](https://github.com/miyagi-dev/vscode-miyagi/issues/10)) ([6a878d4](https://github.com/miyagi-dev/vscode-miyagi/commit/6a878d440c113c6b01c1745f86e26635c46126c6))
+* Cache clearing on miyagi config change ([3d578db](https://github.com/miyagi-dev/vscode-miyagi/commit/3d578db99871f50f15681e26d05ccebfd99ad35c))
 
 
 ### Features
 
-* Add reload command ([68b4e97](https://github.com/miyagi-dev/vscode-miyagi/commit/68b4e976a4cfb7d258f99098a657d4606381c054))
+* Add reload command ([20e4b37](https://github.com/miyagi-dev/vscode-miyagi/commit/20e4b373bd06d782e83273cd5dcfac3b070335cb))
 
 
 
@@ -172,12 +172,12 @@
 
 ### Bug Fixes
 
-* Better command naming and context menu placement ([a17566f](https://github.com/miyagi-dev/vscode-miyagi/commit/a17566f63e0675a2d4db1833e14be6b099042c52))
+* Better command naming and context menu placement ([1ee234d](https://github.com/miyagi-dev/vscode-miyagi/commit/1ee234dc9cfea64aa0c30cc32ea633cdbef4d671))
 
 
 ### Features
 
-* Linked $ref and $tpl in schemas/mocks (Close [#5](https://github.com/miyagi-dev/vscode-miyagi/issues/5)) ([a66daa0](https://github.com/miyagi-dev/vscode-miyagi/commit/a66daa0d5e48e8ff178dad1aab8ab55ef16f785d))
+* Linked $ref and $tpl in schemas/mocks (Close [#5](https://github.com/miyagi-dev/vscode-miyagi/issues/5)) ([efd3f0c](https://github.com/miyagi-dev/vscode-miyagi/commit/efd3f0cedda16fcf9b954e99f4a9ab19603b7d1f))
 
 
 
@@ -186,7 +186,7 @@
 
 ### Bug Fixes
 
-* **new-component:** Remove `<componentPath>` placeholder from name input box ([1e0e974](https://github.com/miyagi-dev/vscode-miyagi/commit/1e0e974edadef59f1bfebb6fb1bd1b86420d008e))
+* **new-component:** Remove `<componentPath>` placeholder from name input box ([b4183d3](https://github.com/miyagi-dev/vscode-miyagi/commit/b4183d380198e85ba69480e283f4443751a0b7ee))
 
 
 
@@ -195,7 +195,7 @@
 
 ### Features
 
-* Handle multiple miyagi projects (Close [#1](https://github.com/miyagi-dev/vscode-miyagi/issues/1)) ([6b52353](https://github.com/miyagi-dev/vscode-miyagi/commit/6b523537a7d25f4b2fab52e79084502d2cf6e0c8))
+* Handle multiple miyagi projects (Close [#1](https://github.com/miyagi-dev/vscode-miyagi/issues/1)) ([060b099](https://github.com/miyagi-dev/vscode-miyagi/commit/060b099b389eb2d388c3c127ed64e4a2e3416e9f))
 
 
 
