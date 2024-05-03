@@ -34,7 +34,7 @@
 	},
 	"main": "./out/extension.js",
 	"activationEvents": [
-		"onStartupFinished"
+		"workspaceContains:**/.miyagi.{js,json}"
 	],
 	"contributes": {
 		"commands": [
@@ -42,25 +42,25 @@
 				"command": "miyagi.newComponent",
 				"title": "New Component",
 				"category": "miyagi",
-				"enablement": "miyagi.hasMiyagi && miyagi.canNewComponent"
+				"enablement": "miyagi.canNewComponent"
 			},
 			{
 				"command": "miyagi.lintComponent",
 				"category": "miyagi",
 				"title": "Lint Component",
-				"enablement": "miyagi.hasMiyagi && miyagi.canLint"
+				"enablement": "miyagi.canLint"
 			},
 			{
 				"command": "miyagi.lintAllComponents",
 				"category": "miyagi",
 				"title": "Lint All Components",
-				"enablement": "miyagi.hasMiyagi && miyagi.canLint"
+				"enablement": "miyagi.canLint"
 			},
 			{
 				"command": "miyagi.generateMocks",
 				"category": "miyagi",
 				"title": "Generate Mocks",
-				"enablement": "miyagi.hasMiyagi && miyagi.canGenerateMocks"
+				"enablement": "miyagi.canGenerateMocks"
 			},
 			{
 				"command": "miyagi.reload",
@@ -82,8 +82,7 @@
 			"explorer/context": [
 				{
 					"submenu": "miyagi/explorer",
-					"group": "1_modification",
-					"when": "miyagi.hasMiyagi"
+					"group": "1_modification"
 				}
 			],
 			"miyagi/explorer": [

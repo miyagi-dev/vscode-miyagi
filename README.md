@@ -1,6 +1,11 @@
 # miyagi for VS Code
 
-Please refer to the [miyagi docs](https://www.miyagi.dev/) for setting up and configuring a project.
+Please refer to the [miyagi docs](https://www.miyagi.dev/) for setting up and configuring a miyagi project.
+
+> [!TIP]
+> The extension is only activated if a [miyagi configuration file](https://docs.miyagi.dev/configuration/config-file/) is found when a workspace is opened.
+>
+> When first setting up a new miyagi project, reload the VS Code window _after_ creating the configuration file and installing dependencies.
 
 ## Features
 
