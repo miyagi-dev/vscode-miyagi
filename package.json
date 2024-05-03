@@ -125,7 +125,7 @@
 		"vscode:prepublish": "npm run build"
 	},
 	"config": {
-		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node16.14 --sourcemap"
+		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node18.18 --sourcemap"
 	},
 	"dependencies": {
 		"deepmerge": "^4.3.1",
