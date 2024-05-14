@@ -14,12 +14,14 @@ import { getProjectList, reloadSchemas } from './lib/projects'
 import { setupStorage } from './lib/storage'
 import { createFileSystemWatcher } from './utils/create-file-system-watcher'
 
+const contextHasMiyagi = new ContextKey('miyagi.hasMiyagi')
 const contextCanLint = new ContextKey('miyagi.canLint')
 const contextCanNewComponent = new ContextKey('miyagi.canNewComponent')
 const contextCanGenerateMocks = new ContextKey('miyagi.canGenerateMocks')
 
 async function reload() {
 	const projectList = await getProjectList({ refresh: true })
+	contextHasMiyagi.set(projectList.length > 0)
 
 	const canLint = projectList.every((project) => semver.gte(project.version, '3.3.2'))
 	contextCanLint.set(canLint)
