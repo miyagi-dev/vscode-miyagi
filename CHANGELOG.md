@@ -1,3 +1,12 @@
+## [0.11.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.11.0...v0.11.1) (2024-05-14)
+
+
+### Bug Fixes
+
+* Only show explorer context menu in miyagi projects ([7de4339](https://github.com/miyagi-dev/vscode-miyagi/commit/7de43395b3fd5f8080924df3961bc6473c74f501))
+
+
+
 # [0.11.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.10.2...v0.11.0) (2024-05-03)
 
 
