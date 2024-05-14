@@ -82,7 +82,8 @@
 			"explorer/context": [
 				{
 					"submenu": "miyagi/explorer",
-					"group": "1_modification"
+					"group": "1_modification",
+					"when": "miyagi.hasMiyagi"
 				}
 			],
 			"miyagi/explorer": [
@@ -129,22 +130,22 @@
 	},
 	"dependencies": {
 		"deepmerge": "^4.3.1",
-		"semver": "^7.6.0",
+		"semver": "^7.6.2",
 		"yaml": "^2.4.2"
 	},
 	"devDependencies": {
 		"@types/json-schema": "^7.0.15",
-		"@types/node": "^20.12.8",
+		"@types/node": "^20.12.12",
 		"@types/vscode": "^1.89.0",
-		"@typescript-eslint/eslint-plugin": "^7.8.0",
-		"@typescript-eslint/parser": "^7.8.0",
-		"conventional-changelog-cli": "^4.1.0",
-		"esbuild": "^0.20.2",
+		"@typescript-eslint/eslint-plugin": "^7.9.0",
+		"@typescript-eslint/parser": "^7.9.0",
+		"conventional-changelog-cli": "^5.0.0",
+		"esbuild": "^0.21.2",
 		"eslint": "^8.57.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-import-resolver-typescript": "^3.6.1",
 		"eslint-plugin-import": "^2.29.1",
-		"eslint-plugin-n": "^17.4.0",
+		"eslint-plugin-n": "^17.7.0",
 		"eslint-plugin-promise": "^6.1.1",
 		"eslint-plugin-simple-import-sort": "^12.1.0",
 		"typescript": "^5.4.5"
