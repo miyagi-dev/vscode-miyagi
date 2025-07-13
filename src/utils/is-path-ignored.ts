@@ -1,7 +1,7 @@
 import { spawnSync } from 'node:child_process'
 import path from 'node:path'
 
-import vscode from 'vscode'
+import { type Uri, workspace } from 'vscode'
 
 type SearchIgnoreOptions = {
 	filePath: string
@@ -27,15 +27,15 @@ function searchIgnore({ filePath, cwd, root }: SearchIgnoreOptions): boolean {
 	return searchIgnore({ filePath, cwd: path.dirname(cwd), root })
 }
 
-export function isPathIgnored(uri: vscode.Uri) {
-	const workspace = vscode.workspace.getWorkspaceFolder(uri)
+export function isPathIgnored(uri: Uri) {
+	const folder = workspace.getWorkspaceFolder(uri)
 
-	if (!workspace) {
+	if (!folder) {
 		return false
 	}
 
 	const filePath = uri.path
-	const root = workspace.uri.path
+	const root = folder.uri.path
 	const cwd = path.dirname(uri.path)
 
 	return searchIgnore({ filePath, cwd, root })

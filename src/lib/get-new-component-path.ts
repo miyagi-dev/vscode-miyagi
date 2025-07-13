@@ -1,17 +1,17 @@
 import path from 'node:path'
 
-import vscode from 'vscode'
+import { Uri, window } from 'vscode'
 
-import { getProject } from './projects'
-import { selectProject } from './select-project'
+import { getProject } from './projects.ts'
+import { selectProject } from './select-project.ts'
 
-export async function getNewComponentPath(uri?: vscode.Uri) {
-	let activePath: vscode.Uri | undefined
+export async function getNewComponentPath(uri?: Uri) {
+	let activePath: Uri | undefined
 
 	if (uri) {
 		activePath = uri
-	} else if (vscode.window.activeTextEditor) {
-		activePath = vscode.Uri.joinPath(vscode.window.activeTextEditor.document.uri, '..')
+	} else if (window.activeTextEditor) {
+		activePath = Uri.joinPath(window.activeTextEditor.document.uri, '..')
 	} else {
 		activePath = (await selectProject())?.uri
 	}
@@ -23,7 +23,7 @@ export async function getNewComponentPath(uri?: vscode.Uri) {
 	const project = getProject(activePath)
 
 	if (!project) {
-		vscode.window.showErrorMessage('miyagi: Error getting active project')
+		window.showErrorMessage('miyagi: Error getting active project')
 		return
 	}
 
@@ -31,7 +31,7 @@ export async function getNewComponentPath(uri?: vscode.Uri) {
 	const componentsFolder = project.config.components.folder
 
 	if (!activePath.path.includes(componentsFolder)) {
-		vscode.window.showWarningMessage(`miyagi: Select a location in "${componentsFolder}"`)
+		window.showWarningMessage(`miyagi: Select a location in "${componentsFolder}"`)
 		return
 	}
 
@@ -41,7 +41,7 @@ export async function getNewComponentPath(uri?: vscode.Uri) {
 		parentFolder = path.relative(path.join(cwd, componentsFolder), activePath.path) + '/'
 	}
 
-	const componentPath = await vscode.window.showInputBox({
+	const componentPath = await window.showInputBox({
 		title: 'miyagi: Component path and name',
 		value: parentFolder,
 		valueSelection: [-1, -1],

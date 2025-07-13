@@ -7,15 +7,11 @@ jobs:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm ci
-      - name: Lint
-        run: npm run lint
-      - name: Type check
-        run: npm run typecheck
+          node-version: 24
+      - run: npm ci
+      - run: node --run lint:js
+      - run: node --run lint:format
+      - run: node --run typecheck

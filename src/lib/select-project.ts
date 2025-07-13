@@ -1,9 +1,9 @@
-import vscode from 'vscode'
+import { type QuickPickItem, window } from 'vscode'
 
-import { Project } from '../types'
-import { getProjectList } from './projects'
+import type { Project } from '../types.ts'
+import { getProjectList } from './projects.ts'
 
-interface ProjectOption extends vscode.QuickPickItem {
+interface ProjectOption extends QuickPickItem {
 	value: Project
 }
 
@@ -19,7 +19,7 @@ export async function selectProject() {
 		value: project,
 	}))
 
-	const projectOption = await vscode.window.showQuickPick(projectOptions, {
+	const projectOption = await window.showQuickPick(projectOptions, {
 		title: 'miyagi: Select project',
 	})
 

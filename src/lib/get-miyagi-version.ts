@@ -1,8 +1,8 @@
-import vscode from 'vscode'
+import { type Uri } from 'vscode'
 
-import { runMiyagi } from './run'
+import { runMiyagi } from './run.ts'
 
-export function getMiyagiVersion(projectURI: vscode.Uri): string | undefined {
+export function getMiyagiVersion(projectURI: Uri): string | undefined {
 	const result = runMiyagi({
 		args: ['--version'],
 		cwd: projectURI.path,

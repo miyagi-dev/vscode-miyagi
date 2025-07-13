@@ -1,7 +1,7 @@
-import vscode from 'vscode'
+import { type ExtensionContext, type Memento } from 'vscode'
 
-export let storage: vscode.Memento
+export let storage: Memento
 
-export function setupStorage(context: vscode.ExtensionContext) {
+export function setupStorage(context: ExtensionContext) {
 	storage = context.workspaceState
 }

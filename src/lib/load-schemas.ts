@@ -1,15 +1,15 @@
 import path from 'node:path'
 
 import { JSONSchema7 } from 'json-schema'
-import vscode from 'vscode'
+import { RelativePattern, Uri, workspace } from 'vscode'
 import YAML from 'yaml'
 
-import { EXCLUDE_GLOB, SCHEMA_GLOB } from '../constants'
-import { Schema } from '../types'
+import { EXCLUDE_GLOB, SCHEMA_GLOB } from '../constants.ts'
+import type { Schema } from '../types.ts'
 
-async function convertSchema(uri: vscode.Uri): Promise<Schema> {
+async function convertSchema(uri: Uri): Promise<Schema> {
 	const extension = path.extname(uri.path).slice(1) as 'json' | 'yaml'
-	const file = await vscode.workspace.fs.readFile(uri)
+	const file = await workspace.fs.readFile(uri)
 	let content: JSONSchema7
 
 	try {
@@ -27,14 +27,14 @@ async function convertSchema(uri: vscode.Uri): Promise<Schema> {
 	// Fallback object if schema is empty.
 	content ??= {}
 
-	const componentURI = vscode.Uri.joinPath(uri, '..')
+	const componentURI = Uri.joinPath(uri, '..')
 	const id = content.$id ?? componentURI.path
 
 	return { id, uri, componentURI, content }
 }
 
-export async function loadSchemas(projectURI: vscode.Uri): Promise<Schema[]> {
-	const glob = new vscode.RelativePattern(projectURI, SCHEMA_GLOB)
-	const files = await vscode.workspace.findFiles(glob, EXCLUDE_GLOB)
+export async function loadSchemas(projectURI: Uri): Promise<Schema[]> {
+	const glob = new RelativePattern(projectURI, SCHEMA_GLOB)
+	const files = await workspace.findFiles(glob, EXCLUDE_GLOB)
 	return Promise.all(files.map(convertSchema))
 }

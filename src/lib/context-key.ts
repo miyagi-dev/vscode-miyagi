@@ -1,4 +1,4 @@
-import vscode from 'vscode'
+import { commands } from 'vscode'
 
 type ContextValue = boolean | string | string[] | RegExp | undefined
 
@@ -16,7 +16,7 @@ export class ContextKey {
 		}
 
 		this.#lastValue = value
-		vscode.commands.executeCommand('setContext', this.#name, value)
+		commands.executeCommand('setContext', this.#name, value)
 	}
 
 	get() {

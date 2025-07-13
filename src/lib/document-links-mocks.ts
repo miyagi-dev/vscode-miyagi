@@ -1,10 +1,17 @@
 import path from 'node:path'
 
-import vscode from 'vscode'
+import {
+	type DocumentLink,
+	type DocumentLinkProvider,
+	type DocumentSelector,
+	languages,
+	Range,
+	Uri,
+} from 'vscode'
 
-import { MOCKS_GLOB } from '../constants'
-import { resolveNamespace } from '../utils/resolve-namespace'
-import { getProject } from './projects'
+import { MOCKS_GLOB } from '../constants.ts'
+import { resolveNamespace } from '../utils/resolve-namespace.ts'
+import { getProject } from './projects.ts'
 
 type TYPES = 'ref' | 'tpl'
 
@@ -13,9 +20,9 @@ const LINK_PATTERN = {
 	json: /"\$(?<type>ref|tpl)": ?"(?<reference>.+?)"/g,
 } as const
 
-const selector: vscode.DocumentSelector = { pattern: MOCKS_GLOB }
+const selector: DocumentSelector = { pattern: MOCKS_GLOB }
 
-type ProvideDocumentLinks = vscode.DocumentLinkProvider['provideDocumentLinks']
+type ProvideDocumentLinks = DocumentLinkProvider['provideDocumentLinks']
 const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
@@ -39,7 +46,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	}
 
 	const matches = content.matchAll(LINK_PATTERN[project.config.files.mocks.extension])
-	const links: vscode.DocumentLink[] = []
+	const links: DocumentLink[] = []
 
 	for (const match of matches) {
 		if (token.isCancellationRequested) {
@@ -60,15 +67,12 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 		let [id] = reference.split('#')
 		id = resolveNamespace({ project, id })
 
-		const range = new vscode.Range(
-			document.positionAt(contentStart),
-			document.positionAt(contentEnd),
-		)
+		const range = new Range(document.positionAt(contentStart), document.positionAt(contentEnd))
 
 		const filename = filenames[type].replace('<component>', path.basename(id))
 		const extension = extensions[type]
 
-		const target = vscode.Uri.joinPath(
+		const target = Uri.joinPath(
 			project.uri,
 			project.config.components.folder,
 			id,
@@ -81,10 +85,10 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	return links
 }
 
-const provider: vscode.DocumentLinkProvider = {
+const provider: DocumentLinkProvider = {
 	provideDocumentLinks,
 }
 
 export function documentLinksMocks() {
-	return vscode.languages.registerDocumentLinkProvider(selector, provider)
+	return languages.registerDocumentLinkProvider(selector, provider)
 }

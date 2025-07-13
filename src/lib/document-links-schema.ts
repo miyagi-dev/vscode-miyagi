@@ -1,11 +1,18 @@
-import vscode from 'vscode'
+import {
+	type DocumentLink,
+	type DocumentLinkProvider,
+	type DocumentSelector,
+	languages,
+	Range,
+	type TextDocument,
+} from 'vscode'
 
-import { SCHEMA_GLOB } from '../constants'
-import { resolveNamespace } from '../utils/resolve-namespace'
-import { getProject } from './projects'
+import { SCHEMA_GLOB } from '../constants.ts'
+import { resolveNamespace } from '../utils/resolve-namespace.ts'
+import { getProject } from './projects.ts'
 
-interface DocumentLink extends vscode.DocumentLink {
-	document: vscode.TextDocument
+interface DocumentLinkWithDocument extends DocumentLink {
+	document: TextDocument
 	id: string
 }
 
@@ -14,9 +21,9 @@ const LINK_PATTERN = {
 	json: /"\$ref": ?"(?<reference>.+?)"/g,
 } as const
 
-const selector: vscode.DocumentSelector = { pattern: SCHEMA_GLOB }
+const selector: DocumentSelector = { pattern: SCHEMA_GLOB }
 
-type ProvideDocumentLinks = vscode.DocumentLinkProvider['provideDocumentLinks']
+type ProvideDocumentLinks = DocumentLinkProvider['provideDocumentLinks']
 const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
@@ -31,7 +38,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 
 	const extension = project.config.files.schema.extension
 	const matches = content.matchAll(LINK_PATTERN[extension])
-	const links: DocumentLink[] = []
+	const links: DocumentLinkWithDocument[] = []
 
 	for (const match of matches) {
 		if (token.isCancellationRequested) {
@@ -51,10 +58,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 		let [id] = reference.split('#')
 		id = resolveNamespace({ project, id })
 
-		const range = new vscode.Range(
-			document.positionAt(contentStart),
-			document.positionAt(contentEnd),
-		)
+		const range = new Range(document.positionAt(contentStart), document.positionAt(contentEnd))
 
 		links.push({ range, document, id })
 	}
@@ -62,8 +66,8 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	return links
 }
 
-type ResolveDocumentLink = vscode.DocumentLinkProvider['resolveDocumentLink']
-const resolveDocumentLink: ResolveDocumentLink = async function (link: DocumentLink) {
+type ResolveDocumentLink = DocumentLinkProvider['resolveDocumentLink']
+const resolveDocumentLink: ResolveDocumentLink = async function (link: DocumentLinkWithDocument) {
 	const project = getProject(link.document.uri)
 	const id = link.id
 
@@ -74,11 +78,11 @@ const resolveDocumentLink: ResolveDocumentLink = async function (link: DocumentL
 	return link
 }
 
-const provider: vscode.DocumentLinkProvider = {
+const provider: DocumentLinkProvider = {
 	provideDocumentLinks,
 	resolveDocumentLink,
 }
 
 export function documentLinksSchema() {
-	return vscode.languages.registerDocumentLinkProvider(selector, provider)
+	return languages.registerDocumentLinkProvider(selector, provider)
 }

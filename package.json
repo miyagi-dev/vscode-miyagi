@@ -29,9 +29,10 @@
 		"theme": "dark"
 	},
 	"engines": {
-		"vscode": "^1.89.0",
-		"node": ">=18.18"
+		"vscode": "^1.102.0",
+		"node": ">=22.15"
 	},
+	"type": "module",
 	"main": "./out/extension.js",
 	"activationEvents": [
 		"workspaceContains:**/.miyagi.{js,json}"
@@ -118,36 +119,33 @@
 	},
 	"scripts": {
 		"watch": "esbuild $npm_package_config_esbuild --watch",
-		"lint": "eslint src --ext ts",
+		"lint:js": "eslint",
+		"lint:format": "prettier --check .",
 		"typecheck": "tsc --project ./ --noEmit",
-		"prebuild": "npm run lint && npm run typecheck",
+		"prebuild": "npm run lint:js && npm run lint:format && npm run typecheck",
 		"build": "esbuild $npm_package_config_esbuild --minify",
 		"version": "conventional-changelog --preset angular --infile CHANGELOG.md --same-file && git add CHANGELOG.md",
 		"vscode:prepublish": "npm run build"
 	},
 	"config": {
-		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node18.18 --sourcemap"
+		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --external:yaml --platform=node --target=node22.15 --format=esm --sourcemap"
 	},
 	"dependencies": {
 		"deepmerge": "^4.3.1",
-		"semver": "^7.6.2",
-		"yaml": "^2.4.2"
+		"semver": "^7.7.2",
+		"yaml": "^2.8.0"
 	},
 	"devDependencies": {
+		"@eslint/js": "^9.31.0",
 		"@types/json-schema": "^7.0.15",
-		"@types/node": "^20.12.12",
-		"@types/vscode": "^1.89.0",
-		"@typescript-eslint/eslint-plugin": "^7.9.0",
-		"@typescript-eslint/parser": "^7.9.0",
+		"@types/node": "^24.0.13",
+		"@types/vscode": "^1.102.0",
 		"conventional-changelog-cli": "^5.0.0",
-		"esbuild": "^0.21.2",
-		"eslint": "^8.57.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-import-resolver-typescript": "^3.6.1",
-		"eslint-plugin-import": "^2.29.1",
-		"eslint-plugin-n": "^17.7.0",
-		"eslint-plugin-promise": "^6.1.1",
-		"eslint-plugin-simple-import-sort": "^12.1.0",
-		"typescript": "^5.4.5"
+		"esbuild": "^0.25.6",
+		"eslint": "^9.31.0",
+		"eslint-plugin-simple-import-sort": "^12.1.1",
+		"prettier": "^3.6.2",
+		"typescript": "^5.8.3",
+		"typescript-eslint": "^8.36.0"
 	}
 }

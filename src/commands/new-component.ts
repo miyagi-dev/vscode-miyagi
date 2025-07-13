@@ -1,11 +1,11 @@
-import vscode from 'vscode'
+import { type QuickPickItem, type Uri, window } from 'vscode'
 
-import { getNewComponentPath } from '../lib/get-new-component-path'
-import { outputChannel } from '../lib/output-channel'
-import { runMiyagi } from '../lib/run'
-import { storage } from '../lib/storage'
+import { getNewComponentPath } from '../lib/get-new-component-path.ts'
+import { outputChannel } from '../lib/output-channel.ts'
+import { runMiyagi } from '../lib/run.ts'
+import { storage } from '../lib/storage.ts'
 
-interface FileOption extends vscode.QuickPickItem {
+interface FileOption extends QuickPickItem {
 	value: string
 }
 
@@ -49,7 +49,7 @@ const fileOptions: FileOption[] = [
 	},
 ]
 
-export async function newComponent(uri?: vscode.Uri) {
+export async function newComponent(uri?: Uri) {
 	const componentPath = await getNewComponentPath(uri)
 
 	if (!componentPath) {
@@ -64,7 +64,7 @@ export async function newComponent(uri?: vscode.Uri) {
 		})
 	}
 
-	const selectedFiles = await vscode.window.showQuickPick(fileOptions, {
+	const selectedFiles = await window.showQuickPick(fileOptions, {
 		title: 'miyagi: Select files to create',
 		canPickMany: true,
 	})
@@ -82,7 +82,7 @@ export async function newComponent(uri?: vscode.Uri) {
 	})
 
 	if (result.status !== 0) {
-		vscode.window.showErrorMessage('miyagi: Error creating component')
+		window.showErrorMessage('miyagi: Error creating component')
 	}
 
 	const stderr = result?.stderr.toString()

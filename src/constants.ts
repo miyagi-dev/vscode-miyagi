@@ -1,4 +1,4 @@
-import { MiyagiConfig } from './types'
+import type { MiyagiConfig } from './types.ts'
 
 export const MIYAGI_CONFIG_GLOB = '**/.miyagi.{js,json}'
 export const SCHEMA_GLOB = '**/schema.{json,yaml}'

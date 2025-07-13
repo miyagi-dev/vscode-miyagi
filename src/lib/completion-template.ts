@@ -1,23 +1,31 @@
 import path from 'node:path'
 
 import { JSONSchema7, JSONSchema7Definition } from 'json-schema'
-import vscode from 'vscode'
+import {
+	type CancellationToken,
+	CompletionItem,
+	CompletionItemKind,
+	type CompletionItemProvider,
+	type DocumentSelector,
+	languages,
+	MarkdownString,
+} from 'vscode'
 
-import { TWIG_GLOB } from '../constants'
-import { getProject } from './projects'
+import { TWIG_GLOB } from '../constants.ts'
+import { getProject } from './projects.ts'
 
-interface CompletionItem extends vscode.CompletionItem {
+interface CompletionItemWithDefinition extends CompletionItem {
 	definition?: JSONSchema7Definition
 }
 
 const OBJECT_PATH_PATTERN = /[\w.]+$/
 
-const selector: vscode.DocumentSelector = [{ pattern: TWIG_GLOB }] as const
+const selector: DocumentSelector = [{ pattern: TWIG_GLOB }] as const
 
 type TraverseSchemaOptions = {
 	properties: JSONSchema7['properties']
 	path: string[]
-	token: vscode.CancellationToken
+	token: CancellationToken
 }
 
 function traverseSchema({
@@ -86,7 +94,7 @@ function getItemType(definition: JSONSchema7Definition): string | undefined {
 	return `(property) ${type}`
 }
 
-function getItemDescription(definition: JSONSchema7Definition): vscode.MarkdownString | undefined {
+function getItemDescription(definition: JSONSchema7Definition): MarkdownString | undefined {
 	if (typeof definition === 'boolean') {
 		return
 	}
@@ -113,7 +121,7 @@ function getItemDescription(definition: JSONSchema7Definition): vscode.MarkdownS
 		return
 	}
 
-	return new vscode.MarkdownString(description.join('\n\n'))
+	return new MarkdownString(description.join('\n\n'))
 }
 
 function getItemCommitCharacter(definition: JSONSchema7Definition): string[] | undefined {
@@ -134,7 +142,7 @@ function getItemCommitCharacter(definition: JSONSchema7Definition): string[] | u
 	return commitCharacters
 }
 
-type ProvideCompletionItems = vscode.CompletionItemProvider['provideCompletionItems']
+type ProvideCompletionItems = CompletionItemProvider['provideCompletionItems']
 const provideCompletionItems: ProvideCompletionItems = function (document, position, token) {
 	const componentPath = path.dirname(document.uri.path)
 	const project = getProject(document.uri)
@@ -159,16 +167,16 @@ const provideCompletionItems: ProvideCompletionItems = function (document, posit
 		return
 	}
 
-	const completionItems: CompletionItem[] = []
+	const completionItems: CompletionItemWithDefinition[] = []
 
 	for (const [key, definition] of Object.entries(properties)) {
 		if (token.isCancellationRequested) {
 			break
 		}
 
-		const item: CompletionItem = new vscode.CompletionItem(key)
+		const item: CompletionItemWithDefinition = new CompletionItem(key)
 
-		item.kind = vscode.CompletionItemKind.Variable
+		item.kind = CompletionItemKind.Variable
 		item.commitCharacters = getItemCommitCharacter(definition)
 		item.definition = definition
 
@@ -178,8 +186,8 @@ const provideCompletionItems: ProvideCompletionItems = function (document, posit
 	return completionItems
 }
 
-type ResolveCompletionItem = vscode.CompletionItemProvider['resolveCompletionItem']
-const resolveCompletionItem: ResolveCompletionItem = function (item: CompletionItem) {
+type ResolveCompletionItem = CompletionItemProvider['resolveCompletionItem']
+const resolveCompletionItem: ResolveCompletionItem = function (item: CompletionItemWithDefinition) {
 	if (!item.definition) {
 		return
 	}
@@ -190,11 +198,11 @@ const resolveCompletionItem: ResolveCompletionItem = function (item: CompletionI
 	return item
 }
 
-const provider: vscode.CompletionItemProvider = {
+const provider: CompletionItemProvider = {
 	provideCompletionItems,
 	resolveCompletionItem,
 }
 
 export function completionTemplate() {
-	return vscode.languages.registerCompletionItemProvider(selector, provider, '.')
+	return languages.registerCompletionItemProvider(selector, provider, '.')
 }

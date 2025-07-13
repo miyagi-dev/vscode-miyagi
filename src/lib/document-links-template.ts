@@ -1,9 +1,16 @@
 import path from 'node:path'
 
-import vscode from 'vscode'
+import {
+	type DocumentLink,
+	type DocumentLinkProvider,
+	type DocumentSelector,
+	languages,
+	Range,
+	Uri,
+} from 'vscode'
 
-import { TWIG_GLOB } from '../constants'
-import { getProject } from './projects'
+import { TWIG_GLOB } from '../constants.ts'
+import { getProject } from './projects.ts'
 
 type EXTENSIONS = 'twig'
 
@@ -11,9 +18,9 @@ const LINK_PATTERN = {
 	twig: /("|')@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+?)\1/gi,
 } as const
 
-const selector: vscode.DocumentSelector = [{ pattern: TWIG_GLOB }]
+const selector: DocumentSelector = [{ pattern: TWIG_GLOB }]
 
-type ProvideDocumentLinks = vscode.DocumentLinkProvider['provideDocumentLinks']
+type ProvideDocumentLinks = DocumentLinkProvider['provideDocumentLinks']
 const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
@@ -36,7 +43,7 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 
 	const extension = path.extname(document.uri.path).slice(1) as EXTENSIONS
 	const matches = content.matchAll(LINK_PATTERN[extension])
-	const links: vscode.DocumentLink[] = []
+	const links: DocumentLink[] = []
 
 	for (const match of matches) {
 		if (token.isCancellationRequested) {
@@ -60,12 +67,9 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 		const contentStart = start + 1
 		const contentEnd = start + match[0].length - 1
 
-		const range = new vscode.Range(
-			document.positionAt(contentStart),
-			document.positionAt(contentEnd),
-		)
+		const range = new Range(document.positionAt(contentStart), document.positionAt(contentEnd))
 
-		const target = vscode.Uri.joinPath(project.uri, namespacePath, filename)
+		const target = Uri.joinPath(project.uri, namespacePath, filename)
 
 		links.push({ range, target })
 	}
@@ -73,10 +77,10 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	return links
 }
 
-const provider: vscode.DocumentLinkProvider = {
+const provider: DocumentLinkProvider = {
 	provideDocumentLinks,
 }
 
 export function documentLinksTemplate() {
-	return vscode.languages.registerDocumentLinkProvider(selector, provider)
+	return languages.registerDocumentLinkProvider(selector, provider)
 }

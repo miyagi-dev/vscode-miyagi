@@ -1,4 +1,4 @@
-import { Project } from '../types'
+import type { Project } from '../types.ts'
 
 type ResolveNamespaceOptions = {
 	project: Project

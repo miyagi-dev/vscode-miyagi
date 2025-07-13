@@ -1,13 +1,13 @@
 import path from 'node:path'
 
-import vscode from 'vscode'
+import { type Uri, window } from 'vscode'
 
-import { outputChannel } from '../lib/output-channel'
-import { getProject } from '../lib/projects'
-import { runMiyagi } from '../lib/run'
-import { selectProject } from '../lib/select-project'
+import { outputChannel } from '../lib/output-channel.ts'
+import { getProject } from '../lib/projects.ts'
+import { runMiyagi } from '../lib/run.ts'
+import { selectProject } from '../lib/select-project.ts'
 
-function lintComponent(uri: vscode.Uri) {
+function lintComponent(uri: Uri) {
 	const project = getProject(uri)
 
 	if (!project) {
@@ -19,7 +19,7 @@ function lintComponent(uri: vscode.Uri) {
 	const componentPath = path.relative(path.join(cwd, componentsFolder), uri.path)
 
 	if (!uri.path.includes(componentsFolder)) {
-		vscode.window.showWarningMessage(`miyagi: Select a component in "${componentsFolder}"`)
+		window.showWarningMessage(`miyagi: Select a component in "${componentsFolder}"`)
 		return
 	}
 
@@ -44,7 +44,7 @@ async function lintProject() {
 	})
 }
 
-export async function lint(uri?: vscode.Uri) {
+export async function lint(uri?: Uri) {
 	let result
 
 	if (uri) {
@@ -58,9 +58,9 @@ export async function lint(uri?: vscode.Uri) {
 	}
 
 	if (result.status === 0) {
-		vscode.window.showInformationMessage('miyagi: Valid schemas and mock data')
+		window.showInformationMessage('miyagi: Valid schemas and mock data')
 	} else {
-		vscode.window.showErrorMessage('miyagi: Invalid schemas or mock data')
+		window.showErrorMessage('miyagi: Invalid schemas or mock data')
 	}
 
 	const stdout = result?.stdout.toString()

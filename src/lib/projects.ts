@@ -1,13 +1,13 @@
 import deepmerge from 'deepmerge'
-import vscode from 'vscode'
+import { Uri, window, workspace } from 'vscode'
 
-import { DEFAULT_MIYAGI_CONFIG, EXCLUDE_GLOB, MIYAGI_CONFIG_GLOB } from '../constants'
-import { Project } from '../types'
-import { clearRequireCache } from '../utils/clear-require-cache'
-import { isPathIgnored } from '../utils/is-path-ignored'
-import { getMiyagiVersion } from './get-miyagi-version'
-import { loadSchemas } from './load-schemas'
-import { outputChannel } from './output-channel'
+import { DEFAULT_MIYAGI_CONFIG, EXCLUDE_GLOB, MIYAGI_CONFIG_GLOB } from '../constants.ts'
+import type { MiyagiConfig, Project } from '../types.ts'
+import { getModule } from '../utils/get-module.ts'
+import { isPathIgnored } from '../utils/is-path-ignored.ts'
+import { getMiyagiVersion } from './get-miyagi-version.ts'
+import { loadSchemas } from './load-schemas.ts'
+import { outputChannel } from './output-channel.ts'
 
 type GetProjectListOptions = {
 	refresh?: boolean
@@ -15,22 +15,21 @@ type GetProjectListOptions = {
 
 let projects: Project[]
 
-async function getProjectInfo(configURI: vscode.Uri): Promise<Project | undefined> {
+async function getProjectInfo(configURI: Uri): Promise<Project | undefined> {
 	try {
-		clearRequireCache(configURI.path)
-
-		const uri = vscode.Uri.joinPath(configURI, '..')
+		const uri = Uri.joinPath(configURI, '..')
 		const version = getMiyagiVersion(uri) ?? '0.0.0'
-		// eslint-disable-next-line @typescript-eslint/no-var-requires
-		const config = deepmerge(DEFAULT_MIYAGI_CONFIG, require(configURI.path))
+		const { default: projectConfig } = (await getModule(configURI.path)) as {
+			default: MiyagiConfig
+		}
+		const config = deepmerge(DEFAULT_MIYAGI_CONFIG, projectConfig)
 		const schemas = await loadSchemas(uri)
 
 		return { uri, version, config, schemas }
 	} catch (error) {
 		outputChannel.appendLine(String(error))
 
-		// eslint-disable-next-line promise/catch-or-return
-		vscode.window
+		window
 			.showErrorMessage('miyagi: Error loading configuration', 'Show Details')
 			.then((action) => action === 'Show Details' && outputChannel.show())
 
@@ -43,7 +42,7 @@ export async function getProjectList({ refresh }: GetProjectListOptions = {}) {
 		return projects
 	}
 
-	const configURIs = await vscode.workspace.findFiles(MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB)
+	const configURIs = await workspace.findFiles(MIYAGI_CONFIG_GLOB, EXCLUDE_GLOB)
 	projects = []
 
 	for (const configURI of configURIs) {
@@ -65,7 +64,7 @@ export async function getProjectList({ refresh }: GetProjectListOptions = {}) {
 	return projects
 }
 
-export function getProject(uri: vscode.Uri) {
+export function getProject(uri: Uri) {
 	return projects.find((project) => uri.path.startsWith(project.uri.path))
 }
 

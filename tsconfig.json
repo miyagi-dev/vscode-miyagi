@@ -3,10 +3,13 @@
 		// Input
 		"rootDir": "src",
 		"esModuleInterop": true,
+		"moduleResolution": "nodenext",
+		"allowImportingTsExtensions": true,
 
 		// Output
-		"module": "commonjs",
-		"target": "ESNext",
+		"noEmit": true,
+		"module": "nodenext",
+		"target": "esnext",
 		"lib": ["ESNext"],
 		"outDir": "out",
 		"sourceMap": true,

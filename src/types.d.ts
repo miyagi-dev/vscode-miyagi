@@ -1,5 +1,5 @@
 import { JSONSchema7 } from 'json-schema'
-import vscode from 'vscode'
+import { Uri } from 'vscode'
 
 // General-purpose types
 
@@ -41,13 +41,13 @@ export interface MiyagiConfig {
 
 export interface Schema {
 	id: string
-	uri: vscode.Uri
-	componentURI: vscode.Uri
+	uri: Uri
+	componentURI: Uri
 	content: JSONSchema7
 }
 
 export interface Project {
-	uri: vscode.Uri
+	uri: Uri
 	version: string
 	config: MiyagiConfig
 	schemas: Schema[]
