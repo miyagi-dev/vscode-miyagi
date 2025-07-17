@@ -119,8 +119,9 @@
 	},
 	"scripts": {
 		"watch": "esbuild $npm_package_config_esbuild --watch",
+		"format": "prettier --experimental-cli --write .",
 		"lint:js": "eslint",
-		"lint:format": "prettier --check .",
+		"lint:format": "prettier --experimental-cli --check .",
 		"typecheck": "tsc --project ./ --noEmit",
 		"prebuild": "npm run lint:js && npm run lint:format && npm run typecheck",
 		"build": "esbuild $npm_package_config_esbuild --minify",
@@ -138,7 +139,7 @@
 	"devDependencies": {
 		"@eslint/js": "^9.31.0",
 		"@types/json-schema": "^7.0.15",
-		"@types/node": "^24.0.13",
+		"@types/node": "^24.0.14",
 		"@types/vscode": "^1.102.0",
 		"conventional-changelog-cli": "^5.0.0",
 		"esbuild": "^0.25.6",
@@ -146,6 +147,6 @@
 		"eslint-plugin-simple-import-sort": "^12.1.1",
 		"prettier": "^3.6.2",
 		"typescript": "^5.8.3",
-		"typescript-eslint": "^8.36.0"
+		"typescript-eslint": "^8.37.0"
 	}
 }
