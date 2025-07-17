@@ -1,3 +1,7 @@
+# [0.12.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.11.1...v0.12.0) (2025-07-17)
+
+
+
 ## [0.11.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.11.0...v0.11.1) (2024-05-14)
 
 
