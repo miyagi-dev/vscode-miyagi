@@ -129,15 +129,16 @@
 		"vscode:prepublish": "npm run build"
 	},
 	"config": {
-		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --external:yaml --platform=node --target=node22.15 --format=esm --sourcemap"
+		"esbuild": "./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --platform=node --target=node22.15 --format=esm --sourcemap"
 	},
 	"dependencies": {
 		"deepmerge": "^4.3.1",
-		"semver": "^7.7.2",
-		"yaml": "^2.8.0"
+		"js-yaml": "^4.1.0",
+		"semver": "^7.7.2"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.31.0",
+		"@types/js-yaml": "^4.0.9",
 		"@types/json-schema": "^7.0.15",
 		"@types/node": "^24.0.14",
 		"@types/vscode": "^1.102.0",

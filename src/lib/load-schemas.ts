@@ -1,8 +1,8 @@
 import path from 'node:path'
 
+import YAML from 'js-yaml'
 import { JSONSchema7 } from 'json-schema'
 import { RelativePattern, Uri, workspace } from 'vscode'
-import YAML from 'yaml'
 
 import { EXCLUDE_GLOB, SCHEMA_GLOB } from '../constants.ts'
 import type { Schema } from '../types.ts'
@@ -18,7 +18,7 @@ async function convertSchema(uri: Uri): Promise<Schema> {
 		}
 
 		if (extension === 'yaml') {
-			content = YAML.parse(file.toString())
+			content = YAML.load(file.toString()) as JSONSchema7
 		}
 	} catch {
 		content = {}
