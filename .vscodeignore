@@ -1,10 +1,13 @@
-.eslintrc.json
+.editorconfig
 .github
 .gitignore
+.node-version
 .npmrc
-.nvmrc
+.prettierignore
 .vscode
 **/*.map
+eslint.config.js
 node_modules
+prettier.config.js
 src
 tsconfig.json
