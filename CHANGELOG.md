@@ -1,3 +1,12 @@
+## [0.12.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.12.0...v0.12.1) (2025-07-17)
+
+
+### Bug Fixes
+
+* Switch YAML library for ESM compatibility ([ba4e16b](https://github.com/miyagi-dev/vscode-miyagi/commit/ba4e16b279a65e68b53be73a8a55e41220b27493))
+
+
+
 # [0.12.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.11.1...v0.12.0) (2025-07-17)
 
 

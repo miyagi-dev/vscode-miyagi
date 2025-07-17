@@ -3,7 +3,7 @@
 	"displayName": "miyagi",
 	"description": "Use miyagi features directly in VS Code.",
 	"publisher": "fynn",
-	"version": "0.12.0",
+	"version": "0.12.1",
 	"preview": true,
 	"license": "MIT",
 	"categories": [
