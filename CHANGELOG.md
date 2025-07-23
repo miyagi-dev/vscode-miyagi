@@ -1,3 +1,12 @@
+# [1.0.0](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.12.1...v1.0.0) (2025-07-23)
+
+
+### Features
+
+* Add miyagi v4 support ([8c33359](https://github.com/miyagi-dev/vscode-miyagi/commit/8c333599c2c3767712af580d735574ae95caf6e5))
+
+
+
 ## [0.12.1](https://github.com/miyagi-dev/vscode-miyagi/compare/v0.12.0...v0.12.1) (2025-07-17)
 
 
