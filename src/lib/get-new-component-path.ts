@@ -16,9 +16,7 @@ export async function getNewComponentPath(uri?: Uri) {
 		activePath = (await selectProject())?.uri
 	}
 
-	if (!activePath) {
-		return
-	}
+	if (!activePath) return
 
 	const project = getProject(activePath)
 
@@ -48,9 +46,7 @@ export async function getNewComponentPath(uri?: Uri) {
 		placeHolder: '<componentFolder>/<componentName>',
 	})
 
-	if (!componentPath) {
-		return
-	}
+	if (!componentPath) return
 
 	return {
 		cwd,

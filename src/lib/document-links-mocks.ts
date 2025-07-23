@@ -10,7 +10,7 @@ import {
 } from 'vscode'
 
 import { MOCKS_GLOB } from '../constants.ts'
-import { resolveNamespace } from '../utils/resolve-namespace.ts'
+import { getComponentPath } from '../utils/get-component-path.ts'
 import { getProject } from './projects.ts'
 
 type TYPES = 'ref' | 'tpl'
@@ -27,13 +27,8 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
 
-	if (!project) {
-		return
-	}
-
-	if (!content.trim()) {
-		return
-	}
+	if (!project) return
+	if (!content.trim()) return
 
 	const filenames = {
 		ref: project.config.files.mocks.name,
@@ -49,33 +44,31 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const links: DocumentLink[] = []
 
 	for (const match of matches) {
-		if (token.isCancellationRequested) {
-			break
-		}
+		if (token.isCancellationRequested) break
 
 		const reference = match.groups?.reference
 		const type = match.groups?.type as TYPES | undefined
 		const start = match.index
 
-		if (!reference || !type || start === undefined) {
-			continue
-		}
+		if (!reference || !type || start === undefined) continue
 
 		const contentStart = start + match[0].indexOf(reference)
 		const contentEnd = contentStart + reference.length
 
-		let [id] = reference.split('#')
-		id = resolveNamespace({ project, id })
+		const [id] = reference.split('#')
+		const componentPath = getComponentPath({ project, id })
+
+		if (!componentPath) continue
 
 		const range = new Range(document.positionAt(contentStart), document.positionAt(contentEnd))
 
-		const filename = filenames[type].replace('<component>', path.basename(id))
+		const filename = filenames[type].replace('<component>', path.basename(componentPath))
 		const extension = extensions[type]
 
 		const target = Uri.joinPath(
 			project.uri,
 			project.config.components.folder,
-			id,
+			componentPath,
 			`${filename}.${extension}`,
 		)
 

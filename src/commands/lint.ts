@@ -1,5 +1,6 @@
 import path from 'node:path'
 
+import semver from 'semver'
 import { type Uri, window } from 'vscode'
 
 import { outputChannel } from '../lib/output-channel.ts'
@@ -10,13 +11,13 @@ import { selectProject } from '../lib/select-project.ts'
 function lintComponent(uri: Uri) {
 	const project = getProject(uri)
 
-	if (!project) {
-		return
-	}
+	if (!project) return
 
 	const cwd = project.uri.path
 	const componentsFolder = project.config.components.folder
-	const componentPath = path.relative(path.join(cwd, componentsFolder), uri.path)
+	const componentPath = semver.gte(project.version, '4.0.0-rc')
+		? path.relative(cwd, uri.path)
+		: path.relative(path.join(cwd, componentsFolder), uri.path)
 
 	if (!uri.path.includes(componentsFolder)) {
 		window.showWarningMessage(`miyagi: Select a component in "${componentsFolder}"`)
@@ -32,9 +33,7 @@ function lintComponent(uri: Uri) {
 async function lintProject() {
 	const project = await selectProject()
 
-	if (!project) {
-		return
-	}
+	if (!project) return
 
 	const cwd = project.uri.path
 
@@ -53,9 +52,7 @@ export async function lint(uri?: Uri) {
 		result = await lintProject()
 	}
 
-	if (!result) {
-		return
-	}
+	if (!result) return
 
 	if (result.status === 0) {
 		window.showInformationMessage('miyagi: Valid schemas and mock data')

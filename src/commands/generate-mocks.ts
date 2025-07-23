@@ -7,15 +7,11 @@ import { getProject } from '../lib/projects.ts'
 import { runMiyagi } from '../lib/run.ts'
 
 export function generateMocks(uri?: Uri) {
-	if (!uri) {
-		return
-	}
+	if (!uri) return
 
 	const project = getProject(uri)
 
-	if (!project) {
-		return
-	}
+	if (!project) return
 
 	const cwd = project.uri.path
 	const componentsFolder = project.config.components.folder

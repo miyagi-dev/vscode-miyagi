@@ -8,7 +8,6 @@ import {
 } from 'vscode'
 
 import { SCHEMA_GLOB } from '../constants.ts'
-import { resolveNamespace } from '../utils/resolve-namespace.ts'
 import { getProject } from './projects.ts'
 
 interface DocumentLinkWithDocument extends DocumentLink {
@@ -28,36 +27,25 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
 
-	if (!project) {
-		return
-	}
-
-	if (!content.trim()) {
-		return
-	}
+	if (!project) return
+	if (!content.trim()) return
 
 	const extension = project.config.files.schema.extension
 	const matches = content.matchAll(LINK_PATTERN[extension])
 	const links: DocumentLinkWithDocument[] = []
 
 	for (const match of matches) {
-		if (token.isCancellationRequested) {
-			break
-		}
+		if (token.isCancellationRequested) break
 
 		const reference = match.groups?.reference
 		const start = match.index
 
-		if (!reference || start === undefined) {
-			continue
-		}
+		if (!reference || start === undefined) continue
 
 		const contentStart = start + match[0].indexOf(reference)
 		const contentEnd = contentStart + reference.length
 
-		let [id] = reference.split('#')
-		id = resolveNamespace({ project, id })
-
+		const [id] = reference.split('#')
 		const range = new Range(document.positionAt(contentStart), document.positionAt(contentEnd))
 
 		links.push({ range, document, id })

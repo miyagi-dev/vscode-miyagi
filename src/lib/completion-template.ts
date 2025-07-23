@@ -33,22 +33,15 @@ function traverseSchema({
 	path,
 	token,
 }: TraverseSchemaOptions): JSONSchema7['properties'] {
-	if (!properties) {
-		return
-	}
-
-	if (token.isCancellationRequested) {
-		return
-	}
+	if (!properties) return
+	if (token.isCancellationRequested) return
 
 	const [childKey, ...childPath] = path
 	const childKeyInProperties = childKey in properties
 
 	// If the child key is not in the properties but the child path still goes on,
 	// we have to assume a “broken” object path.
-	if (!childKeyInProperties && childPath.length) {
-		return
-	}
+	if (!childKeyInProperties && childPath.length) return
 
 	// If there is no child key (“end” of object path) or the child key is not in the properties
 	// (not a “direct” match has been entered), we just return the current properties and let
@@ -59,23 +52,17 @@ function traverseSchema({
 
 	const childDefinition = properties[childKey]
 
-	if (typeof childDefinition === 'boolean') {
-		return
-	}
+	if (typeof childDefinition === 'boolean') return
 
 	const childProperties = childDefinition.properties
 
-	if (!childProperties) {
-		return
-	}
+	if (!childProperties) return
 
 	return traverseSchema({ properties: childProperties, path: childPath, token })
 }
 
 function getItemType(definition: JSONSchema7Definition): string | undefined {
-	if (typeof definition === 'boolean') {
-		return
-	}
+	if (typeof definition === 'boolean') return
 
 	let type: string | undefined
 
@@ -87,17 +74,13 @@ function getItemType(definition: JSONSchema7Definition): string | undefined {
 		type = definition.type.join(' | ')
 	}
 
-	if (!type) {
-		return
-	}
+	if (!type) return
 
 	return `(property) ${type}`
 }
 
 function getItemDescription(definition: JSONSchema7Definition): MarkdownString | undefined {
-	if (typeof definition === 'boolean') {
-		return
-	}
+	if (typeof definition === 'boolean') return
 
 	const description: string[] = []
 
@@ -117,9 +100,7 @@ function getItemDescription(definition: JSONSchema7Definition): MarkdownString |
 		description.push(`Enum: ${definition.enum.map((item) => `\`${item}\``).join(', ')}`)
 	}
 
-	if (!description.length) {
-		return
-	}
+	if (!description.length) return
 
 	return new MarkdownString(description.join('\n\n'))
 }
@@ -148,9 +129,7 @@ const provideCompletionItems: ProvideCompletionItems = function (document, posit
 	const project = getProject(document.uri)
 	const schema = project?.schemas.find((schema) => schema.componentURI.path === componentPath)
 
-	if (!schema) {
-		return
-	}
+	if (!schema) return
 
 	let properties = schema.content.properties
 
@@ -163,16 +142,12 @@ const provideCompletionItems: ProvideCompletionItems = function (document, posit
 		properties = traverseSchema({ properties, path, token })
 	}
 
-	if (!properties) {
-		return
-	}
+	if (!properties) return
 
 	const completionItems: CompletionItemWithDefinition[] = []
 
 	for (const [key, definition] of Object.entries(properties)) {
-		if (token.isCancellationRequested) {
-			break
-		}
+		if (token.isCancellationRequested) break
 
 		const item: CompletionItemWithDefinition = new CompletionItem(key)
 
@@ -188,9 +163,7 @@ const provideCompletionItems: ProvideCompletionItems = function (document, posit
 
 type ResolveCompletionItem = CompletionItemProvider['resolveCompletionItem']
 const resolveCompletionItem: ResolveCompletionItem = function (item: CompletionItemWithDefinition) {
-	if (!item.definition) {
-		return
-	}
+	if (!item.definition) return
 
 	item.detail = getItemType(item.definition)
 	item.documentation = getItemDescription(item.definition)

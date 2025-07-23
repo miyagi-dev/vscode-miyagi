@@ -1,7 +1,7 @@
 import path from 'node:path'
 
 import YAML from 'js-yaml'
-import { JSONSchema7 } from 'json-schema'
+import type { JSONSchema7 } from 'json-schema'
 import { RelativePattern, Uri, workspace } from 'vscode'
 
 import { EXCLUDE_GLOB, SCHEMA_GLOB } from '../constants.ts'

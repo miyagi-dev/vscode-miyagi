@@ -23,9 +23,7 @@ export async function selectProject() {
 		title: 'miyagi: Select project',
 	})
 
-	if (!projectOption) {
-		return
-	}
+	if (!projectOption) return
 
 	return projectOption.value
 }

@@ -11,9 +11,7 @@ export class ContextKey {
 	}
 
 	set(value: ContextValue) {
-		if (value === this.#lastValue) {
-			return
-		}
+		if (value === this.#lastValue) return
 
 		this.#lastValue = value
 		commands.executeCommand('setContext', this.#name, value)

@@ -1,10 +1,10 @@
-import deepmerge from 'deepmerge'
 import { Uri, window, workspace } from 'vscode'
 
-import { DEFAULT_MIYAGI_CONFIG, EXCLUDE_GLOB, MIYAGI_CONFIG_GLOB } from '../constants.ts'
-import type { MiyagiConfig, Project } from '../types.ts'
+import { EXCLUDE_GLOB, MIYAGI_CONFIG_GLOB } from '../constants.ts'
+import type { MiyagiConfig3, MiyagiConfig4, Project } from '../types.ts'
 import { getModule } from '../utils/get-module.ts'
 import { isPathIgnored } from '../utils/is-path-ignored.ts'
+import { normalizeMiyagiConfig } from '../utils/normalize-miyagi-config.ts'
 import { getMiyagiVersion } from './get-miyagi-version.ts'
 import { loadSchemas } from './load-schemas.ts'
 import { outputChannel } from './output-channel.ts'
@@ -19,10 +19,16 @@ async function getProjectInfo(configURI: Uri): Promise<Project | undefined> {
 	try {
 		const uri = Uri.joinPath(configURI, '..')
 		const version = getMiyagiVersion(uri) ?? '0.0.0'
-		const { default: projectConfig } = (await getModule(configURI.path)) as {
-			default: MiyagiConfig
-		}
-		const config = deepmerge(DEFAULT_MIYAGI_CONFIG, projectConfig)
+
+		const projectConfig = (await getModule({ modulePath: configURI.path, cwd: uri.path })) as
+			| { default: MiyagiConfig3 }
+			| MiyagiConfig4
+
+		const config = normalizeMiyagiConfig({
+			config: 'default' in projectConfig ? projectConfig.default : projectConfig,
+			cwd: uri.path,
+		})
+
 		const schemas = await loadSchemas(uri)
 
 		return { uri, version, config, schemas }
@@ -48,15 +54,11 @@ export async function getProjectList({ refresh }: GetProjectListOptions = {}) {
 	for (const configURI of configURIs) {
 		const isIgnored = isPathIgnored(configURI)
 
-		if (isIgnored) {
-			continue
-		}
+		if (isIgnored) continue
 
 		const projectInfo = await getProjectInfo(configURI)
 
-		if (!projectInfo) {
-			continue
-		}
+		if (!projectInfo) continue
 
 		projects.push(projectInfo)
 	}

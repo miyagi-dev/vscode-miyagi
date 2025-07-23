@@ -11,7 +11,7 @@ export interface SemanticVersionObject {
 
 // miyagi-specific types
 
-export interface MiyagiConfig {
+interface MiyagiConfigBase {
 	components: {
 		folder: string
 	}
@@ -29,13 +29,27 @@ export interface MiyagiConfig {
 			extension?: 'twig'
 		}
 	}
+}
+
+export interface MiyagiConfig3 extends MiyagiConfigBase {
 	engine?: {
-		name?: 'twig' | string
 		options?: {
 			namespaces?: {
 				[key: string]: string | undefined
 			}
 		}
+	}
+}
+
+export interface MiyagiConfig4 extends MiyagiConfigBase {
+	namespaces?: {
+		[key: string]: string | undefined
+	}
+}
+
+export interface MiyagiConfigNormalized extends MiyagiConfigBase {
+	namespaces?: {
+		[key: string]: string | undefined
 	}
 }
 
@@ -49,6 +63,6 @@ export interface Schema {
 export interface Project {
 	uri: Uri
 	version: string
-	config: MiyagiConfig
+	config: MiyagiConfigNormalized
 	schemas: Schema[]
 }

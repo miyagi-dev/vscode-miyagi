@@ -38,11 +38,6 @@ const fileOptions: FileOption[] = [
 		picked: true,
 	},
 	{
-		label: 'Info',
-		value: 'info',
-		picked: false,
-	},
-	{
 		label: 'Documentation',
 		value: 'docs',
 		picked: false,
@@ -52,9 +47,7 @@ const fileOptions: FileOption[] = [
 export async function newComponent(uri?: Uri) {
 	const componentPath = await getNewComponentPath(uri)
 
-	if (!componentPath) {
-		return
-	}
+	if (!componentPath) return
 
 	const storedOnlyFiles: string[] | undefined = await storage.get(STORAGE_KEY_ONLY_FILES)
 
@@ -69,9 +62,7 @@ export async function newComponent(uri?: Uri) {
 		canPickMany: true,
 	})
 
-	if (!selectedFiles?.length) {
-		return
-	}
+	if (!selectedFiles?.length) return
 
 	const onlyFiles = selectedFiles.map((file) => file.value)
 	await storage.update(STORAGE_KEY_ONLY_FILES, onlyFiles)

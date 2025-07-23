@@ -15,7 +15,7 @@ import { getProject } from './projects.ts'
 type EXTENSIONS = 'twig'
 
 const LINK_PATTERN = {
-	twig: /("|')@(?<namespace>[a-z0-9-_]+)\/(?<filename>.+?)\1/gi,
+	twig: /("|')(?<namespace>@[a-z0-9-_]+)\/(?<filename>.+?)\1/gi,
 } as const
 
 const selector: DocumentSelector = [{ pattern: TWIG_GLOB }]
@@ -25,50 +25,34 @@ const provideDocumentLinks: ProvideDocumentLinks = function (document, token) {
 	const project = getProject(document.uri)
 	const content = document.getText()
 
-	if (!project) {
-		return
-	}
+	if (!project) return
+	if (!content.trim()) return
 
-	if (!content.trim()) {
-		return
-	}
+	const namespaces = project.config.namespaces
 
-	if (project.config.engine?.name !== 'twig') {
-		return
-	}
-
-	if (!project.config.engine?.options?.namespaces) {
-		return
-	}
+	if (!namespaces) return
 
 	const extension = path.extname(document.uri.path).slice(1) as EXTENSIONS
 	const matches = content.matchAll(LINK_PATTERN[extension])
 	const links: DocumentLink[] = []
 
 	for (const match of matches) {
-		if (token.isCancellationRequested) {
-			break
-		}
+		if (token.isCancellationRequested) break
 
 		const start = match.index
 		const namespace = match.groups?.namespace
 		const filename = match.groups?.filename
 
-		if (!namespace || !filename || start === undefined) {
-			continue
-		}
+		if (!namespace || !filename || start === undefined) continue
 
-		const namespacePath = project.config.engine.options.namespaces[namespace]
+		const namespacePath = namespaces[namespace]
 
-		if (!namespacePath) {
-			continue
-		}
+		if (!namespacePath) continue
 
 		const contentStart = start + 1
 		const contentEnd = start + match[0].length - 1
 
 		const range = new Range(document.positionAt(contentStart), document.positionAt(contentEnd))
-
 		const target = Uri.joinPath(project.uri, namespacePath, filename)
 
 		links.push({ range, target })
